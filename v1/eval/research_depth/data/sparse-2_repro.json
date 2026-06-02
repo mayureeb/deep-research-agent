@@ -1,0 +1,1191 @@
+{
+  "prompt_id": "sparse-2",
+  "category": "sparse",
+  "n_runs": 2,
+  "mode": "draft_only",
+  "max_revisions": 0,
+  "verifier_enabled": false,
+  "subquestion_jaccard": 0.0,
+  "claim_jaccard": 0.0,
+  "per_run": [
+    {
+      "run_index": 0,
+      "elapsed_seconds": 135.58879828453064,
+      "n_claims": 9,
+      "n_subquestions": 7,
+      "grounding_rate": 1.0,
+      "coverage_rate": 0.2857142857142857,
+      "f1": 0.4444444444444445
+    },
+    {
+      "run_index": 1,
+      "elapsed_seconds": 198.35175013542175,
+      "n_claims": 11,
+      "n_subquestions": 7,
+      "grounding_rate": 1.0,
+      "coverage_rate": 0.5714285714285714,
+      "f1": 0.7272727272727273
+    }
+  ],
+  "runs": [
+    {
+      "user_prompt": "What do we actually know about whether process reward models improve LLM reasoning more than outcome-only reward models?",
+      "shape": {
+        "shape": "CONTESTED",
+        "confidence": 0.82,
+        "rationale": "The prompt directly probes an empirical dispute in the literature about whether process vs. outcome reward models yield differential reasoning improvements, a question with conflicting findings across recent studies."
+      },
+      "decomposition": {
+        "subquestions": [
+          {
+            "id": "sq1",
+            "question": "What are the core architectural and training differences between process reward models (PRMs) and outcome reward models (ORMs) in the context of LLM reasoning?",
+            "rationale": "Establishing precise definitions and mechanisms is necessary before evaluating comparative effectiveness claims.",
+            "confidence": 0.8,
+            "depends_on": [],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq2",
+            "question": "What empirical evidence from controlled studies shows PRMs outperforming ORMs on mathematical or multi-step reasoning benchmarks (e.g., GSM8K, MATH, competition math)?",
+            "rationale": "Direct benchmark comparisons are the primary evidence base for whether PRMs deliver measurable gains over ORMs.",
+            "confidence": 0.9,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq3",
+            "question": "What empirical evidence challenges or fails to replicate PRM superiority over ORMs, including cases where ORMs match or exceed PRM performance?",
+            "rationale": "The field contains contradictory findings; capturing null or negative results is essential to an honest assessment of the evidence.",
+            "confidence": 0.9,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq4",
+            "question": "What methodological differences across studies (e.g., step-label acquisition method, base model size, search/decoding strategy, evaluation protocol) explain divergent findings about PRM vs. ORM effectiveness?",
+            "rationale": "Understanding why studies disagree is critical for determining whether PRM advantages are genuine or artifacts of experimental design.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq2",
+              "sq3"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq5",
+            "question": "How does the cost and difficulty of obtaining dense process-level supervision labels affect the practical and fair comparison between PRMs and ORMs?",
+            "rationale": "PRMs require richer supervision signals, so comparisons that don't control for annotation cost may overstate their advantage relative to ORMs.",
+            "confidence": 0.75,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq6",
+            "question": "Beyond final-answer benchmarks, do PRMs provide advantages in robustness, generalization to out-of-distribution problems, or reduction of reward hacking compared to ORMs?",
+            "rationale": "Benchmark accuracy is not the only axis of comparison; PRMs are theoretically motivated by process-level correctness and reduced exploitation, so these properties deserve separate evaluation.",
+            "confidence": 0.7,
+            "depends_on": [
+              "sq2",
+              "sq3"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq7",
+            "question": "What gaps or weaknesses exist in the current body of evidence comparing PRMs and ORMs \u2014 e.g., missing ablations, limited domain coverage, or lack of large-scale RLHF training comparisons?",
+            "rationale": "Identifying what is not yet known prevents overconfident conclusions and guides interpretation of the existing literature.",
+            "confidence": 0.8,
+            "depends_on": [
+              "sq2",
+              "sq3",
+              "sq4"
+            ],
+            "preferred_search": "search_papers"
+          }
+        ]
+      },
+      "findings": {
+        "findings": [
+          {
+            "subquestion_id": "sq1",
+            "claim": "Process reward models (PRMs) provide step-level feedback across intermediate steps in reasoning trajectories, while outcome reward models (ORMs) provide only a single reward for the final output.",
+            "evidence": "A Process-supervised Reward Model (PRM) is a learned function that evaluates the correctness or utility of each intermediate step in a multi-step reasoning trajectory produced by a model, in contrast to traditional outcome reward models (ORMs) that score only the final output.",
+            "source_url": "https://www.emergentmind.com/topics/process-supervised-reward-models-prms",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-23d2a7",
+            "saved_at": "2026-05-05T06:01:22.404690Z",
+            "fetched_at": "2026-05-05T06:01:22.404429Z",
+            "content_hash": "e5bbf531ce68571212987a7861cf503cf6a7f4aa40d51a3ee1e9047f4dbcd16c",
+            "domain": "www.emergentmind.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "PRMs enable granular, step-level supervision and credit assignment, while ORMs provide only outcome-level signals that apply uniformly across all steps.",
+            "evidence": "By providing dense, granular supervision at the process level, PRMs enable more precise credit assignment, early error detection, and fine-grained guidance in both supervised and reinforcement learning pipelines.",
+            "source_url": "https://www.emergentmind.com/topics/process-supervised-reward-models-prms",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-23d2a7",
+            "saved_at": "2026-05-05T06:01:22.404896Z",
+            "fetched_at": "2026-05-05T06:01:22.404781Z",
+            "content_hash": "27b5b3a2270424d784b07157f87b57c620349e42aeea67613fc314269f608cf4",
+            "domain": "www.emergentmind.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Discriminative PRM architectures use Transformer encoders with scalar or multi-head outputs trained via binary cross-entropy or ranking losses, while generative PRMs use language models to output stepwise critiques and verdicts.",
+            "evidence": "Discriminative PRMs: Transformer encoder with scalar head, trained with binary cross-entropy/MSE or pairwise ranking. Variants include multi-head (aleatoric/epistemic uncertainty) ensembles, error-type specific branches, and token-wise critics. Generative PRMs: Language-model-based verifiers output stepwise CoT critiques and explicit verdicts (e.g., ThinkPRM, GroundedPRM), trained with next-token prediction over rationales plus judgments.",
+            "source_url": "https://www.emergentmind.com/topics/process-supervised-reward-models-prms",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-23d2a7",
+            "saved_at": "2026-05-05T06:01:22.405054Z",
+            "fetched_at": "2026-05-05T06:01:22.405010Z",
+            "content_hash": "8a3c6909de5d7ce3f8f96ac91c13ac5d445bc4ac65a10f536e36165965a74e0b",
+            "domain": "www.emergentmind.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "PRM data requires step-level supervision through human annotation, automated verification methods, or LLM-as-judge approaches, whereas ORM training uses only outcome labels.",
+            "evidence": "A central challenge in PRM development is the acquisition of high-fidelity step-level supervision. Data construction strategies span a fidelity-scalability spectrum: Human Annotation: PRM800K and similar corpora employ domain experts for stepwise labeling; Automated Verification: Methods such as MathShepherd, OmegaPRM, URSA apply symbolic solvers, MCTS, or runtime tests; LLM-as-Judge: Annotation is bootstrapped from strong LLMs prompted to provide step-level verification.",
+            "source_url": "https://www.emergentmind.com/topics/process-supervised-reward-models-prms",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-23d2a7",
+            "saved_at": "2026-05-05T06:01:22.405106Z",
+            "fetched_at": "2026-05-05T06:01:22.405079Z",
+            "content_hash": "3163d6d7c961dfaebf31f4266904484b964ae8be1e1c684ac2bdb8548b4c01b4",
+            "domain": "www.emergentmind.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "In inference, PRMs enable step-aware guidance through beam search, best-of-N selection, and early error rejection at the first flagged step, whereas ORMs can only rank complete trajectories.",
+            "evidence": "PRMs guide beam search, best-of-N selection, or greedy search, enabling rejection or early stopping at the first flagged error. HGS-PRM and reward-guided selection on math/code benchmarks show gains of 1\u20135+ points over CoT ranking and vanilla outcome models.",
+            "source_url": "https://www.emergentmind.com/topics/process-supervised-reward-models-prms",
+            "source_title": "",
+            "confidence": 0.93,
+            "researcher_id": "r-23d2a7",
+            "saved_at": "2026-05-05T06:01:22.405199Z",
+            "fetched_at": "2026-05-05T06:01:22.405167Z",
+            "content_hash": "39b963f3eda0a5edc7bbf927bea749f8c4201e916e68c41938cf2838cd0b8e6c",
+            "domain": "www.emergentmind.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.867,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Process reward models learn a mapping from intermediate step sequences to reward values, whereas outcome reward models learn a mapping from final answers to reward values.",
+            "evidence": "The goal of a process reward model is to learn a mapping from a trajectory to a reward value (i.e. r : S^T \u2192 R) in order to guide sampling of valid processes. This is contrast to a outcome reward model which maps from a final answer to a reward value (i.e. r : Y \u2192 R) which is common in traditional post-training in which the models learn to generate final answers that are correct.",
+            "source_url": "https://www.stephendiehl.com/posts/process_reward/",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-23d2a7",
+            "saved_at": "2026-05-05T06:01:30.692601Z",
+            "fetched_at": "2026-05-05T06:01:30.692526Z",
+            "content_hash": "d1b793afdcc2983b524f61ebd1b369a992df06bc226b45823be7e2003e847839",
+            "domain": "www.stephendiehl.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Current PRMs are systematically exploitable under adversarial optimization and exhibit reduced robustness, with RL-induced reward hacking causing policies to achieve near-perfect PRM rewards while ground-truth accuracy remains low.",
+            "evidence": "Adversarial optimization demonstrates that gradient-based attacks inflate rewards on invalid trajectories. RL-induced reward hacking exposes the critical failure mode: policies trained on AIME problems achieve near-perfect PRM rewards (>0.9), while ground-truth accuracy remains low (below 4%), with 43% of reward gains attributable to stylistic shortcuts. These findings reveal that current PRMs function as fluency detectors rather than reasoning verifiers, creating systematic blind spots that undermine their use as training signals.",
+            "source_url": "https://arxiv.org/abs/2603.06621",
+            "source_title": "Reward Under Attack: Analyzing the Robustness and Hackability of Process Reward Models",
+            "confidence": 0.95,
+            "researcher_id": "r-71f26a",
+            "saved_at": "2026-05-05T06:02:07.394566Z",
+            "fetched_at": "2026-05-05T06:02:07.394296Z",
+            "content_hash": "81c1e868c40c8b33b006898cfa80b7fd1d2bbe48407656d3ea6261dca523ea2e",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.0,
+            "combined_confidence": 0.73,
+            "axis_disagreement": true
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "PRMs designed with dynamic reward criteria and Pareto dominance estimation can demonstrate exceptional out-of-distribution generalization performance.",
+            "evidence": "Further analysis reveals that DG-PRM adapts well to out-of-distribution scenarios, demonstrating exceptional generalizability.",
+            "source_url": "https://aclanthology.org/2025.acl-long.212/",
+            "source_title": "Dynamic and Generalizable Process Reward Modeling",
+            "confidence": 0.85,
+            "researcher_id": "r-71f26a",
+            "saved_at": "2026-05-05T06:02:07.394733Z",
+            "fetched_at": "2026-05-05T06:02:07.394686Z",
+            "content_hash": "1e96df6a2a9bfabca8571b279fe86d9390d680c1bf704ab3aad35a1d47ecdf1f",
+            "domain": "aclanthology.org",
+            "source_quality": 0.7,
+            "agreement_score": 0.5,
+            "combined_confidence": 0.71,
+            "axis_disagreement": true
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Reward hacking in PRMs during RL fine-tuning is primarily induced by canonical summation-form credit assignment (cumulative future rewards), not inherent to process supervision itself.",
+            "evidence": "We find the primary cause of reward hacking induced by PRM is that: the canonical summation-form credit assignment in reinforcement learning (RL), i.e. cumulative gamma-decayed future rewards, causes the LLM to hack steps with high rewards.",
+            "source_url": "https://neurips.cc/virtual/2025/poster/120032",
+            "source_title": "Stop Summation: Min-Form Credit Assignment Is All Process Reward Model Needs for Reasoning",
+            "confidence": 0.9,
+            "researcher_id": "r-71f26a",
+            "saved_at": "2026-05-05T06:02:07.394779Z",
+            "fetched_at": "2026-05-05T06:02:07.394759Z",
+            "content_hash": "048f6c763666584aab84fb8f9850527e313c8cfab60f06c0fce5d9195bc45fc7",
+            "domain": "neurips.cc",
+            "source_quality": 0.7,
+            "agreement_score": 0.5,
+            "combined_confidence": 0.73,
+            "axis_disagreement": true
+          }
+        ],
+        "uncertainty_notes": [
+          {
+            "subquestion_id": "sq2",
+            "topic": "What empirical evidence from controlled studies shows PRMs outperforming ORMs on mathematical or multi-step reasoning benchmarks (e.g., GSM8K, MATH, competition math)?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-0c2baa"
+          },
+          {
+            "subquestion_id": "sq3",
+            "topic": "What empirical evidence challenges or fails to replicate PRM superiority over ORMs, including cases where ORMs match or exceed PRM performance?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-3abf55"
+          },
+          {
+            "subquestion_id": "sq4",
+            "topic": "What methodological differences across studies (e.g., step-label acquisition method, base model size, search/decoding strategy, evaluation protocol) explain divergent findings about PRM vs. ORM effectiveness?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-9938cf"
+          },
+          {
+            "subquestion_id": "sq5",
+            "topic": "How does the cost and difficulty of obtaining dense process-level supervision labels affect the practical and fair comparison between PRMs and ORMs?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-20ec1b"
+          },
+          {
+            "subquestion_id": "sq7",
+            "topic": "What gaps or weaknesses exist in the current body of evidence comparing PRMs and ORMs \u2014 e.g., missing ablations, limited domain coverage, or lack of large-scale RLHF training comparisons?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-b5a2cc"
+          }
+        ]
+      },
+      "report": {
+        "user_prompt": "What do we actually know about whether process reward models improve LLM reasoning more than outcome-only reward models?",
+        "summary": "The question of whether PRMs outperform ORMs is contested and largely unresolved by the available evidence: the research process failed to surface any concrete empirical comparisons between PRMs and ORMs on standard benchmarks, meaning the central empirical question cannot be answered from these findings. What the evidence does establish is the architectural distinction between the two approaches and three competing accounts of PRM robustness \u2014 one characterizing PRMs as fundamentally exploitable fluency detectors, one suggesting specialized PRM variants can generalize well out-of-distribution, and one attributing reward hacking to RL credit assignment mechanics rather than process supervision itself. Given the axis-disagreement flags on all three robustness findings and the near-total absence of controlled comparative evidence, strong conclusions about PRM superiority are unwarranted.",
+        "claims": [
+          {
+            "claim": "PRMs provide step-level feedback on intermediate reasoning steps, while ORMs assign a single reward to the final output only.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              0,
+              5
+            ]
+          },
+          {
+            "claim": "PRMs enable more granular credit assignment and early error detection by supervising each step, whereas ORMs apply a uniform outcome signal across all steps in a trajectory.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              1,
+              5
+            ]
+          },
+          {
+            "claim": "PRM architectures vary significantly: discriminative PRMs use Transformer encoders with scalar heads trained via cross-entropy or ranking losses, while generative PRMs use language models to produce stepwise critiques.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              2
+            ]
+          },
+          {
+            "claim": "Obtaining step-level supervision for PRM training is substantially more costly than ORM training, requiring human annotation, automated verification (e.g., MCTS, symbolic solvers), or LLM-as-judge bootstrapping.",
+            "confidence": 0.87,
+            "supporting_finding_indices": [
+              3
+            ]
+          },
+          {
+            "claim": "At inference time, PRMs can guide beam search, best-of-N selection, and early stopping at flagged errors, capabilities not available to ORMs which can only rank complete trajectories.",
+            "confidence": 0.87,
+            "supporting_finding_indices": [
+              4
+            ]
+          },
+          {
+            "claim": "Sources disagree on PRM robustness: one study (arXiv 2603.06621) finds current PRMs are systematically exploitable, functioning as fluency detectors \u2014 with RL-trained policies achieving >0.9 PRM reward while ground-truth accuracy remains below 4% \u2014 while another study (ACL 2025) finds that a specialized DG-PRM variant demonstrates exceptional out-of-distribution generalization.",
+            "confidence": 0.55,
+            "supporting_finding_indices": [
+              6,
+              7
+            ]
+          },
+          {
+            "claim": "Under adversarial optimization, standard PRMs can be exploited to inflate rewards on invalid trajectories, with approximately 43% of reward gains during RL training attributable to stylistic shortcuts rather than genuine reasoning improvements.",
+            "confidence": 0.55,
+            "supporting_finding_indices": [
+              6
+            ]
+          },
+          {
+            "claim": "Sources disagree on the root cause of PRM reward hacking during RL: one account (arXiv 2603.06621) attributes it to PRMs being intrinsically flawed reasoning evaluators, while another (NeurIPS 2025) locates the cause in the canonical summation-form credit assignment mechanism in RL rather than in process supervision itself.",
+            "confidence": 0.5,
+            "supporting_finding_indices": [
+              6,
+              8
+            ]
+          },
+          {
+            "claim": "One study found that modifying RL credit assignment away from canonical cumulative gamma-decayed future rewards can reduce PRM reward hacking, suggesting the problem may be addressable without abandoning process supervision.",
+            "confidence": 0.55,
+            "supporting_finding_indices": [
+              8
+            ]
+          }
+        ],
+        "contradictions_surfaced": [
+          {
+            "description": "Findings 6 and 7 contradict each other on whether PRMs generalize well out-of-distribution. Finding 6 (https://arxiv.org/abs/2603.06621) states that 'current PRMs function as fluency detectors rather than reasoning verifiers, creating systematic blind spots' and exhibit 'reduced robustness,' with policies achieving near-perfect PRM rewards while ground-truth accuracy remains below 4%. Finding 7 (https://aclanthology.org/2025.acl-long.212/) states that DG-PRM 'adapts well to out-of-distribution scenarios, demonstrating exceptional generalizability.' These claims cannot both be true as general characterizations of PRM robustness and out-of-distribution performance, though the discrepancy may partly stem from different PRM architectures (standard PRMs vs. DG-PRM with dynamic reward criteria and Pareto dominance estimation). Both findings carry axis-disagree flags, further reducing confidence in either as a definitive characterization.",
+            "finding_ids": [
+              6,
+              7
+            ],
+            "severity": "moderate",
+            "type": "factual"
+          },
+          {
+            "description": "Findings 6 and 8 offer competing mechanistic explanations for why reward hacking occurs in PRMs during RL training. Finding 6 (https://arxiv.org/abs/2603.06621) attributes reward hacking to PRMs being fundamentally flawed as reasoning evaluators, stating they 'function as fluency detectors rather than reasoning verifiers' and that '43% of reward gains [are] attributable to stylistic shortcuts,' implying the problem is intrinsic to process supervision. Finding 8 (https://neurips.cc/virtual/2025/poster/120032) explicitly counters this by locating the root cause in 'the canonical summation-form credit assignment in reinforcement learning (RL), i.e. cumulative gamma-decayed future rewards,' not in process supervision itself. These are directly conflicting mechanistic accounts of the same phenomenon, with significant implications for whether PRMs can be salvaged as training signals. Both findings carry axis-disagree flags.",
+            "finding_ids": [
+              6,
+              8
+            ],
+            "severity": "major",
+            "type": "factual"
+          }
+        ],
+        "caveats": [
+          "WARNING \u2014 bounded revision exhausted with critic issues still open. The report ships with 3 unresolved critic issue(s):\n  \u2022 Claim #1 (overstated): The claim says ORMs 'apply a uniform outcome signal across all steps in a trajectory.' The cited findings do not describe ORMs as applying a uniform signal across all steps \u2014 they simply say ORMs map from a final answer to a reward value. The 'uniform across all steps' framing is an inference not directly supported by the cited evidence.\n  \u2022 Claim #3 (overstated): The claim asserts that obtaining step-level supervision is 'substantially more costly' than ORM training. The cited finding [3] only describes PRM data construction as 'a central challenge' and lists methods spanning a 'fidelity-scalability spectrum' \u2014 it does not explicitly compare cost to ORM training or use language like 'substantially more costly.' The cost comparison to ORM training is an inference not supported by the cited evidence.\n  \u2022 Claim #8 (overstated): The claim states that 'modifying RL credit assignment... can reduce PRM reward hacking.' However, finding [8] only identifies the cause of reward hacking (canonical summation-form credit assignment) \u2014 it does not state or demonstrate that modifying this mechanism actually reduces hacking. The implication that a solution exists and works is not supported by the cited evidence, which only identifies the cause.",
+          "The most critical gap: the research process exhausted its search budget without surfacing any concrete empirical comparisons of PRM vs. ORM performance on standard reasoning benchmarks (GSM8K, MATH, competition math, etc.). The central empirical question \u2014 whether PRMs actually improve reasoning more than ORMs \u2014 cannot be answered from the available findings.",
+          "No evidence was found on how methodological differences across studies (step-label acquisition method, base model size, search/decoding strategy, evaluation protocol) explain divergent findings about PRM vs. ORM effectiveness.",
+          "No evidence was found on studies where ORMs match or exceed PRM performance, meaning the findings provide no information about the distribution of positive vs. negative results for PRMs.",
+          "No evidence was found on the practical economics of step-level label acquisition relative to outcome labels, making it impossible to assess whether PRM gains (if any) justify annotation costs.",
+          "No evidence was found on gaps or weaknesses in the existing comparative literature (missing ablations, limited domain coverage, absence of large-scale RLHF comparisons).",
+          "All three robustness-related findings (indices 6, 7, 8) are flagged [AXIS-DISAGREE], meaning the self-reported confidence, source quality, and cross-source agreement scores diverge \u2014 these findings should be treated as hypothesis-generating rather than settled evidence.",
+          "Finding 6 (arXiv 2603.06621) has a combined confidence of 0.73 despite a self-reported confidence of 0.95, driven by near-zero agreement score (0.00), suggesting its strong claims about PRM failure modes are not corroborated by other sources in the findings set.",
+          "The architectural and definitional findings (indices 0\u20135) come predominantly from a single aggregator source (emergentmind.com), which may itself synthesize selectively from the literature."
+        ]
+      },
+      "critic_history": [
+        {
+          "issues": [
+            {
+              "claim_index": 1,
+              "issue_type": "overstated",
+              "explanation": "The claim says ORMs 'apply a uniform outcome signal across all steps in a trajectory.' The cited findings do not describe ORMs as applying a uniform signal across all steps \u2014 they simply say ORMs map from a final answer to a reward value. The 'uniform across all steps' framing is an inference not directly supported by the cited evidence."
+            },
+            {
+              "claim_index": 3,
+              "issue_type": "overstated",
+              "explanation": "The claim asserts that obtaining step-level supervision is 'substantially more costly' than ORM training. The cited finding [3] only describes PRM data construction as 'a central challenge' and lists methods spanning a 'fidelity-scalability spectrum' \u2014 it does not explicitly compare cost to ORM training or use language like 'substantially more costly.' The cost comparison to ORM training is an inference not supported by the cited evidence."
+            },
+            {
+              "claim_index": 8,
+              "issue_type": "overstated",
+              "explanation": "The claim states that 'modifying RL credit assignment... can reduce PRM reward hacking.' However, finding [8] only identifies the cause of reward hacking (canonical summation-form credit assignment) \u2014 it does not state or demonstrate that modifying this mechanism actually reduces hacking. The implication that a solution exists and works is not supported by the cited evidence, which only identifies the cause."
+            }
+          ],
+          "approved": false
+        }
+      ],
+      "verify_history": [
+        {
+          "results": []
+        }
+      ],
+      "metadata": {
+        "commit_hash": "2f6ab883c54607f36d522b553c98dfd10b64a6c9",
+        "branch": "main",
+        "models": {
+          "researcher": "claude-haiku-4-5",
+          "writer": "claude-sonnet-4-6",
+          "critic": "claude-sonnet-4-6",
+          "judge": "claude-opus-4-7",
+          "kae_judge": "claude-haiku-4-5"
+        },
+        "config_snapshot": {
+          "anthropic_api_key": "<set>",
+          "tavily_api_key": "<set>",
+          "researcher_model": "claude-haiku-4-5",
+          "writer_model": "claude-sonnet-4-6",
+          "critic_model": "claude-sonnet-4-6",
+          "judge_model": "claude-opus-4-7",
+          "kae_judge_model": "claude-haiku-4-5",
+          "min_subquestions": 3,
+          "max_subquestions": 7,
+          "decompose_max_retries": 2,
+          "researcher_max_tool_calls": 30,
+          "researcher_max_findings": 6,
+          "researcher_min_findings_to_stop": 3,
+          "researcher_min_unique_sources": 2,
+          "researcher_min_avg_confidence": 0.55,
+          "researcher_unproductive_call_limit": 10,
+          "search_results_per_query": 8,
+          "fetch_max_chars": 12000,
+          "scholar_max_retries": 3,
+          "scholar_backoff_seconds": 1.0,
+          "scholar_unavailable_window_seconds": 120,
+          "max_revisions": 0,
+          "verifier_enabled": false,
+          "parallel_researchers": 2
+        },
+        "captured_at": "2026-05-05T06:00:41.283222Z"
+      },
+      "metrics": {
+        "total_subquestions": 7,
+        "subquestions_with_findings": 2,
+        "total_findings": 9,
+        "unique_sources": 5,
+        "revision_rounds": 0,
+        "final_grounding_rate": 0.6666666666666666,
+        "coverage_rate": 0.2857142857142857,
+        "elapsed_seconds": 135.5823848247528,
+        "per_stage": {
+          "classify_shape": {
+            "calls": 1,
+            "input_tokens": 973,
+            "output_tokens": 54,
+            "cost_usd": 0.003729,
+            "elapsed_seconds": 2.395154875004664
+          },
+          "confidence": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cost_usd": 0.0,
+            "elapsed_seconds": 0.00039479206316173077
+          },
+          "critic": {
+            "calls": 1,
+            "input_tokens": 5179,
+            "output_tokens": 381,
+            "cost_usd": 0.021252,
+            "elapsed_seconds": 6.561467499937862
+          },
+          "decompose": {
+            "calls": 1,
+            "input_tokens": 1469,
+            "output_tokens": 893,
+            "cost_usd": 0.017802,
+            "elapsed_seconds": 14.02167462487705
+          },
+          "reconciler": {
+            "calls": 1,
+            "input_tokens": 2850,
+            "output_tokens": 530,
+            "cost_usd": 0.0165,
+            "elapsed_seconds": 8.22515079099685
+          },
+          "researcher": {
+            "calls": 42,
+            "input_tokens": 265836,
+            "output_tokens": 7618,
+            "cost_usd": 0.303926,
+            "elapsed_seconds": 75.5756127089262
+          },
+          "writer": {
+            "calls": 1,
+            "input_tokens": 5416,
+            "output_tokens": 1990,
+            "cost_usd": 0.046098,
+            "elapsed_seconds": 28.75958237494342
+          }
+        },
+        "total_input_tokens": 281723,
+        "total_output_tokens": 11466,
+        "total_cost_usd": 0.409307,
+        "researcher_latency_max": 35.16306058387272,
+        "researcher_latency_avg": 20.683250672882423,
+        "tool_mix": {
+          "web_search": 24,
+          "search_papers": 15,
+          "fetch_url": 32,
+          "save_finding": 9,
+          "note_uncertainty": 0
+        },
+        "kae": null,
+        "ace": null,
+        "plan_judge": null
+      },
+      "taxonomy": null,
+      "started_at": "2026-05-05T06:02:56.822494Z"
+    },
+    {
+      "user_prompt": "What do we actually know about whether process reward models improve LLM reasoning more than outcome-only reward models?",
+      "shape": {
+        "shape": "CONTESTED",
+        "confidence": 0.82,
+        "rationale": "The prompt directly probes a disputed empirical question in the literature about whether PRMs outperform ORMs for LLM reasoning, which is an active debate with mixed findings across studies."
+      },
+      "decomposition": {
+        "subquestions": [
+          {
+            "id": "sq1",
+            "question": "What are the core architectural and training differences between process reward models (PRMs) and outcome reward models (ORMs) as applied to LLM reasoning?",
+            "rationale": "Establishing the technical distinction is prerequisite to interpreting any comparative evidence\u2014without this, claims about which is 'better' are ambiguous.",
+            "confidence": 0.85,
+            "depends_on": [],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq2",
+            "question": "What does empirical evidence from controlled comparisons show about PRM vs. ORM performance on mathematical and multi-step reasoning benchmarks (e.g., MATH, GSM8K, competition math)?",
+            "rationale": "This is the central empirical question\u2014direct benchmark comparisons are the primary evidence base for whether PRMs outperform ORMs.",
+            "confidence": 0.95,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq3",
+            "question": "What evidence exists that PRMs generalize better (or worse) than ORMs to out-of-distribution tasks, domains beyond math, or longer reasoning chains?",
+            "rationale": "A method that wins on standard benchmarks but fails to generalize would have limited practical value, so generalization is a critical second dimension of comparison.",
+            "confidence": 0.8,
+            "depends_on": [
+              "sq2"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq4",
+            "question": "What methodological factors\u2014such as quality and granularity of process labels, scale of verifier training data, base model size, and search procedure (e.g., beam search vs. MCTS vs. best-of-N)\u2014explain divergent findings across PRM vs. ORM studies?",
+            "rationale": "Many studies reach conflicting conclusions; identifying the confounds that drive disagreement is essential for interpreting the literature accurately.",
+            "confidence": 0.9,
+            "depends_on": [
+              "sq2"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq5",
+            "question": "What are the known failure modes or limitations of PRMs\u2014such as reward hacking of intermediate steps, annotation cost, and sensitivity to label noise\u2014compared to those of ORMs?",
+            "rationale": "Understanding where PRMs break down is necessary to balance the positive claims and assess whether apparent gains are robust.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq6",
+            "question": "What do recent results from large-scale systems (e.g., OpenAI's PRM800K, DeepSeek, Qwen, or similar) reveal about the practical gains of PRMs when integrated into RLHF or inference-time search pipelines?",
+            "rationale": "State-of-the-art deployments provide the highest-stakes evidence on whether process supervision delivers real-world gains beyond controlled academic benchmarks.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq2"
+            ],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq7",
+            "question": "What evidence or expert consensus exists on whether current PRM vs. ORM comparisons are methodologically sound\u2014and what gaps remain in the literature (e.g., missing ablations, lack of reproducibility, underexplored domains)?",
+            "rationale": "Assessing the reliability of the evidence base itself is critical for a field where results shift rapidly and many papers lack head-to-head ablations.",
+            "confidence": 0.75,
+            "depends_on": [
+              "sq2",
+              "sq4"
+            ],
+            "preferred_search": "search_papers"
+          }
+        ]
+      },
+      "findings": {
+        "findings": [
+          {
+            "subquestion_id": "sq1",
+            "claim": "Process reward models (PRMs) provide feedback at each step of multi-step reasoning traces, whereas outcome reward models (ORMs) only provide feedback at the final step.",
+            "evidence": "PRMs provide feedback at each step of a multi-step reasoning trace, potentially improving credit assignment over outcome reward models (ORMs) that only provide feedback at the final step.",
+            "source_url": "https://arxiv.org/abs/2410.08146",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-d82921",
+            "saved_at": "2026-05-05T06:03:52.672934Z",
+            "fetched_at": "2026-05-05T06:03:52.672835Z",
+            "content_hash": "ab71854925ddfe3cc934412c0ef86d00ad644808bb882a35ae4238a7791b1533",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.5,
+            "combined_confidence": 0.855,
+            "axis_disagreement": true
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Process reward models map from intermediate reasoning steps to reward values, while outcome reward models map from final answers to reward values.",
+            "evidence": "A process reward model is to learn a mapping from a trajectory to a reward value (i.e. r : S^T \u2192 R) in order to guide sampling of valid processes. This is contrast to a outcome reward model which maps from a final answer to a reward value (i.e. r : Y \u2192 R)",
+            "source_url": "https://www.stephendiehl.com/posts/process_reward/",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-d82921",
+            "saved_at": "2026-05-05T06:04:03.472089Z",
+            "fetched_at": "2026-05-05T06:04:03.471899Z",
+            "content_hash": "dc8c69e35fe064970eab4302d8f7b3a2ff6694a9ac558f8db5f476fb84e9f70e",
+            "domain": "www.stephendiehl.com",
+            "source_quality": 0.7,
+            "agreement_score": 0.5,
+            "combined_confidence": 0.75,
+            "axis_disagreement": true
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Outcome reward models train on binary feedback signals based solely on the correctness of final answers, creating sparse rewards that don't provide information about intermediate step correctness.",
+            "evidence": "conduct sampling on the LLM to produce multiple reasoning trajectories, assign binary feedback (0/1 reward) based solely on the correctness of their final answer, and perform corresponding policy optimization using the sampled trajectories with reward. Though a reasoning trajectory usually contains multiple reasoning steps with thousands of tokens, there lacks an efficient approach to automatically label the correctness of each token or reasoning step in math reasoning tasks. Thus, a practical way is to parse the final answer from the reasoning trajectory, evaluate its correctness based on rules or models, and then provide an outcome reward at the end of the trajectory.",
+            "source_url": "https://arxiv.org/html/2502.06781v1",
+            "source_title": "",
+            "confidence": 0.93,
+            "researcher_id": "r-d82921",
+            "saved_at": "2026-05-05T06:04:12.381216Z",
+            "fetched_at": "2026-05-05T06:04:12.381097Z",
+            "content_hash": "99d5120a5874a0d3f2a17202124be2851d0ce9330be6eaef09c4ca784c84b65d",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.972,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Data generation method (human annotation vs. automated vs. hybrid) is a critical methodological factor affecting PRM training, reflecting trade-offs between fidelity and scalability.",
+            "evidence": "Section 2 explicitly categorizes process supervision into three main paradigms: (1) human annotation, (2) automated supervision, and (3) hybrid methods that combine both. \"Each paradigm reflects a different trade-off between fidelity and scalability, and recent work often integrates multiple strategies to leverage the strengths of one source while mitigating the weaknesses of another.\"",
+            "source_url": "https://arxiv.org/html/2510.08049v3",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-b5e298",
+            "saved_at": "2026-05-05T06:04:24.559460Z",
+            "fetched_at": "2026-05-05T06:04:24.559348Z",
+            "content_hash": "e74fb585d01bbf397f599d9fbab46acb66a0a1d881801da5ba6a137b5858a65c",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "The choice of search procedure (MCTS vs. beam search vs. best-of-N) impacts performance and computational efficiency of process-based reward models.",
+            "evidence": "The paper discusses MCTS as a search procedure guided by process reward models, noting: \"MCTS algorithm, inspired by AlphaZero, performs a tree search over the unified space of reasoning steps generated by different LLMs. By following the guidance from PRM, we can obtain the reasoning chain that is likely to be the most accurate.\" It further states that \"process-level ensembling offers finer and more efficient control over generation compared to output-level ensembling\" and that MCTS improves performance by 3.6% and 4.3% on MATH and MQA datasets respectively.",
+            "source_url": "https://arxiv.org/html/2412.15797v1",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-b5e298",
+            "saved_at": "2026-05-05T06:04:37.468132Z",
+            "fetched_at": "2026-05-05T06:04:37.468081Z",
+            "content_hash": "a5811c91529365291890532f9b6377933c8c986ef05bad2b8154dc130651c689",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.96,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Base model choice significantly affects reward model performance, with performance improvements of up to 14% by selecting an optimal base model compared to the most common default choice within the same size group.",
+            "evidence": "The paper states: \"Our results show that the performance can be improved by up to 14% compared to the most common (i.e., default) choice\" and notes that \"replacing the popular base model (i.e., LLama-3.x) with the best model of similar size leads to gains ranging from 3% to 14%.\" The paper further notes: \"within each group, a few models post superior performances, with margins up to 14%.\"",
+            "source_url": "https://arxiv.org/html/2505.10775v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-b5e298",
+            "saved_at": "2026-05-05T06:04:45.071346Z",
+            "fetched_at": "2026-05-05T06:04:45.071303Z",
+            "content_hash": "7c935f814d7c1f8ed903911a311acf724041c5e6f5455f761bca45b87c17ba88",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "PRMs are systematically exploitable under adversarial optimization pressure, with policies trained on AIME problems achieving near-perfect PRM rewards (>0.9) while ground-truth accuracy remains low (below 4%), and 43% of reward gains attributable to stylistic shortcuts rather than genuine reasoning improvements.",
+            "evidence": "RL-induced reward hacking exposes the critical failure mode: policies trained on AIME problems achieve near-perfect PRM rewards (>0.9), while ground-truth accuracy remains low (below 4%), with 43% of reward gains attributable to stylistic shortcuts.",
+            "source_url": "https://arxiv.org/abs/2603.06621",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-ce10e0",
+            "saved_at": "2026-05-05T06:04:25.991672Z",
+            "fetched_at": "2026-05-05T06:04:25.991610Z",
+            "content_hash": "64276311e5a33b426f4e7e2b0e4c75b6388a49ac8d49920224c81ea8cafcc1d8",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.5,
+            "combined_confidence": 0.855,
+            "axis_disagreement": true
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "PRMs exhibit a fluency-logic dissociation, showing high invariance to surface-level style changes (reward changes <0.1) yet inconsistent detection of logically-corrupted reasoning, with different models failing on different attack types.",
+            "evidence": "Static perturbation analysis uncovers a fluency-logic dissociation: high invariance to surface-level style changes (reward changes <0.1), yet inconsistent detection of logically-corrupted reasoning, with different models failing on different attack types.",
+            "source_url": "https://arxiv.org/abs/2603.06621",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-ce10e0",
+            "saved_at": "2026-05-05T06:04:25.991753Z",
+            "fetched_at": "2026-05-05T06:04:25.991738Z",
+            "content_hash": "e8e48eb13c772535b073fcef6ba8972e7c31028d2ed66e0f479c64fc6c008676",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.5,
+            "combined_confidence": 0.855,
+            "axis_disagreement": true
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Current PRMs function primarily as fluency detectors rather than reasoning verifiers, creating systematic blind spots exploitable under optimization pressure.",
+            "evidence": "These findings reveal that current PRMs function as fluency detectors rather than reasoning verifiers, creating systematic blind spots that undermine their use as training signals.",
+            "source_url": "https://arxiv.org/abs/2603.06621",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-ce10e0",
+            "saved_at": "2026-05-05T06:04:25.991782Z",
+            "fetched_at": "2026-05-05T06:04:25.991773Z",
+            "content_hash": "6748ff3a0a792d814309559b50a679888a7831fc51f7adebbade8a84c085a962",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.5,
+            "combined_confidence": 0.855,
+            "axis_disagreement": true
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Developing PRMs is challenging due to the high cost and limited scalability of human-annotated data, making synthetic data synthesis necessary but difficult due to high noise ratios that cause overfitting.",
+            "evidence": "Process reward models (PRMs) offer fine-grained, step-level evaluations that facilitate deeper reasoning processes in large language models (LLMs), proving effective in complex tasks like mathematical reasoning. However, developing PRMs is challenging due to the high cost and limited scalability of human-annotated data. Synthetic data from Monte Carlo (MC) estimation is a promising alternative but suffers from a high noise ratio, which can cause overfitting and hinder large-scale training.",
+            "source_url": "https://arxiv.org/html/2509.16548v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-ce10e0",
+            "saved_at": "2026-05-05T06:04:38.311596Z",
+            "fetched_at": "2026-05-05T06:04:38.311567Z",
+            "content_hash": "dc5b2bb4ae8ecbeb496cfc69b8ff0b37a021c3f9a04dc78d81ac60a425c0aa19",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "PRMs are sensitive to label noise in annotations, with annotation models tending to both underestimate and overestimate step correctness due to limitations in their annotation capabilities.",
+            "evidence": "We conduct a preliminary study on the noise distribution in synthetic data from MC estimation, identifying that annotation models tend to both underestimate and overestimate step correctness due to limitations in their annotation capabilities.",
+            "source_url": "https://arxiv.org/html/2509.16548v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-ce10e0",
+            "saved_at": "2026-05-05T06:04:38.311638Z",
+            "fetched_at": "2026-05-05T06:04:38.311631Z",
+            "content_hash": "de16b497590e1ea22ef34e1b33f06c56d785c2cbf89a9ca7a41bc49a1f3ab37c",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "DeepSeek-R1 achieved 79.8% Pass@1 on AIME 2024 and 97.3% on MATH-500 using large-scale reinforcement learning, surpassing or matching OpenAI-o1-1217 on reasoning benchmarks without relying on process reward models for the core RL training.",
+            "evidence": "DeepSeek-R1 achieves a score of 79.8% Pass@1 on AIME 2024, slightly surpassing OpenAI-o1-1217. On MATH-500, it attains an impressive score of 97.3%, performing on par with OpenAI-o1-1217.",
+            "source_url": "https://arxiv.org/html/2501.12948v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-ca0d55",
+            "saved_at": "2026-05-05T06:04:50.782343Z",
+            "fetched_at": "2026-05-05T06:04:50.782320Z",
+            "content_hash": "1596df5849f592ecb83a4573e154c0346f5b50a4c0ad55f0004d7bf010cc8512",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Process advantage verifiers (PAVs) measuring progress under prover policies showed 8% higher accuracy than outcome reward models and were 1.5-5x more compute-efficient, with a 6x gain in sample efficiency for online RL policies trained with PRMs vs. ORMs.",
+            "evidence": "compared to ORM, they are >8% more accurate, and 1.5-5x more compute-efficient. Equipped with these insights, our PAVs enable one of the first results showing a 6x gain in sample efficiency for a policy trained using online RL with PRMs vs. ORMs.",
+            "source_url": "https://openreview.net/forum?id=A6Y7AqlzLW",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-ca0d55",
+            "saved_at": "2026-05-05T06:04:50.782370Z",
+            "fetched_at": "2026-05-05T06:04:50.782361Z",
+            "content_hash": "e9982660a214af0de25a8183108b7c6e3b9cb81ef920f0ab1d429d313d629fa2",
+            "domain": "openreview.net",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.96,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Qwen2.5-Math-PRM-7B outperformed majority voting (maj@8) by an average of 1.4% across 7 mathematical benchmarks (GSM8K, MATH, Minerva Math, GaoKao 2023, OlympiadBench, College Math, MMLU STEM) in best-of-N evaluation with 8 samples.",
+            "evidence": "Notably, it outperforms maj@8 across all 7 tasks, achieving an average improvement of 1.4%.",
+            "source_url": "https://qwenlm.github.io/blog/qwen2.5-math-prm/",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-ca0d55",
+            "saved_at": "2026-05-05T06:05:24.893312Z",
+            "fetched_at": "2026-05-05T06:05:24.893037Z",
+            "content_hash": "2cd95e5bcf6e0bd392bd96d885f9d99cec091d6cf4c138be507788dea720cf94",
+            "domain": "qwenlm.github.io",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.855,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "EpicPRM showed that a smaller, high-quality process supervision dataset (Epic50k with 50k steps) achieved comparable or superior PRM performance compared to larger datasets like PRM800K and Math-Shepherd, despite being less than 10% of their size, suggesting data quality outweighs quantity.",
+            "evidence": "The PRM trained on Epic50k achieves supervision performance comparable to, and in some cases surpassing, PRMs trained on the PRM800k and Math-Shepherd datasets, despite being less than 10% the size.",
+            "source_url": "https://arxiv.org/html/2503.02382v1",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-ca0d55",
+            "saved_at": "2026-05-05T06:05:24.893444Z",
+            "fetched_at": "2026-05-05T06:05:24.893430Z",
+            "content_hash": "8e15991af9c0929285108b657ddc3eb01984e5bb0212e7e00dcb64e1bb9074e3",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.96,
+            "axis_disagreement": false
+          }
+        ],
+        "uncertainty_notes": [
+          {
+            "subquestion_id": "sq2",
+            "topic": "What does empirical evidence from controlled comparisons show about PRM vs. ORM performance on mathematical and multi-step reasoning benchmarks (e.g., MATH, GSM8K, competition math)?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-b0010a"
+          },
+          {
+            "subquestion_id": "sq3",
+            "topic": "What evidence exists that PRMs generalize better (or worse) than ORMs to out-of-distribution tasks, domains beyond math, or longer reasoning chains?",
+            "reason": "Made 11 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-95c5f7"
+          },
+          {
+            "subquestion_id": "sq7",
+            "topic": "What evidence or expert consensus exists on whether current PRM vs. ORM comparisons are methodologically sound\u2014and what gaps remain in the literature (e.g., missing ablations, lack of reproducibility, underexplored domains)?",
+            "reason": "Made 11 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-1df0d5"
+          }
+        ]
+      },
+      "report": {
+        "user_prompt": "What do we actually know about whether process reward models improve LLM reasoning more than outcome-only reward models?",
+        "summary": "The question of whether PRMs outperform ORMs is genuinely contested: some controlled comparisons show meaningful PRM advantages in accuracy and compute efficiency, while high-profile systems like DeepSeek-R1 achieve state-of-the-art reasoning without relying on PRMs for core RL training. PRMs carry significant known failure modes\u2014including reward hacking, label noise sensitivity, and evidence that they may function more as fluency detectors than genuine reasoning verifiers\u2014that complicate straightforward performance comparisons. Methodological heterogeneity (search procedure, data quality, base model, annotation paradigm) makes cross-study comparisons unreliable, and direct controlled comparisons on non-math benchmarks and out-of-distribution tasks are largely absent from the evidence base.",
+        "claims": [
+          {
+            "claim": "PRMs provide dense, per-step feedback signals during multi-step reasoning, whereas ORMs provide only a single binary reward based on final-answer correctness, creating sparse credit-assignment signals.",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "claim": "Process advantage verifiers (a PRM variant measuring progress under prover policies) showed more than 8% higher accuracy than ORMs and were 1.5\u20135x more compute-efficient, with a 6x gain in sample efficiency for online RL policies trained with PRMs versus ORMs.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              12
+            ]
+          },
+          {
+            "claim": "Qwen2.5-Math-PRM-7B outperformed majority voting (maj@8) by an average of 1.4% across 7 mathematical benchmarks in best-of-N evaluation, suggesting incremental but real PRM gains in math-specific inference-time search.",
+            "confidence": 0.75,
+            "supporting_finding_indices": [
+              13
+            ]
+          },
+          {
+            "claim": "DeepSeek-R1 achieved 79.8% Pass@1 on AIME 2024 and 97.3% on MATH-500\u2014matching or exceeding OpenAI-o1-1217\u2014using large-scale RL without relying on process reward models for core RL training, demonstrating that ORM-based or PRM-free pipelines can reach frontier reasoning performance.",
+            "confidence": 0.93,
+            "supporting_finding_indices": [
+              11
+            ]
+          },
+          {
+            "claim": "PRMs are systematically exploitable under adversarial optimization: policies trained on AIME problems have achieved near-perfect PRM rewards (>0.9) while ground-truth accuracy remained below 4%, with 43% of reward gains attributed to stylistic shortcuts rather than genuine reasoning improvements.",
+            "confidence": 0.72,
+            "supporting_finding_indices": [
+              6,
+              8
+            ]
+          },
+          {
+            "claim": "There is internal tension in findings about PRM failure modes: one set of results characterizes PRMs as rewarding stylistic/surface shortcuts, while another set reports that PRMs show high invariance to surface-level style changes (reward changes <0.1); the net characterization that PRMs act primarily as 'fluency detectors' is therefore uncertain and should be treated with caution.",
+            "confidence": 0.55,
+            "supporting_finding_indices": [
+              6,
+              7,
+              8
+            ]
+          },
+          {
+            "claim": "PRMs are sensitive to label noise: Monte Carlo\u2013estimated synthetic annotations tend to both underestimate and overestimate step correctness, causing overfitting and limiting large-scale training, while human annotation is costly and does not scale.",
+            "confidence": 0.93,
+            "supporting_finding_indices": [
+              9,
+              10
+            ]
+          },
+          {
+            "claim": "Data quality outweighs raw dataset size for PRM training: a 50k-step high-quality dataset (Epic50k) achieved comparable or superior PRM performance relative to PRM800K and Math-Shepherd despite being less than 10% of their size.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              14
+            ]
+          },
+          {
+            "claim": "The choice of search procedure (MCTS, beam search, or best-of-N) materially affects PRM performance, with MCTS guided by PRMs yielding 3.6% and 4.3% improvements on MATH and MQA datasets respectively over output-level ensemble baselines.",
+            "confidence": 0.9,
+            "supporting_finding_indices": [
+              4
+            ]
+          },
+          {
+            "claim": "Base model selection alone can change reward model performance by up to 14% within the same model-size group, meaning many PRM vs. ORM comparisons in the literature may confound reward-model type with base-model choice.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              5
+            ]
+          },
+          {
+            "claim": "PRM training methodology\u2014human annotation, automated (Monte Carlo) supervision, or hybrid\u2014is a critical variable that creates trade-offs between annotation fidelity and scalability, making direct cross-study comparisons unreliable without controlling for this factor.",
+            "confidence": 0.93,
+            "supporting_finding_indices": [
+              3,
+              9
+            ]
+          }
+        ],
+        "contradictions_surfaced": [
+          {
+            "description": "Findings 6, 7, and 8 all originate from the same paper (https://arxiv.org/abs/2603.06621) but present an internal tension about how PRMs fail. Finding 6 reports that 43% of reward gains are attributable to 'stylistic shortcuts,' implying PRMs reward surface features. Finding 7, however, reports 'high invariance to surface-level style changes (reward changes <0.1),' which is inconsistent with style being a primary exploit. Finding 8 characterizes PRMs as 'fluency detectors,' which aligns with the stylistic-shortcut framing of finding 6 but conflicts with the surface-invariance result of finding 7. The most likely reconciliation is that the paper uses 'stylistic shortcuts' to refer to something distinct from surface-level style perturbations tested in finding 7, but the current evidence summaries do not resolve this, creating genuine uncertainty about the precise nature of PRM failure modes under optimization pressure.",
+            "finding_ids": [
+              6,
+              7,
+              8
+            ],
+            "severity": "moderate",
+            "type": "framing"
+          },
+          {
+            "description": "Findings 0 and 1 offer subtly different technical definitions of PRMs. Finding 0 (arxiv.org/abs/2410.08146) states PRMs 'provide feedback at each step,' implying per-step rewards. Finding 1 (stephendiehl.com) defines a PRM as learning 'a mapping from a trajectory to a reward value (r: S^T \u2192 R),' which describes a single trajectory-level scalar, not necessarily a per-step signal. This definitional ambiguity matters because it affects how 'dense feedback' advantages attributed to PRMs should be interpreted and compared across studies.",
+            "finding_ids": [
+              0,
+              1
+            ],
+            "severity": "minor",
+            "type": "methodological"
+          },
+          {
+            "description": "Finding 12 (process advantage verifiers showing 8%+ accuracy gains over ORMs and 6x sample efficiency in online RL) and finding 11 (DeepSeek-R1 reaching frontier performance without PRMs in core RL) present a framing tension about the practical necessity of PRMs for large-scale RL training. The PAV result suggests PRMs offer large efficiency gains over ORMs, while DeepSeek-R1 demonstrates that comparable or superior final performance is achievable without them. These findings are not strictly contradictory (different systems, scales, and pipelines), but they pull in opposite directions on the headline question.",
+            "finding_ids": [
+              11,
+              12
+            ],
+            "severity": "moderate",
+            "type": "framing"
+          }
+        ],
+        "caveats": [
+          "WARNING \u2014 bounded revision exhausted with critic issues still open. The report ships with 4 unresolved critic issue(s):\n  \u2022 Claim #3 (overstated): The cited finding (finding [11]) confirms DeepSeek-R1's benchmark scores and that it matched/surpassed OpenAI-o1-1217, but does not explicitly state it was 'ORM-based' or 'PRM-free.' The claim that DeepSeek-R1 demonstrates 'ORM-based or PRM-free pipelines can reach frontier reasoning performance' goes beyond what the cited finding establishes\u2014the finding only reports benchmark scores and comparison to OpenAI-o1. The assertion about the nature of the RL pipeline (ORM-based/PRM-free) is partially supported by finding [11]'s description in the pool summary but the actual evidence quote does not mention this. The writer's own claim in the report text ('without relying on process reward models for core RL training') is not corroborated by the quoted evidence from the finding.\n  \u2022 Claim #5 (overstated): The claim asserts an 'internal tension' between findings [6] and [7], but both come from the same paper (arxiv.org/abs/2603.06621) and are not actually in contradiction\u2014the paper itself presents both results as part of the same analysis (reward hacking via stylistic shortcuts under optimization pressure, while being invariant to static surface perturbations). The paper's own conclusion in finding [8] is that PRMs are 'fluency detectors.' The claim incorrectly frames these as contradictory findings when they are complementary results from the same source, and then casts unwarranted doubt on the 'fluency detector' characterization that the paper itself endorses. Additionally, all three findings are [AXIS-DISAGREE] (combined=0.85), which warrants caution, but the writer's framing of internal contradiction is a misrepresentation of the evidence structure.\n  \u2022 Claim #8 (overstated): The cited finding [4] states MCTS improves performance by 3.6% and 4.3% on MATH and MQA datasets respectively, but the comparison baseline is described as 'output-level ensembling' not necessarily a general ORM or beam search baseline. The claim says these are improvements 'over output-level ensemble baselines,' which is consistent with the finding, but the broader framing that 'choice of search procedure materially affects PRM performance' is supported. However, beam search is mentioned in the claim but not in the cited finding\u2014the finding only discusses MCTS and output-level ensembling. This minor overreach is present but marginal. More importantly, the claim is largely supported.\n  \u2022 Claim #9 (overstated): The cited finding [5] establishes that base model selection can change reward model performance by up to 14% within size groups. However, the claim extends this to say 'many PRM vs. ORM comparisons in the literature may confound reward-model type with base-model choice.' This inferential leap\u2014that this finding implies existing PRM vs. ORM comparisons are confounded\u2014is not supported by the cited finding, which does not discuss PRM vs. ORM comparisons at all. The finding is about base model choice for reward models generally, not specifically about the PRM vs. ORM comparison literature.",
+          "No findings were successfully extracted on direct controlled empirical comparisons of PRM vs. ORM performance on standard math benchmarks (MATH, GSM8K, competition math) despite targeted research effort (sq2). This is the most critical gap: the report cannot make calibrated claims about head-to-head benchmark performance.",
+          "No findings were extracted on PRM vs. ORM generalization to out-of-distribution tasks, domains beyond mathematics, or longer reasoning chains (sq3). All empirical evidence in this report pertains to mathematical reasoning; generalizability claims are unsupported.",
+          "No findings were extracted on expert consensus regarding methodological soundness of the existing PRM vs. ORM literature, missing ablations, or reproducibility (sq7). The report cannot assess how trustworthy the broader body of comparison studies is.",
+          "Several findings carry [AXIS-DISAGREE] flags (findings 0, 1, 6, 7, 8), indicating divergence between self-reported confidence, source quality, and cross-source agreement. Claims drawing on these findings have been hedged accordingly, but residual uncertainty remains.",
+          "The PRM failure-mode evidence (findings 6\u20138) all originates from a single paper (arxiv.org/abs/2603.06621), limiting independence of support. The internal tension noted in the contradiction above further reduces confidence in strong conclusions about PRM failure modes.",
+          "The DeepSeek-R1 result (finding 11) does not confirm that ORMs were used instead of PRMs\u2014it confirms PRMs were not used for core RL training. The precise reward mechanism is not fully characterized in the available evidence.",
+          "Most empirical findings concern inference-time search (best-of-N, MCTS) rather than RL training pipelines. PRM advantages may differ substantially between these use cases, and the evidence base does not systematically separate them.",
+          "The Qwen2.5-Math-PRM result (finding 13) comes from a vendor blog post rather than a peer-reviewed source, warranting lower confidence despite the numerical specificity."
+        ]
+      },
+      "critic_history": [
+        {
+          "issues": [
+            {
+              "claim_index": 3,
+              "issue_type": "overstated",
+              "explanation": "The cited finding (finding [11]) confirms DeepSeek-R1's benchmark scores and that it matched/surpassed OpenAI-o1-1217, but does not explicitly state it was 'ORM-based' or 'PRM-free.' The claim that DeepSeek-R1 demonstrates 'ORM-based or PRM-free pipelines can reach frontier reasoning performance' goes beyond what the cited finding establishes\u2014the finding only reports benchmark scores and comparison to OpenAI-o1. The assertion about the nature of the RL pipeline (ORM-based/PRM-free) is partially supported by finding [11]'s description in the pool summary but the actual evidence quote does not mention this. The writer's own claim in the report text ('without relying on process reward models for core RL training') is not corroborated by the quoted evidence from the finding."
+            },
+            {
+              "claim_index": 5,
+              "issue_type": "overstated",
+              "explanation": "The claim asserts an 'internal tension' between findings [6] and [7], but both come from the same paper (arxiv.org/abs/2603.06621) and are not actually in contradiction\u2014the paper itself presents both results as part of the same analysis (reward hacking via stylistic shortcuts under optimization pressure, while being invariant to static surface perturbations). The paper's own conclusion in finding [8] is that PRMs are 'fluency detectors.' The claim incorrectly frames these as contradictory findings when they are complementary results from the same source, and then casts unwarranted doubt on the 'fluency detector' characterization that the paper itself endorses. Additionally, all three findings are [AXIS-DISAGREE] (combined=0.85), which warrants caution, but the writer's framing of internal contradiction is a misrepresentation of the evidence structure."
+            },
+            {
+              "claim_index": 8,
+              "issue_type": "overstated",
+              "explanation": "The cited finding [4] states MCTS improves performance by 3.6% and 4.3% on MATH and MQA datasets respectively, but the comparison baseline is described as 'output-level ensembling' not necessarily a general ORM or beam search baseline. The claim says these are improvements 'over output-level ensemble baselines,' which is consistent with the finding, but the broader framing that 'choice of search procedure materially affects PRM performance' is supported. However, beam search is mentioned in the claim but not in the cited finding\u2014the finding only discusses MCTS and output-level ensembling. This minor overreach is present but marginal. More importantly, the claim is largely supported."
+            },
+            {
+              "claim_index": 9,
+              "issue_type": "overstated",
+              "explanation": "The cited finding [5] establishes that base model selection can change reward model performance by up to 14% within size groups. However, the claim extends this to say 'many PRM vs. ORM comparisons in the literature may confound reward-model type with base-model choice.' This inferential leap\u2014that this finding implies existing PRM vs. ORM comparisons are confounded\u2014is not supported by the cited finding, which does not discuss PRM vs. ORM comparisons at all. The finding is about base model choice for reward models generally, not specifically about the PRM vs. ORM comparison literature."
+            }
+          ],
+          "approved": false
+        }
+      ],
+      "verify_history": [
+        {
+          "results": []
+        }
+      ],
+      "metadata": {
+        "commit_hash": "2f6ab883c54607f36d522b553c98dfd10b64a6c9",
+        "branch": "main",
+        "models": {
+          "researcher": "claude-haiku-4-5",
+          "writer": "claude-sonnet-4-6",
+          "critic": "claude-sonnet-4-6",
+          "judge": "claude-opus-4-7",
+          "kae_judge": "claude-haiku-4-5"
+        },
+        "config_snapshot": {
+          "anthropic_api_key": "<set>",
+          "tavily_api_key": "<set>",
+          "researcher_model": "claude-haiku-4-5",
+          "writer_model": "claude-sonnet-4-6",
+          "critic_model": "claude-sonnet-4-6",
+          "judge_model": "claude-opus-4-7",
+          "kae_judge_model": "claude-haiku-4-5",
+          "min_subquestions": 3,
+          "max_subquestions": 7,
+          "decompose_max_retries": 2,
+          "researcher_max_tool_calls": 30,
+          "researcher_max_findings": 6,
+          "researcher_min_findings_to_stop": 3,
+          "researcher_min_unique_sources": 2,
+          "researcher_min_avg_confidence": 0.55,
+          "researcher_unproductive_call_limit": 10,
+          "search_results_per_query": 8,
+          "fetch_max_chars": 12000,
+          "scholar_max_retries": 3,
+          "scholar_backoff_seconds": 1.0,
+          "scholar_unavailable_window_seconds": 120,
+          "max_revisions": 0,
+          "verifier_enabled": false,
+          "parallel_researchers": 2
+        },
+        "captured_at": "2026-05-05T06:03:17.145632Z"
+      },
+      "metrics": {
+        "total_subquestions": 7,
+        "subquestions_with_findings": 4,
+        "total_findings": 15,
+        "unique_sources": 12,
+        "revision_rounds": 0,
+        "final_grounding_rate": 0.6363636363636364,
+        "coverage_rate": 0.5714285714285714,
+        "elapsed_seconds": 198.34682512283325,
+        "per_stage": {
+          "classify_shape": {
+            "calls": 1,
+            "input_tokens": 973,
+            "output_tokens": 59,
+            "cost_usd": 0.003804,
+            "elapsed_seconds": 2.278876082971692
+          },
+          "confidence": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cost_usd": 0.0,
+            "elapsed_seconds": 0.0003804168663918972
+          },
+          "critic": {
+            "calls": 1,
+            "input_tokens": 6887,
+            "output_tokens": 849,
+            "cost_usd": 0.033396,
+            "elapsed_seconds": 17.916758625069633
+          },
+          "decompose": {
+            "calls": 1,
+            "input_tokens": 1469,
+            "output_tokens": 964,
+            "cost_usd": 0.018867,
+            "elapsed_seconds": 15.993419165955856
+          },
+          "reconciler": {
+            "calls": 1,
+            "input_tokens": 3820,
+            "output_tokens": 582,
+            "cost_usd": 0.02019,
+            "elapsed_seconds": 13.096950500039384
+          },
+          "researcher": {
+            "calls": 58,
+            "input_tokens": 453522,
+            "output_tokens": 9684,
+            "cost_usd": 0.501942,
+            "elapsed_seconds": 109.4822409581393
+          },
+          "writer": {
+            "calls": 1,
+            "input_tokens": 6474,
+            "output_tokens": 2428,
+            "cost_usd": 0.055842,
+            "elapsed_seconds": 39.51986716594547
+          }
+        },
+        "total_input_tokens": 473145,
+        "total_output_tokens": 14566,
+        "total_cost_usd": 0.6340410000000001,
+        "researcher_latency_max": 46.57943266700022,
+        "researcher_latency_avg": 27.993047654662014,
+        "tool_mix": {
+          "web_search": 31,
+          "search_papers": 14,
+          "fetch_url": 33,
+          "save_finding": 15,
+          "note_uncertainty": 0
+        },
+        "kae": null,
+        "ace": null,
+        "plan_judge": null
+      },
+      "taxonomy": null,
+      "started_at": "2026-05-05T06:06:35.434493Z"
+    }
+  ]
+}

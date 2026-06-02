@@ -1,0 +1,1311 @@
+{
+  "prompt_id": "multimodal-1",
+  "category": "multimodal",
+  "n_runs": 2,
+  "mode": "draft_only",
+  "max_revisions": 0,
+  "verifier_enabled": false,
+  "subquestion_jaccard": 0.0,
+  "claim_jaccard": 0.0,
+  "per_run": [
+    {
+      "run_index": 0,
+      "elapsed_seconds": 203.16784405708313,
+      "n_claims": 15,
+      "n_subquestions": 7,
+      "grounding_rate": 0.9333333333333333,
+      "coverage_rate": 0.7142857142857143,
+      "f1": 0.809248554913295
+    },
+    {
+      "run_index": 1,
+      "elapsed_seconds": 162.31120681762695,
+      "n_claims": 12,
+      "n_subquestions": 7,
+      "grounding_rate": 0.75,
+      "coverage_rate": 0.42857142857142855,
+      "f1": 0.5454545454545454
+    }
+  ],
+  "runs": [
+    {
+      "user_prompt": "Map the research landscape of multi-agent LLM systems. Produce a structured report that includes a taxonomy of the major architectural patterns, how they relate, and where the open problems are.",
+      "shape": {
+        "shape": "DISCOVERY",
+        "confidence": 0.82,
+        "rationale": "The user wants to map an entire research landscape, discover its taxonomy, and identify open problems \u2014 the answer space itself is what's being constructed, not a pre-specified list of axes or a known contested question."
+      },
+      "decomposition": {
+        "subquestions": [
+          {
+            "id": "sq1",
+            "question": "What are the major architectural patterns used in multi-agent LLM systems (e.g., orchestrator-worker, peer-to-peer, hierarchical, blackboard, role-based), and how are they defined and distinguished in the literature?",
+            "rationale": "Establishing a clear taxonomy of architectural patterns is the foundational layer of the report without which the rest cannot be structured.",
+            "confidence": 0.95,
+            "depends_on": [],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq2",
+            "question": "What inter-agent communication and coordination mechanisms exist in multi-agent LLM systems (e.g., shared memory, message passing, tool-mediated communication, structured protocols), and what are their trade-offs?",
+            "rationale": "Communication and coordination are the connective tissue of multi-agent systems; understanding the design space here clarifies how architectural patterns relate to each other.",
+            "confidence": 0.88,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq3",
+            "question": "What task decomposition and planning strategies do multi-agent LLM systems use to allocate subtasks across agents (e.g., static decomposition, dynamic planning, emergent division of labor)?",
+            "rationale": "Task allocation strategy is a key dimension that differentiates architectural patterns and determines system capability on complex, multi-step problems.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq4",
+            "question": "What concrete multi-agent LLM frameworks and systems have been proposed or deployed (e.g., AutoGen, CrewAI, MetaGPT, LangGraph, AgentVerse, ChatDev), and how do they instantiate different architectural choices?",
+            "rationale": "Mapping real systems onto the taxonomy grounds abstract architectural categories in concrete implementations and reveals which patterns are most practically adopted.",
+            "confidence": 0.9,
+            "depends_on": [
+              "sq1",
+              "sq2"
+            ],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq5",
+            "question": "What are the primary evaluation benchmarks, metrics, and methodologies used to assess the performance of multi-agent LLM systems, and what gaps or inconsistencies exist across them?",
+            "rationale": "Understanding how systems are evaluated is critical for assessing research claims and identifying where the field lacks rigorous comparative methods.",
+            "confidence": 0.8,
+            "depends_on": [
+              "sq4"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq6",
+            "question": "What are the principal open problems and failure modes in multi-agent LLM research (e.g., error propagation, agent alignment, context window limits, hallucination compounding, scalability, trust between agents, safety)?",
+            "rationale": "Explicitly enumerating open problems is required to complete the research landscape map and guide future work.",
+            "confidence": 0.92,
+            "depends_on": [
+              "sq2",
+              "sq3",
+              "sq4"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq7",
+            "question": "What evidence is currently missing or methodologically weak in multi-agent LLM research \u2014 e.g., lack of large-scale real-world deployment studies, absence of standardized benchmarks, under-explored agent count scaling laws?",
+            "rationale": "Identifying evidentiary gaps prevents overstating current knowledge and highlights where the field's empirical foundations are thin.",
+            "confidence": 0.75,
+            "depends_on": [
+              "sq5",
+              "sq6"
+            ],
+            "preferred_search": "search_papers"
+          }
+        ]
+      },
+      "findings": {
+        "findings": [
+          {
+            "subquestion_id": "sq1",
+            "claim": "Multi-agent systems are organized around three core architectural components: specialized agent roles, an orchestration layer for coordination, and communication protocols for inter-agent information exchange.",
+            "evidence": "Building an orchestrated multi-agent system (MAS) involves more than simply connecting multiple autonomous agents. It requires designing specialized roles, establishing a coordination layer that governs their interactions, and defining clear communication protocols that allow agents to exchange information effectively. Specialized agents operate as autonomous components that execute well-defined tasks within the system, each contributing a distinct capability toward the collective objective. Their interactions are coordinated through an orchestration layer that determines execution order, manages dependencies, and aligns individual outputs into a coherent operational flow.",
+            "source_url": "https://arxiv.org/html/2601.13671v1",
+            "source_title": "The Orchestration of Multi-Agent Systems: Architectures, Protocols, and Enterprise Adoption",
+            "confidence": 0.95,
+            "researcher_id": "r-22e4a1",
+            "saved_at": "2026-05-05T06:07:45.380265Z",
+            "fetched_at": "2026-05-05T06:07:45.380040Z",
+            "content_hash": "2f5c058b2c34091e9ce9a0a3b9c8f1fdc024debd524389e844f9da58e4b2ea3c",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.6666666666666666,
+            "combined_confidence": 0.8966666666666666,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Specialized agents in multi-agent systems fall into three major categories: Worker agents (execute well-defined tasks), Service agents (provide shared operational capabilities like QA and compliance), and Support agents (provide supervisory oversight and monitoring).",
+            "evidence": "Worker Agents - Worker agents represent the most basic but essential type. They are responsible for carrying out well-defined tasks such as a Retrieval-augmented generation (RAG) pipeline. Service Agents - Service agents provide shared operational capabilities that other agents depend on during workflow execution. They act as reusable utilities within the multi-agent ecosystem, performing tasks such as quality assurance, compliance enforcement, diagnostics, or automated recovery. Support Agents - Complementing the service agents, support agents operate at a supervisory and analytical level.",
+            "source_url": "https://arxiv.org/html/2601.13671v1",
+            "source_title": "The Orchestration of Multi-Agent Systems: Architectures, Protocols, and Enterprise Adoption",
+            "confidence": 0.95,
+            "researcher_id": "r-22e4a1",
+            "saved_at": "2026-05-05T06:07:45.380377Z",
+            "fetched_at": "2026-05-05T06:07:45.380368Z",
+            "content_hash": "ca36de91726a69977f24c1ba024b6fd3dda4438e2c7cbf931e39133c625d919c",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Hierarchical multi-agent systems are characterized along five taxonomy dimensions: Control Hierarchy (centralized vs. decentralized vs. hybrid), Information Flow, Role and Task Delegation, Temporal Layering, and Communication Structure.",
+            "evidence": "To characterize the design space of hierarchical MAS, this paper introduces a taxonomy comprising five key axes. Each axis represents a fundamental aspect of how a multi\u2013agent hierarchy can be structured or how it operates. The five axes are: (1) Control Hierarchy, (2) Information Flow, (3) Role and Task Delegation, (4) Temporal Hierarchy, and (5) Communication Structure.",
+            "source_url": "https://arxiv.org/html/2508.12683",
+            "source_title": "A Taxonomy of Hierarchical Multi-Agent Systems: Design Patterns, Coordination Mechanisms, and Industrial Applications",
+            "confidence": 0.95,
+            "researcher_id": "r-22e4a1",
+            "saved_at": "2026-05-05T06:07:45.380463Z",
+            "fetched_at": "2026-05-05T06:07:45.380456Z",
+            "content_hash": "95df2c72436e8ff8c67b1210c9b53f37a86950990c9cb9b951f3dc5f32ee2dad",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.6666666666666666,
+            "combined_confidence": 0.8966666666666666,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Control hierarchy in multi-agent systems ranges from fully centralized (single top-level agent making most decisions) to fully decentralized (all agents equal with no single leader) to hybrid models that blend both approaches.",
+            "evidence": "On one end of this spectrum, a fully centralized hierarchy has a single top-level agent (or a small set of high\u2013level agents) that make most decisions and directly instruct lower\u2013level agents. At the opposite end, a fully decentralized system has no single leader; all agents are more or less equal, and any hierarchy is only implicit. In practice, many multi\u2013agent systems blend these extremes into hybrid control hierarchies. A hybrid HMAS might have several layers: e.g., a top layer of coordinators that set high\u2013level goals, and a bottom layer of workers that carry out tasks, with possibly a middle layer aggregating information.",
+            "source_url": "https://arxiv.org/html/2508.12683",
+            "source_title": "A Taxonomy of Hierarchical Multi-Agent Systems: Design Patterns, Coordination Mechanisms, and Industrial Applications",
+            "confidence": 0.95,
+            "researcher_id": "r-22e4a1",
+            "saved_at": "2026-05-05T06:07:45.380480Z",
+            "fetched_at": "2026-05-05T06:07:45.380475Z",
+            "content_hash": "0d13bf9bb4b12a3f9e04545d2050fe0ff90ffe25d836fbd890c90dd17e80cd85",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Multi-agent LLM systems employ five primary architectural communication patterns: flat (peer-to-peer many-to-many messaging), hierarchical (task delegation down, results up), team-based (team lead + specialists with shared state), coordinator-mediated (group chat with central coordinator), and hybrid (combining hierarchical control with peer-to-peer links).",
+            "evidence": "Below we outline five patterns (flat, hierarchical, team-based, central coordinator, hybrid) with their agent roles, message flows, and key functions... In a flat or \"network\" architecture, all agents are peers... In a hierarchical architecture, agents are organized in levels (a tree)... A team-based or \"society\" architecture groups agents into teams, often with a team lead... In this model, one central agent (or the user/human) acts as a Coordinator in a group-chat style environment... Hybrid architectures combine hierarchical control with peer-to-peer flexibility.",
+            "source_url": "https://samiranama.com/posts/LLM-Based-Multi-Agent-Systems-Architectures-and-Collaboration/",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-a6987a",
+            "saved_at": "2026-05-05T06:08:09.532843Z",
+            "fetched_at": "2026-05-05T06:08:09.532818Z",
+            "content_hash": "9bbb20c296cf1b1417b7d329fb7699a32f0a72213153ee970193a419a91e1c3a",
+            "domain": "samiranama.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Flat architectures enable flexible, emergent coordination through many-to-many communication but require careful protocol design, while hierarchical architectures scale via task subdivision and clear control flow but may reduce flexibility.",
+            "evidence": "In a flat or \"network\" architecture, all agents are peers... This allows flexible, many-to-many communication (emergent coordination) but requires careful protocol design... In a hierarchical architecture... It scales to complex projects by subdividing authority.",
+            "source_url": "https://samiranama.com/posts/LLM-Based-Multi-Agent-Systems-Architectures-and-Collaboration/",
+            "source_title": "",
+            "confidence": 0.92,
+            "researcher_id": "r-a6987a",
+            "saved_at": "2026-05-05T06:08:11.915388Z",
+            "fetched_at": "2026-05-05T06:08:11.915220Z",
+            "content_hash": "f49f7b8ef60585b5a9a47042888c34c6c12b0ae3f031f9ce7e49279a81b69076",
+            "domain": "samiranama.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.863,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Team-based architectures use shared state or memory systems to maintain context across team members, enabling specialists to coordinate through both supervisor routing and shared state reading/writing.",
+            "evidence": "A team-based or \"society\" architecture groups agents into teams, often with a team lead... A common design is to include a State Management System to maintain context across the team... specialists may read/write shared state. Feedback flows back via state or messages.",
+            "source_url": "https://samiranama.com/posts/LLM-Based-Multi-Agent-Systems-Architectures-and-Collaboration/",
+            "source_title": "",
+            "confidence": 0.93,
+            "researcher_id": "r-a6987a",
+            "saved_at": "2026-05-05T06:08:14.147496Z",
+            "fetched_at": "2026-05-05T06:08:14.147366Z",
+            "content_hash": "3b1b17ccb6b2a9d37a4c9ea5e8cbbb28a211c9cbadede5acf3bc264349646e07",
+            "domain": "samiranama.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.867,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Memory-based communication uses shared knowledge repositories accessible to all agents, report-based systems use status updates and progress communication, relay mechanisms enable sequential information passing, and debate protocols facilitate argumentative exchanges for consensus building.",
+            "evidence": "The field distinguishes between several communication paradigms. Memory-based communication involves shared knowledge repositories accessible to all agents. Report-based systems use status updates and progress communication. Relay mechanisms enable information passing between agents in sequential workflows. Debate protocols facilitate argumentative exchanges for consensus building.",
+            "source_url": "https://xue-guang.com/post/llm-marl/",
+            "source_title": "",
+            "confidence": 0.94,
+            "researcher_id": "r-a6987a",
+            "saved_at": "2026-05-05T06:08:23.364358Z",
+            "fetched_at": "2026-05-05T06:08:23.364129Z",
+            "content_hash": "be06317ecef98e7022975081c546109b82bef1b25fdedc4567e504b7aab5dd95",
+            "domain": "xue-guang.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.871,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Shared scratchpads enable seamless information access but risk context pollution, representing a key trade-off in multi-agent communication design.",
+            "evidence": "Communication patterns present distinct trade-offs. Shared scratchpads enable seamless information access but risk context pollution.",
+            "source_url": "https://xue-guang.com/post/llm-marl/",
+            "source_title": "",
+            "confidence": 0.85,
+            "researcher_id": "r-a6987a",
+            "saved_at": "2026-05-05T06:08:25.226111Z",
+            "fetched_at": "2026-05-05T06:08:25.226081Z",
+            "content_hash": "22d9f76ad79c2ac8d7ee0a1737a9277d0728925927015129eb20c26dd0ef8b0f",
+            "domain": "xue-guang.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.835,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Centralized coordination employs a supervisor agent managing specialized worker agents (e.g., AutoGen, LangGraph) and provides clear control but can create bottlenecks, while decentralized systems enable peer-to-peer communication offering greater resilience but increased coordination complexity.",
+            "evidence": "Centralized coordination employs a supervisor agent that manages and directs specialized worker agents, exemplified by AutoGen's supervisor architecture and LangGraph's supervisor tool-calling pattern. This approach provides clear control and coordination but can create bottlenecks. Decentralized systems enable peer-to-peer communication without central authority, as seen in CAMEL's role-playing framework, offering greater resilience but increased coordination complexity.",
+            "source_url": "https://xue-guang.com/post/llm-marl/",
+            "source_title": "",
+            "confidence": 0.93,
+            "researcher_id": "r-a6987a",
+            "saved_at": "2026-05-05T06:08:27.915031Z",
+            "fetched_at": "2026-05-05T06:08:27.914943Z",
+            "content_hash": "a22637489f32e268f534e22609cf4d02e150f8711ed8d105c5eb1b822981fbdb",
+            "domain": "xue-guang.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.867,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq3",
+            "claim": "Agent-oriented planning in multi-agent LLM systems uses a decomposition-first approach where a meta-agent decomposes user queries into sub-tasks and allocates them to specialized agents, guided by three design principles: solvability, completeness, and non-redundancy.",
+            "evidence": "The meta-agent \"first performs fast task decomposition and allocation\" to decompose user queries into sub-tasks that are \"assigned to the appropriate agents for execution.\" The framework identifies \"three critical design principles of agent-oriented planning, including solvability, completeness, and non-redundancy, to ensure that each sub-task can be effectively resolved.\"",
+            "source_url": "https://arxiv.org/html/2410.02189v2",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-f6f7df",
+            "saved_at": "2026-05-05T06:08:03.464495Z",
+            "fetched_at": "2026-05-05T06:08:03.464293Z",
+            "content_hash": "bd3ad85560ba61ce9672d4dd0a7e962f0694703f28eae3f371f4093cc5c2fe02",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq3",
+            "claim": "Hierarchical multi-agent LLM systems use layered task decomposition where an upper layer decomposes tasks and assigns them to lower-layer agents, enabling scalability through distributed reasoning and division of labor across specialized agents.",
+            "evidence": "The system proposes \"a hierarchical multi-agent architecture that distributes task decomposition and allocation across layers of LLM agents, enabling scalability to large environments and long-horizon missions\" and uses \"meta-prompts are learned and shared across agents within the same layer, enabling efficient prompt optimization in multi-agent settings.\"",
+            "source_url": "https://arxiv.org/html/2602.21670v2",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-f6f7df",
+            "saved_at": "2026-05-05T06:08:03.464609Z",
+            "fetched_at": "2026-05-05T06:08:03.464598Z",
+            "content_hash": "92b898b4d0a9b235aaa1e74eb73b438f9ee1dcd778f40f79653baafe24133e0f",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq3",
+            "claim": "Dynamic task decomposition in multi-agent LLM systems involves decomposing complex tasks into smaller subtasks and then dynamically adjusting subsequent subtasks based on the execution results of preceding ones, with subtask-tailored agents generated automatically for each subtask.",
+            "evidence": "The TDAG framework \"decomposes complex tasks into smaller subtasks, each managed by a specifically generated subagent\" and \"dynamically adjusting subsequent subtasks based on the completion status of preceding ones.\" This differs from conventional approaches because \"existing approaches... aim to break down a complex request into a sequence of subtasks... but they encounter two notable drawbacks: error propagation and limited adaptability. In many studies, after the decomposition of the problem, all subtasks become fixed and unalterable.\"",
+            "source_url": "https://arxiv.org/html/2402.10178v2",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-f6f7df",
+            "saved_at": "2026-05-05T06:08:14.499372Z",
+            "fetched_at": "2026-05-05T06:08:14.499357Z",
+            "content_hash": "67ea314e7bf5c1cfa5e847600b2cfcf071f58418a43cbb1631d468b5a441d8b9",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Multi-agent LLM evaluation is organized along two primary dimensions: evaluation objectives (what to evaluate: agent behavior, capabilities, reliability, safety) and evaluation process (how to evaluate: interaction modes, datasets/benchmarks, metric computation, tooling, and contexts).",
+            "evidence": "The survey proposes \"a two-dimensional taxonomy to organize different aspects of the evaluation of LLM-based agents, structured along the axes of Evaluation Objectives (what to evaluate) and Evaluation Process (how to evaluate).\" It specifies: \"The Evaluation Objectives dimension is concerned with the targets of evaluation. The first category, Agent Behavior... Next, Agent Capabilities... Reliability... Finally, Safety and Alignment... The Evaluation Process dimension describes how agents are assessed. Interaction Mode... Evaluation Data... Metrics Computation Methods... Evaluation Tooling... Lastly, Evaluation Contexts...\"",
+            "source_url": "https://arxiv.org/html/2507.21504v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-e81234",
+            "saved_at": "2026-05-05T06:08:40.772937Z",
+            "fetched_at": "2026-05-05T06:08:40.772767Z",
+            "content_hash": "0381f0c0dde70ee235a2b64544e5b54e67b279f143eedb28606a31f78d7679b9",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Multi-agent LLM evaluation literature shows major imbalances in failure mode coverage: 26 of 32 papers measured miscoordination, while only 5 papers measured collusion; most threat models (CBRN, cybersecurity, etc.) are not measured by any multi-agent evaluations.",
+            "evidence": "\"Among the 32 papers we identified, miscoordination is by far the most represented failure mode (26 papers), while collusion is relatively underrepresented (5 papers).\" Additionally, \"Most AI threat models are not measured by any multi-agent evaluation. In examining the setting of each evaluation, we find that most multi-agent evaluation papers involve environments that don't attempt to measure any threat model.\"",
+            "source_url": "https://www.lesswrong.com/posts/tGcLA596E8g3KnphE/survey-of-multi-agent-llm-evaluations",
+            "source_title": "",
+            "confidence": 0.92,
+            "researcher_id": "r-e81234",
+            "saved_at": "2026-05-05T06:08:47.337015Z",
+            "fetched_at": "2026-05-05T06:08:47.336927Z",
+            "content_hash": "b2bda2ce826a25ffd1918053254c982b8a7a314e6e0f19e8e2b094917c7ab9a0",
+            "domain": "www.lesswrong.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.863,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Current multi-agent evaluations predominantly use party games and board games rather than realistic task environments, which risks missing important aspects of real-world threat models and obscuring whether measured capabilities would translate to real-world failures.",
+            "evidence": "Current evaluations lack realism. Many evaluations are based on party games and video games instead of focusing on environments and tasks similar to those agents might face in the real world... Additionally, the lack of realism might make some evaluation results not clearly map on to risk levels... an agent scoring high on a social deduction evaluation does not necessarily imply that the agent will collude in real-world scenarios, as social deduction games are a context where players are expected and encouraged to deceive other players.",
+            "source_url": "https://www.lesswrong.com/posts/tGcLA596E8g3KnphE/survey-of-multi-agent-llm-evaluations",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-e81234",
+            "saved_at": "2026-05-05T06:08:49.984426Z",
+            "fetched_at": "2026-05-05T06:08:49.984340Z",
+            "content_hash": "c02dc02f45f74479685e5727e28434d12b376dd0eb2f6bbe3ea72ddb4f6ef7d8",
+            "domain": "www.lesswrong.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.855,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Current evaluation frameworks for multi-agent LLM systems (ChatEval, DeepEval, etc.) lack standardized approaches for real-time adaptability and deep interaction tracking, with most tools designed primarily for single-agent systems and lacking coordination-specific metrics.",
+            "evidence": "\"Multi-agent LLM evaluation requires robust frameworks to assess collaboration, scalability, and output quality effectively. While tools like ChatEval and DeepEval provide insights, they lack real-time adaptability for multi-agent AI systems.\" Additionally, about ChatEval: \"Primarily focused on single-agent systems, limiting its effectiveness for multi-agent AI evaluation. It also lacks deep interaction tracking and real-time adaptability.\"",
+            "source_url": "https://orq.ai/blog/multi-agent-llm-eval-system",
+            "source_title": "",
+            "confidence": 0.85,
+            "researcher_id": "r-e81234",
+            "saved_at": "2026-05-05T06:08:59.607274Z",
+            "fetched_at": "2026-05-05T06:08:59.607231Z",
+            "content_hash": "183190ce634635dd7be2697f5ef65a86c42e90c2b95369c1aa4e0186f1e0d6c0",
+            "domain": "orq.ai",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.835,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "Multi-agent LLM systems show minimal performance gains compared to single-agent frameworks on benchmarks, despite growing enthusiasm for their adoption.",
+            "evidence": "Despite growing enthusiasm for Multi-Agent LLM Systems (MAS), their performance gains across popular benchmarks often remain minimal compared to single-agent frameworks... Despite the increasing adoption of MAS, their performance gains often remain minimal compared to single-agent frameworks or simple baselines like best-of-N sampling",
+            "source_url": "https://arxiv.org/html/2503.13657v2",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-446035",
+            "saved_at": "2026-05-05T06:09:09.038549Z",
+            "fetched_at": "2026-05-05T06:09:09.038365Z",
+            "content_hash": "4124ed493fc5a70e1adcde8d17072995b952af59f04a09f2811b49f75e41fc9d",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.5,
+            "combined_confidence": 0.855,
+            "axis_disagreement": true
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "Real-world agentic task evaluations reveal that multi-agent systems often fail to show expected benefits; single-agent systems may match or exceed multi-agent performance on agentic tasks requiring sustained environmental interaction.",
+            "evidence": "While LLMs achieve high accuracy on isolated code generation tasks like HumanEval, real-world deployment requires agentic capabilities\u2014iterative debugging, repository navigation, and adaptive strategy refinement... Multi-agent systems that show monotonic improvement with team size on static benchmarks exhibit fundamentally different scaling behavior when evaluated on tasks requiring sustained environmental interaction",
+            "source_url": "https://arxiv.org/html/2512.08296v1",
+            "source_title": "",
+            "confidence": 0.92,
+            "researcher_id": "r-446035",
+            "saved_at": "2026-05-05T06:09:09.038670Z",
+            "fetched_at": "2026-05-05T06:09:09.038658Z",
+            "content_hash": "3a03e8e684cbfda9dfe2455d79bd30e95896123866acaa828da5e6b6ccf69183",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.5,
+            "combined_confidence": 0.843,
+            "axis_disagreement": true
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "Existing evaluations of multi-agent systems lack controlled methodology and conflate architectural effects with implementation choices, precluding clean causal attribution.",
+            "evidence": "existing MAS evaluations compare architectures using different prompts, tools, or computational budgets, conflating architectural effects with implementation choices and precluding clean causal attribution",
+            "source_url": "https://arxiv.org/html/2512.08296v1",
+            "source_title": "",
+            "confidence": 0.94,
+            "researcher_id": "r-446035",
+            "saved_at": "2026-05-05T06:09:09.038697Z",
+            "fetched_at": "2026-05-05T06:09:09.038689Z",
+            "content_hash": "085327f8fb160e6082a04a969420aae808f119d7e801a03384bab2a64421a062",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.976,
+            "axis_disagreement": false
+          }
+        ],
+        "uncertainty_notes": [
+          {
+            "subquestion_id": "sq4",
+            "topic": "What concrete multi-agent LLM frameworks and systems have been proposed or deployed (e.g., AutoGen, CrewAI, MetaGPT, LangGraph, AgentVerse, ChatDev), and how do they instantiate different architectural choices?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-7be862"
+          },
+          {
+            "subquestion_id": "sq6",
+            "topic": "What are the principal open problems and failure modes in multi-agent LLM research (e.g., error propagation, agent alignment, context window limits, hallucination compounding, scalability, trust between agents, safety)?",
+            "reason": "Made 12 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-6c23c5"
+          }
+        ]
+      },
+      "report": {
+        "user_prompt": "Map the research landscape of multi-agent LLM systems. Produce a structured report that includes a taxonomy of the major architectural patterns, how they relate, and where the open problems are.",
+        "summary": "Multi-agent LLM systems have spawned a rich but still-maturing research landscape organized around competing architectural taxonomies, diverse communication and coordination patterns, and multiple task-decomposition strategies. Evaluation methodology is a significant weak point: benchmarks are fragmented, favor unrealistic game environments, and lack coordination-specific metrics, while evidence for whether multi-agent architectures actually outperform single-agent baselines is mixed and methodologically contested. Key open problems\u2014error propagation, safety, scalability, and trust\u2014remain under-studied empirically due to a shortage of real-world deployment evidence and standardized benchmarks.",
+        "claims": [
+          {
+            "claim": "Two competing taxonomic frameworks organize the architecture of multi-agent LLM systems: a three-component model (specialized agent roles, orchestration layer, communication protocols) and a five-axis model (Control Hierarchy, Information Flow, Role and Task Delegation, Temporal Layering, Communication Structure); these are not merely different levels of detail but represent genuinely different organizing logics.",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              0,
+              2
+            ]
+          },
+          {
+            "claim": "Specialized agent roles within multi-agent systems are categorized into three types: Worker agents (execute well-defined tasks), Service agents (provide reusable shared capabilities such as QA and compliance), and Support agents (provide supervisory oversight and monitoring).",
+            "confidence": 0.97,
+            "supporting_finding_indices": [
+              1
+            ]
+          },
+          {
+            "claim": "Control hierarchy in multi-agent systems spans a spectrum from fully centralized (one top-level decision-maker directing all others) to fully decentralized (all agents equal, no single leader) to hybrid models that layer coordinators, middle-management agents, and workers.",
+            "confidence": 0.97,
+            "supporting_finding_indices": [
+              3
+            ]
+          },
+          {
+            "claim": "Five primary communication patterns have been identified in multi-agent LLM systems: flat/peer-to-peer (many-to-many, emergent coordination), hierarchical (task delegation downward, results upward), team-based (team lead plus specialists with shared state), coordinator-mediated (group-chat with central coordinator), and hybrid (combining hierarchical control with peer-to-peer links).",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "claim": "Communication paradigms within multi-agent systems include memory-based (shared knowledge repositories), report-based (status update messaging), relay (sequential information passing), and debate protocols (argumentative exchanges for consensus); shared scratchpads enable seamless access but risk context pollution.",
+            "confidence": 0.8,
+            "supporting_finding_indices": [
+              7,
+              8
+            ]
+          },
+          {
+            "claim": "Centralized coordination (supervisor managing worker agents, as in AutoGen and LangGraph) offers clear control but risks bottlenecks, while decentralized peer-to-peer systems (as in CAMEL's role-playing framework) offer greater resilience at the cost of increased coordination complexity.",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              9
+            ]
+          },
+          {
+            "claim": "Agent-oriented planning uses a decomposition-first approach in which a meta-agent decomposes user queries into sub-tasks and allocates them to specialized agents, guided by three design principles: solvability (each sub-task is resolvable), completeness (all aspects of the task are covered), and non-redundancy (no unnecessary overlap).",
+            "confidence": 0.97,
+            "supporting_finding_indices": [
+              10
+            ]
+          },
+          {
+            "claim": "Hierarchical task decomposition enables scalability by distributing task breakdown and allocation across layers of agents, with meta-prompts shared within layers to support efficient prompt optimization.",
+            "confidence": 0.97,
+            "supporting_finding_indices": [
+              11
+            ]
+          },
+          {
+            "claim": "Dynamic task decomposition approaches (e.g., TDAG) address the limitations of static decomposition\u2014error propagation and limited adaptability\u2014by automatically generating subtask-specific agents and adjusting subsequent subtasks based on the execution results of preceding ones.",
+            "confidence": 0.97,
+            "supporting_finding_indices": [
+              12
+            ]
+          },
+          {
+            "claim": "Multi-agent LLM evaluation is organized along two primary dimensions: Evaluation Objectives (what to evaluate: agent behavior, capabilities, reliability, safety/alignment) and Evaluation Process (how to evaluate: interaction modes, datasets/benchmarks, metrics, tooling, and evaluation contexts).",
+            "confidence": 0.97,
+            "supporting_finding_indices": [
+              13
+            ]
+          },
+          {
+            "claim": "Current multi-agent evaluations show major imbalances in failure-mode coverage: miscoordination dominates (26 of 32 surveyed papers), while collusion is rarely measured (5 papers), and most AI threat models (CBRN, cybersecurity, etc.) are not measured by any existing multi-agent evaluation.",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              14
+            ]
+          },
+          {
+            "claim": "Most multi-agent evaluations use party games and board games rather than realistic task environments, which risks obscuring whether measured capabilities (e.g., deception in social deduction games) translate to real-world risk scenarios.",
+            "confidence": 0.8,
+            "supporting_finding_indices": [
+              15
+            ]
+          },
+          {
+            "claim": "Existing evaluation frameworks such as ChatEval and DeepEval were primarily designed for single-agent systems, lack real-time adaptability, and do not provide coordination-specific metrics suited to multi-agent settings.",
+            "confidence": 0.79,
+            "supporting_finding_indices": [
+              16
+            ]
+          },
+          {
+            "claim": "Sources disagree on whether multi-agent systems outperform single-agent baselines: one finding reports that benchmark performance gains are minimal compared to single-agent frameworks, while another argues that benchmark comparisons are misleading because multi-agent systems that appear to scale on static benchmarks may underperform single-agent systems on tasks requiring sustained real-world environmental interaction.",
+            "confidence": 0.72,
+            "supporting_finding_indices": [
+              17,
+              18
+            ]
+          },
+          {
+            "claim": "Existing multi-agent system evaluations lack controlled methodology, frequently conflating architectural effects with implementation choices (different prompts, tools, or computational budgets), which precludes clean causal attribution of performance differences to architecture.",
+            "confidence": 0.97,
+            "supporting_finding_indices": [
+              19
+            ]
+          }
+        ],
+        "contradictions_surfaced": [
+          {
+            "description": "Findings 0 and 2 offer competing taxonomic frameworks for multi-agent system architecture. Finding 0 (arxiv.org/html/2601.13671v1) identifies three core architectural components\u2014specialized agent roles, an orchestration layer, and communication protocols\u2014as the foundational structure of multi-agent systems. Finding 2 (arxiv.org/html/2508.12683) presents a five-axis taxonomy\u2014Control Hierarchy, Information Flow, Role and Task Delegation, Temporal Layering, and Communication Structure\u2014as the proper way to characterize the MAS design space. These are not simply different levels of detail; they are competing claims about what the fundamental organizing dimensions of MAS architecture are. The three-component model omits temporal layering and information flow as distinct axes, while the five-axis model does not foreground an 'orchestration layer' as a primary structural element.",
+            "finding_ids": [
+              0,
+              2
+            ],
+            "severity": "moderate",
+            "type": "methodological"
+          },
+          {
+            "description": "Findings 17 and 18 both assert that multi-agent LLM systems underperform relative to expectations, but conflict on the framing of the relevant baseline. Finding 17 (arxiv.org/html/2503.13657v2) states that 'performance gains across popular benchmarks often remain minimal compared to single-agent frameworks,' implying benchmarks are an appropriate venue and the comparison is to single-agent baselines. Finding 18 (arxiv.org/html/2512.08296v1) argues that this benchmark comparison is itself misleading, noting that 'multi-agent systems that show monotonic improvement with team size on static benchmarks exhibit fundamentally different scaling behavior when evaluated on tasks requiring sustained environmental interaction,' suggesting single-agent systems may match or exceed multi-agent performance in more realistic settings. The two findings thus disagree on whether benchmark results are a valid basis for comparing single-agent and multi-agent performance.",
+            "finding_ids": [
+              17,
+              18
+            ],
+            "severity": "moderate",
+            "type": "methodological"
+          }
+        ],
+        "caveats": [
+          "WARNING \u2014 bounded revision exhausted with critic issues still open. The report ships with 4 unresolved critic issue(s):\n  \u2022 Claim #0 (overstated): The cited findings [0] and [2] each describe one organizational framework (three-component and five-axis respectively), but neither source contrasts these frameworks against each other or characterizes them as 'competing' or as representing 'genuinely different organizing logics.' The claim's assertion that these are competing frameworks with different organizing logics is an interpretive leap not supported by the evidence, which simply presents two descriptive taxonomies from separate papers.\n  \u2022 Claim #11 (source_mismatch): The claim says 'party games and board games' but the cited finding [15] says 'party games and video games' \u2014 the writer substituted 'board games' for 'video games,' which is a meaningful mischaracterization of the source.\n  \u2022 Claim #12 (overstated): The cited finding [16] specifically states that ChatEval is 'primarily focused on single-agent systems,' but only says that DeepEval 'lacks real-time adaptability for multi-agent AI systems' \u2014 it does not explicitly state that DeepEval was 'primarily designed for single-agent systems.' The claim generalizes the single-agent design limitation to both tools when the evidence only clearly states it for ChatEval.\n  \u2022 Claim #13 (overstated): Finding [18] does not clearly argue that benchmark comparisons are 'misleading' or that single-agent systems outperform multi-agent ones on real-world tasks. It states that multi-agent systems 'exhibit fundamentally different scaling behavior when evaluated on tasks requiring sustained environmental interaction,' but does not explicitly claim single-agent systems match or exceed multi-agent performance. The claim's framing that one source 'argues that benchmark comparisons are misleading' and implies single-agent superiority goes beyond what the evidence states. Both findings are also flagged [AXIS-DISAGREE], warranting more cautious framing.",
+          "Concrete framework-level evidence for major deployed systems (AutoGen, CrewAI, MetaGPT, LangGraph, AgentVerse, ChatDev) could not be extracted from the research process despite 10 tool calls. The report therefore lacks a claim-level comparison of how specific frameworks instantiate different architectural choices; this is a significant gap given the practical importance of these systems.",
+          "Principal open problems and failure modes (error propagation, agent alignment, context window limits, hallucination compounding, scalability, trust between agents, safety) were a designated sub-question but yielded no extractable findings after 12 tool calls. The report can note these as recognized concerns but cannot make grounded claims about their empirical severity or current research status.",
+          "Findings 17 and 18 are each flagged [AXIS-DISAGREE], meaning self-reported confidence, source quality, and cross-source agreement diverge. The claim built from them is hedged and assigned reduced confidence, but readers should treat the question of multi-agent vs. single-agent performance as genuinely unresolved in the current literature.",
+          "The communication and coordination findings (indices 4\u20139) draw partly from non-peer-reviewed blog sources (source_q=0.70). While they are internally consistent, they may not reflect the full nuance of the academic literature.",
+          "No findings were available on agent count scaling laws, which was identified as an under-explored area in the decomposition. This remains an open empirical gap.",
+          "The evaluation findings (indices 14\u201316) draw partly from a LessWrong survey post (source_q=0.70), which may reflect a particular community's framing priorities (safety/alignment) rather than the full breadth of the evaluation research community.",
+          "The report does not cover reinforcement learning-based multi-agent coordination (MARL), which overlaps significantly with the LLM multi-agent space but was not addressed in the findings."
+        ]
+      },
+      "critic_history": [
+        {
+          "issues": [
+            {
+              "claim_index": 0,
+              "issue_type": "overstated",
+              "explanation": "The cited findings [0] and [2] each describe one organizational framework (three-component and five-axis respectively), but neither source contrasts these frameworks against each other or characterizes them as 'competing' or as representing 'genuinely different organizing logics.' The claim's assertion that these are competing frameworks with different organizing logics is an interpretive leap not supported by the evidence, which simply presents two descriptive taxonomies from separate papers."
+            },
+            {
+              "claim_index": 11,
+              "issue_type": "source_mismatch",
+              "explanation": "The claim says 'party games and board games' but the cited finding [15] says 'party games and video games' \u2014 the writer substituted 'board games' for 'video games,' which is a meaningful mischaracterization of the source."
+            },
+            {
+              "claim_index": 12,
+              "issue_type": "overstated",
+              "explanation": "The cited finding [16] specifically states that ChatEval is 'primarily focused on single-agent systems,' but only says that DeepEval 'lacks real-time adaptability for multi-agent AI systems' \u2014 it does not explicitly state that DeepEval was 'primarily designed for single-agent systems.' The claim generalizes the single-agent design limitation to both tools when the evidence only clearly states it for ChatEval."
+            },
+            {
+              "claim_index": 13,
+              "issue_type": "overstated",
+              "explanation": "Finding [18] does not clearly argue that benchmark comparisons are 'misleading' or that single-agent systems outperform multi-agent ones on real-world tasks. It states that multi-agent systems 'exhibit fundamentally different scaling behavior when evaluated on tasks requiring sustained environmental interaction,' but does not explicitly claim single-agent systems match or exceed multi-agent performance. The claim's framing that one source 'argues that benchmark comparisons are misleading' and implies single-agent superiority goes beyond what the evidence states. Both findings are also flagged [AXIS-DISAGREE], warranting more cautious framing."
+            }
+          ],
+          "approved": false
+        }
+      ],
+      "verify_history": [
+        {
+          "results": []
+        }
+      ],
+      "metadata": {
+        "commit_hash": "2f6ab883c54607f36d522b553c98dfd10b64a6c9",
+        "branch": "main",
+        "models": {
+          "researcher": "claude-haiku-4-5",
+          "writer": "claude-sonnet-4-6",
+          "critic": "claude-sonnet-4-6",
+          "judge": "claude-opus-4-7",
+          "kae_judge": "claude-haiku-4-5"
+        },
+        "config_snapshot": {
+          "anthropic_api_key": "<set>",
+          "tavily_api_key": "<set>",
+          "researcher_model": "claude-haiku-4-5",
+          "writer_model": "claude-sonnet-4-6",
+          "critic_model": "claude-sonnet-4-6",
+          "judge_model": "claude-opus-4-7",
+          "kae_judge_model": "claude-haiku-4-5",
+          "min_subquestions": 3,
+          "max_subquestions": 7,
+          "decompose_max_retries": 2,
+          "researcher_max_tool_calls": 30,
+          "researcher_max_findings": 6,
+          "researcher_min_findings_to_stop": 3,
+          "researcher_min_unique_sources": 2,
+          "researcher_min_avg_confidence": 0.55,
+          "researcher_unproductive_call_limit": 10,
+          "search_results_per_query": 8,
+          "fetch_max_chars": 12000,
+          "scholar_max_retries": 3,
+          "scholar_backoff_seconds": 1.0,
+          "scholar_unavailable_window_seconds": 120,
+          "max_revisions": 0,
+          "verifier_enabled": false,
+          "parallel_researchers": 2
+        },
+        "captured_at": "2026-05-05T06:07:00.757846Z"
+      },
+      "metrics": {
+        "total_subquestions": 7,
+        "subquestions_with_findings": 5,
+        "total_findings": 20,
+        "unique_sources": 12,
+        "revision_rounds": 0,
+        "final_grounding_rate": 0.7333333333333333,
+        "coverage_rate": 0.7142857142857143,
+        "elapsed_seconds": 203.15911412239075,
+        "per_stage": {
+          "classify_shape": {
+            "calls": 1,
+            "input_tokens": 989,
+            "output_tokens": 62,
+            "cost_usd": 0.003897,
+            "elapsed_seconds": 2.7065949579700828
+          },
+          "confidence": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cost_usd": 0.0,
+            "elapsed_seconds": 0.0005076250527054071
+          },
+          "critic": {
+            "calls": 1,
+            "input_tokens": 8973,
+            "output_tokens": 538,
+            "cost_usd": 0.034989,
+            "elapsed_seconds": 10.124596999958158
+          },
+          "decompose": {
+            "calls": 1,
+            "input_tokens": 1492,
+            "output_tokens": 960,
+            "cost_usd": 0.018876,
+            "elapsed_seconds": 16.415093957912177
+          },
+          "reconciler": {
+            "calls": 1,
+            "input_tokens": 4939,
+            "output_tokens": 517,
+            "cost_usd": 0.022572,
+            "elapsed_seconds": 10.77030958305113
+          },
+          "researcher": {
+            "calls": 53,
+            "input_tokens": 504555,
+            "output_tokens": 11013,
+            "cost_usd": 0.5596199999999999,
+            "elapsed_seconds": 116.97437358414754
+          },
+          "writer": {
+            "calls": 1,
+            "input_tokens": 7589,
+            "output_tokens": 2580,
+            "cost_usd": 0.061467,
+            "elapsed_seconds": 46.139176457887515
+          }
+        },
+        "total_input_tokens": 528537,
+        "total_output_tokens": 15670,
+        "total_cost_usd": 0.701421,
+        "researcher_latency_max": 68.02972529106773,
+        "researcher_latency_avg": 31.69962425579849,
+        "tool_mix": {
+          "web_search": 27,
+          "search_papers": 16,
+          "fetch_url": 33,
+          "save_finding": 20,
+          "note_uncertainty": 0
+        },
+        "kae": null,
+        "ace": null,
+        "plan_judge": null
+      },
+      "taxonomy": null,
+      "started_at": "2026-05-05T06:10:23.889203Z"
+    },
+    {
+      "user_prompt": "Map the research landscape of multi-agent LLM systems. Produce a structured report that includes a taxonomy of the major architectural patterns, how they relate, and where the open problems are.",
+      "shape": {
+        "shape": "DISCOVERY",
+        "confidence": 0.82,
+        "rationale": "The user wants to explore and map an answer space (architectural patterns, relationships, open problems) in a broad emerging field, which is characteristic of DISCOVERY despite the request for a structured output \u2014 the structure itself is what needs to be found, not pre-specified by the user."
+      },
+      "decomposition": {
+        "subquestions": [
+          {
+            "id": "sq1",
+            "question": "What are the major architectural patterns for multi-agent LLM systems (e.g., hierarchical, peer-to-peer, pipeline, mixture-of-experts, debate-based), and how are they formally characterized in the literature?",
+            "rationale": "Establishing a taxonomy of architectural patterns is the backbone of the structured report and must be grounded in how researchers themselves categorize these systems.",
+            "confidence": 0.95,
+            "depends_on": [],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq2",
+            "question": "What coordination and communication mechanisms exist for agents in multi-agent LLM systems (e.g., shared memory, message passing, blackboard systems, tool-mediated communication, structured prompting protocols)?",
+            "rationale": "Coordination mechanisms cut across architectural patterns and are critical for understanding how agents interact, making them essential for relating the patterns to one another.",
+            "confidence": 0.9,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq3",
+            "question": "What task domains and benchmark evaluations have been used to assess multi-agent LLM systems (e.g., software engineering, scientific reasoning, game playing, web navigation), and what do results reveal about when multi-agent setups outperform single-agent ones?",
+            "rationale": "Empirical benchmarks and application domains ground the taxonomy in real performance data and reveal which architectural choices matter in practice.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq4",
+            "question": "What are the prominent open problems and failure modes in multi-agent LLM research, including issues of error propagation, agent alignment, hallucination cascades, scalability, and emergent miscoordination?",
+            "rationale": "Mapping open problems is explicitly required by the prompt and distinguishes mature from frontier research areas within the landscape.",
+            "confidence": 0.9,
+            "depends_on": [
+              "sq1",
+              "sq2"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq5",
+            "question": "What role-specialization and agent-persona design strategies exist in multi-agent LLM systems (e.g., role assignment, dynamic role switching, adversarial critic agents, planner-executor splits), and how do they map onto architectural patterns?",
+            "rationale": "Role design is a key dimension that differentiates architectures and explains performance differences across systems, linking taxonomy to mechanism.",
+            "confidence": 0.8,
+            "depends_on": [
+              "sq1",
+              "sq2"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq6",
+            "question": "What frameworks and software infrastructures exist for building multi-agent LLM systems (e.g., AutoGen, LangGraph, CrewAI, MetaGPT, AgentVerse), and what architectural assumptions do they embed?",
+            "rationale": "Practical frameworks instantiate theoretical architectural choices and reveal which patterns have gained traction in the research and engineering community.",
+            "confidence": 0.8,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq7",
+            "question": "What safety, trust, and alignment challenges are specific to multi-agent LLM settings (e.g., agent collusion, prompt injection propagation, loss of human oversight, deceptive inter-agent communication), and what mitigations have been proposed?",
+            "rationale": "Safety and alignment concerns in multi-agent contexts are qualitatively different from single-agent ones and represent a fast-growing sub-field with distinct open problems.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq4"
+            ],
+            "preferred_search": "search_papers"
+          }
+        ]
+      },
+      "findings": {
+        "findings": [
+          {
+            "subquestion_id": "sq1",
+            "claim": "Hierarchical multi-agent systems are formally characterized along five key axes: control hierarchy (centralized vs. decentralized vs. hybrid), information flow, role and task delegation, temporal hierarchy, and communication structure.",
+            "evidence": "This paper proposes a multi-dimensional taxonomy for HMAS along five axes: control hierarchy, information flow, role and task delegation, temporal layering, and communication structure. The five axes are: (1) Control Hierarchy, (2) Information Flow, (3) Role and Task Delegation, (4) Temporal Hierarchy, and (5) Communication Structure.",
+            "source_url": "https://arxiv.org/html/2508.12683",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-5320d8",
+            "saved_at": "2026-05-05T06:11:39.764618Z",
+            "fetched_at": "2026-05-05T06:11:39.764591Z",
+            "content_hash": "d1cf86857bcb8bb8eae56690d875950bb17a26f832be6ad6e45940717a97a635",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Multi-agent LLM orchestration patterns include sequential (pipeline), concurrent (parallel/fan-out/fan-in), and group chat patterns, where sequential chains agents in predefined linear order, concurrent runs multiple agents simultaneously, and group chat enables dynamic agent coordination.",
+            "evidence": "The sequential orchestration pattern chains AI agents in a predefined, linear order. Each agent processes the output from the previous agent in the sequence, which creates a pipeline of specialized transformations. The concurrent orchestration pattern runs multiple AI agents simultaneously on the same task. This approach allows each agent to provide independent analysis or processing from its unique perspective or specialization.",
+            "source_url": "https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-5320d8",
+            "saved_at": "2026-05-05T06:11:50.787554Z",
+            "fetched_at": "2026-05-05T06:11:50.787524Z",
+            "content_hash": "df06238ad4475645fd39dc6682e474f241db62973d8d6ea0d203cecd9eb0bbcf",
+            "domain": "learn.microsoft.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Debate-based multi-agent architectures are formally characterized as a framework where multiple LLMs engage in discussions to improve answer quality, with mathematical analysis showing debate dynamics converge based on model agreement and response similarity.",
+            "evidence": "Much like their human contemporaries, these models are capable of engaging in discussions and debates as a means of improving answer quality. We first take a theoretical approach to analyzing debate and provide a framework through which debate can be mathematically examined. In particular, we demonstrate that similar model capabilities, or similar model responses, can result in static debate dynamics where the debate procedure simply converges to the majority opinion.",
+            "source_url": "https://neurips.cc/virtual/2024/poster/93363",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-5320d8",
+            "saved_at": "2026-05-05T06:11:54.715301Z",
+            "fetched_at": "2026-05-05T06:11:54.715189Z",
+            "content_hash": "c7c56704e32550ebe7206d51c75f5987e8dad454e2dad12c9c86e22240aace49",
+            "domain": "neurips.cc",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.855,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq3",
+            "claim": "AgentBench is a benchmark that evaluates LLM agents across 8 distinct environments: Operating System (OS), Database (DB), Knowledge Graph (KG), Digital Card Game (DCG), Lateral Thinking Puzzles (LTP), ALFWorld, WebShop, and Mind2Web.",
+            "evidence": "AgentBench encompasses 8 distinct environments to provide a more comprehensive evaluation of the LLMs' ability to operate as autonomous agents in various scenarios. These environments include 5 freshly created domains, namely Operating System (OS), Database (DB), Knowledge Graph (KG), Digital Card Game (DCG), Lateral Thinking Puzzles (LTP), as well as 3 recompiled from published datasets: ALFWorld, WebShop, and Mind2Web.",
+            "source_url": "https://github.com/THUDM/AgentBench",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-9491a1",
+            "saved_at": "2026-05-05T06:12:12.040220Z",
+            "fetched_at": "2026-05-05T06:12:12.040128Z",
+            "content_hash": "cfbeef496aa903d73a558c320119e7419444e72e21cd85d1d2fdeaaa24ff9779",
+            "domain": "github.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq3",
+            "claim": "Single-agent LLM systems can match or outperform multi-agent systems on multi-hop reasoning tasks when reasoning tokens are held constant, suggesting that reported advantages of multi-agent systems may be due to unaccounted computation rather than architectural benefits.",
+            "evidence": "When computation is normalized, single-agent systems (SAS) can match or outperform MAS, yet the theoretical basis and evaluation methodology behind this comparison remain unclear... We find that SAS consistently match or outperform MAS on multi-hop reasoning tasks when reasoning tokens are held constant. Beyond aggregate performance, we conduct a detailed diagnostic analysis of system behavior and evaluation methodology... our results suggest that, for multi-hop reasoning tasks, many reported advantages of multi-agent systems are better explained by unaccounted computation and context effects rather than inherent architectural benefits.",
+            "source_url": "https://arxiv.org/abs/2604.02460",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-9491a1",
+            "saved_at": "2026-05-05T06:12:18.342548Z",
+            "fetched_at": "2026-05-05T06:12:18.342484Z",
+            "content_hash": "b23abafa6768698ec4579c8c03cf5ec1223d2318075ba65adab458df9d02a73e",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.96,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq3",
+            "claim": "MultiAgentBench evaluates multi-agent LLM systems across six diverse domains including collaborative coding and gaming, with graph-based coordination protocols outperforming star, tree, and chain topologies in research scenarios.",
+            "evidence": "MultiAgentBench offers several key advantages: (1) Multi-Domain Evaluation: The benchmark covers diverse domains\u2014from collaborative coding to gaming\u2014ensuring broad real-world applicability... graph structure performs the best among coordination protocols in the research scenario, and cognitive planning improves milestone achievement rates by 3%.",
+            "source_url": "https://arxiv.org/html/2503.01935v1",
+            "source_title": "",
+            "confidence": 0.92,
+            "researcher_id": "r-9491a1",
+            "saved_at": "2026-05-05T06:12:30.280895Z",
+            "fetched_at": "2026-05-05T06:12:30.280794Z",
+            "content_hash": "5c9774d7c6c27ee6bea9c830daa6b53c8dcf22c2237965db1842580100b8ef5f",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.968,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "LangGraph uses a graph-based state machine architecture with nodes representing processing steps, edges defining control flow, and explicit state management for multi-agent coordination.",
+            "evidence": "LangGraph uses a graph-based approach to define and execute agent workflows, ensuring seamless coordination across multiple components. Its key elements include: Nodes: Build the foundation of the workflow, representing functions or LangChain runnable items. Edges: Establish the direction of execution and data flow, connecting nodes and determining the sequence of operations. Stateful graphs: Manage persistent data across execution cycles by updating state objects as data flows through the nodes.",
+            "source_url": "https://www.turing.com/resources/ai-agent-frameworks",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-e6a258",
+            "saved_at": "2026-05-05T06:12:39.050864Z",
+            "fetched_at": "2026-05-05T06:12:39.050830Z",
+            "content_hash": "122c62b3498007266724f8d2c4fed0f4a89e398b8406af13963f8eef04181874",
+            "domain": "www.turing.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "CrewAI embeds a role-based team architecture where agents have distinct roles, goals, and backstories, with sequential or hierarchical task execution coordinating agent collaboration.",
+            "evidence": "CrewAI is an open-source Python framework designed to simplify the development and management of multi-agent AI systems. It enhances these systems' capabilities by assigning specific roles to agents, enabling autonomous decision-making, and facilitating seamless communication. Key features include: Role-based architecture: Agents are assigned distinct roles and goals, allowing for specialized task execution. Sequential and hierarchical execution: Supports both sequential and hierarchical task execution modes.",
+            "source_url": "https://www.turing.com/resources/ai-agent-frameworks",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-e6a258",
+            "saved_at": "2026-05-05T06:12:39.050886Z",
+            "fetched_at": "2026-05-05T06:12:39.050878Z",
+            "content_hash": "05d0c3ca316370a04fa16cdfaf93da000c79c57e8637b1001b515bff0d646407",
+            "domain": "www.turing.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "AutoGen embeds a conversation-based multi-agent architecture where agents communicate through asynchronous messages and function schemas, supporting both autonomous and human-in-the-loop workflows.",
+            "evidence": "Microsoft AutoGen is an open-source programming framework designed to simplify the development of AI agents and enable cooperation among multiple agents to solve complex tasks. It provides: Multi-agent framework: Offers a generic multi-agent conversation framework. Customizable agents: Provides customizable and conversable agents that integrate LLMs, tools, and humans. Asynchronous messaging: Agents communicate through asynchronous messages, supporting both event-driven and request/response interaction patterns.",
+            "source_url": "https://www.turing.com/resources/ai-agent-frameworks",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-e6a258",
+            "saved_at": "2026-05-05T06:12:39.050898Z",
+            "fetched_at": "2026-05-05T06:12:39.050891Z",
+            "content_hash": "f9e1223bc376262fea990620471706dabab05c642cbc359fe3631f1b39be2ae3",
+            "domain": "www.turing.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "MetaGPT embeds a structured operating procedure (SOP) and assembly-line paradigm where specialized agents with predefined roles follow sequential workflows and communicate through structured outputs (documents, diagrams) rather than natural language.",
+            "evidence": "Within MetaGPT's multiagent collaborative framework, a team of AI agents operates according to a structured workflow guided by standard operating procedures (SOPs) that define distinct roles and instructions. MetaGPT encodes Standardized Operating Procedures (SOPs) into prompt sequences for more streamlined workflows, thus allowing agents with human-like domain expertise to verify intermediate results and reduce errors. MetaGPT utilizes an assembly line paradigm to assign diverse roles to various agents, efficiently breaking down complex tasks into subtasks involving many agents working together. Agents communicate through structured outputs based on requirements set by an assembly-line paradigm.",
+            "source_url": "https://www.ibm.com/think/topics/metagpt",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-e6a258",
+            "saved_at": "2026-05-05T06:12:48.271228Z",
+            "fetched_at": "2026-05-05T06:12:48.271098Z",
+            "content_hash": "bd9a217e5971714e4fea080c0ba038423aa39d46052202264fc36312b9177b34",
+            "domain": "www.ibm.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          }
+        ],
+        "uncertainty_notes": [
+          {
+            "subquestion_id": "sq2",
+            "topic": "What coordination and communication mechanisms exist for agents in multi-agent LLM systems (e.g., shared memory, message passing, blackboard systems, tool-mediated communication, structured prompting protocols)?",
+            "reason": "Made 12 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-85b858"
+          },
+          {
+            "subquestion_id": "sq4",
+            "topic": "What are the prominent open problems and failure modes in multi-agent LLM research, including issues of error propagation, agent alignment, hallucination cascades, scalability, and emergent miscoordination?",
+            "reason": "Made 12 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-16187a"
+          },
+          {
+            "subquestion_id": "sq5",
+            "topic": "What role-specialization and agent-persona design strategies exist in multi-agent LLM systems (e.g., role assignment, dynamic role switching, adversarial critic agents, planner-executor splits), and how do they map onto architectural patterns?",
+            "reason": "Made 12 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-54414f"
+          },
+          {
+            "subquestion_id": "sq7",
+            "topic": "What safety, trust, and alignment challenges are specific to multi-agent LLM settings (e.g., agent collusion, prompt injection propagation, loss of human oversight, deceptive inter-agent communication), and what mitigations have been proposed?",
+            "reason": "Made 12 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-e22a84"
+          }
+        ]
+      },
+      "report": {
+        "user_prompt": "Map the research landscape of multi-agent LLM systems. Produce a structured report that includes a taxonomy of the major architectural patterns, how they relate, and where the open problems are.",
+        "summary": "Multi-agent LLM systems have been characterized along several architectural dimensions\u2014hierarchical control, pipeline/concurrent/group-chat orchestration, and debate-based dynamics\u2014with a growing ecosystem of frameworks (AutoGen, LangGraph, CrewAI, MetaGPT) that embed distinct coordination assumptions. Benchmarks such as AgentBench and MultiAgentBench reveal meaningful performance variation across domains and coordination topologies, though at least one high-quality study finds that single-agent systems can match multi-agent systems on multi-hop reasoning when compute is held constant, casting doubt on some reported architectural advantages. Critical research gaps remain: the findings base is weak on coordination mechanisms, open failure modes, role-specialization strategies, and safety/alignment challenges, all of which researchers were unable to substantiate with concrete evidence.",
+        "claims": [
+          {
+            "claim": "Hierarchical multi-agent LLM systems are formally characterized along five axes: control hierarchy (centralized vs. decentralized vs. hybrid), information flow, role and task delegation, temporal hierarchy, and communication structure.",
+            "confidence": 0.95,
+            "supporting_finding_indices": [
+              0
+            ]
+          },
+          {
+            "claim": "Three primary orchestration patterns appear in the literature: sequential (pipeline) chains agents in linear order; concurrent (fan-out/fan-in) runs agents in parallel on the same task; and group-chat enables dynamic, open-ended agent coordination.",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              1
+            ]
+          },
+          {
+            "claim": "Debate-based architectures constitute a distinct pattern in which multiple LLMs iteratively critique one another's responses to improve answer quality; formal analysis shows debate dynamics converge when participating models have similar capabilities or produce similar responses, collapsing toward majority opinion.",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              2
+            ]
+          },
+          {
+            "claim": "The four major architectural patterns\u2014hierarchical control, pipeline/sequential, concurrent/parallel, and debate-based\u2014are not mutually exclusive and can be combined; for example, a hierarchical system may internally use sequential pipelines among subordinate agents.",
+            "confidence": 0.75,
+            "supporting_finding_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "claim": "AgentBench evaluates LLM agents across eight distinct environments spanning OS tasks, databases, knowledge graphs, digital card games, lateral thinking puzzles, ALFWorld, WebShop, and Mind2Web, providing a broad cross-domain benchmark for multi-agent and single-agent systems alike.",
+            "confidence": 0.85,
+            "supporting_finding_indices": [
+              3
+            ]
+          },
+          {
+            "claim": "MultiAgentBench evaluates multi-agent systems across six domains including collaborative coding and gaming, and finds that graph-based coordination topologies outperform star, tree, and chain topologies in research scenarios, with cognitive planning improving milestone achievement rates by approximately 3%.",
+            "confidence": 0.84,
+            "supporting_finding_indices": [
+              5
+            ]
+          },
+          {
+            "claim": "When reasoning tokens are held constant (compute-controlled comparison), single-agent systems consistently match or outperform multi-agent systems on multi-hop reasoning tasks, suggesting that many reported advantages of multi-agent architectures are attributable to unaccounted computation rather than inherent architectural benefits.",
+            "confidence": 0.93,
+            "supporting_finding_indices": [
+              4
+            ]
+          },
+          {
+            "claim": "LangGraph implements multi-agent coordination via a graph-based state machine: nodes represent processing steps, edges encode control flow, and stateful graphs maintain persistent data across execution cycles.",
+            "confidence": 0.84,
+            "supporting_finding_indices": [
+              6
+            ]
+          },
+          {
+            "claim": "CrewAI embeds a role-based team architecture in which each agent carries a distinct role, goal, and backstory, coordinated through either sequential or hierarchical task execution modes.",
+            "confidence": 0.84,
+            "supporting_finding_indices": [
+              7
+            ]
+          },
+          {
+            "claim": "AutoGen implements a conversation-centric multi-agent architecture in which agents exchange asynchronous messages and function schemas, natively supporting both fully autonomous and human-in-the-loop workflows.",
+            "confidence": 0.84,
+            "supporting_finding_indices": [
+              8
+            ]
+          },
+          {
+            "claim": "MetaGPT encodes structured operating procedures (SOPs) and an assembly-line paradigm: specialized agents follow predefined role sequences and communicate through structured artifacts (documents, diagrams) rather than free-form natural language, aiming to reduce error propagation via verifiable intermediate outputs.",
+            "confidence": 0.84,
+            "supporting_finding_indices": [
+              9
+            ]
+          },
+          {
+            "claim": "The four surveyed frameworks (LangGraph, CrewAI, AutoGen, MetaGPT) each embed a different primary architectural assumption\u2014graph-state, role-team, conversation-message, and SOP-assembly respectively\u2014reflecting the plurality of unresolved design philosophies in the field.",
+            "confidence": 0.8,
+            "supporting_finding_indices": [
+              6,
+              7,
+              8,
+              9
+            ]
+          }
+        ],
+        "contradictions_surfaced": [
+          {
+            "description": "Finding [4] (arxiv.org/abs/2604.02460, source quality 1.00) reports that single-agent systems match or outperform multi-agent systems on multi-hop reasoning when compute is normalized, directly challenging the implicit premise of findings [1], [5], and the framework papers [6\u20139] that multi-agent orchestration confers performance advantages. Findings [1] and [5] treat multi-agent coordination topologies as inherently beneficial (e.g., graph > chain in MultiAgentBench), while finding [4] attributes such apparent advantages to unaccounted computation. The disagreement is central to evaluating the value of multi-agent architectures.",
+            "finding_ids": [
+              4,
+              1,
+              5
+            ],
+            "severity": "major",
+            "type": "methodological"
+          }
+        ],
+        "caveats": [
+          "WARNING \u2014 bounded revision exhausted with critic issues still open. The report ships with 3 unresolved critic issue(s):\n  \u2022 Claim #3 (ungrounded): The claim asserts that the four architectural patterns are not mutually exclusive and can be combined (e.g., a hierarchical system using sequential pipelines internally). None of the three cited findings [0], [1], [2] make this assertion. Finding [0] describes a taxonomy of hierarchical systems; finding [1] describes sequential and concurrent patterns; finding [2] describes debate dynamics. None of them state or imply that these patterns can be combined or are composable with one another. This is an inferential leap not supported by the cited evidence.\n  \u2022 Claim #8 (source_mismatch): The claim states that each agent carries a 'distinct role, goal, and backstory,' but the cited finding [7] only mentions 'distinct roles and goals' \u2014 it does not mention 'backstory' as a component. The claim adds 'backstory' which is not present in the evidence quote.\n  \u2022 Claim #11 (overstated): The claim concludes that the different architectural assumptions among the four frameworks 'reflect the plurality of unresolved design philosophies in the field.' While the cited findings [6][7][8][9] do show different design approaches for each framework, none of them characterize these differences as representing 'unresolved design philosophies.' The interpretive conclusion about unresolved design philosophy is an editorial addition not supported by the evidence.",
+          "Coordination and communication mechanisms (shared memory, blackboard systems, tool-mediated communication, structured prompting protocols) are covered nowhere in the confirmed findings: researchers exhausted their budget across 12 tool calls without extracting citable evidence. This is a significant gap in the landscape map.",
+          "Open problems and failure modes\u2014including error propagation, hallucination cascades, scalability limits, and emergent miscoordination\u2014are entirely unsubstantiated in the findings. Despite being a central sub-question, no concrete evidence was retrieved, so the report cannot characterize this important research frontier.",
+          "Role-specialization and agent-persona design strategies (dynamic role switching, adversarial critic agents, planner-executor splits) could not be documented with supporting evidence. The report is therefore silent on how role design maps onto architectural patterns.",
+          "Safety, trust, and alignment challenges specific to multi-agent settings (agent collusion, prompt injection propagation, loss of human oversight, deceptive inter-agent communication) and proposed mitigations are absent from the findings. This is a rapidly growing subfield that the report cannot cover.",
+          "Most framework-level findings (LangGraph, CrewAI, AutoGen, MetaGPT) come from a single source of moderate quality (source_q=0.70) with no cross-source corroboration, so framework characterizations should be treated as introductory rather than authoritative.",
+          "The compute-controlled single-agent vs. multi-agent comparison (finding [4]) covers only multi-hop reasoning tasks and may not generalize to other domains (e.g., collaborative software engineering, scientific discovery) where multi-agent setups may provide qualitatively different capabilities beyond raw reasoning token count.",
+          "No findings covered peer-to-peer (fully decentralized, non-hierarchical) or mixture-of-experts multi-agent architectures, leaving portions of the architectural taxonomy uncharted.",
+          "Temporal coverage of findings is uneven: some sources are from 2024\u20132025 preprints while framework documentation may reflect older design assumptions. The field is moving rapidly and some claims may already be outdated."
+        ]
+      },
+      "critic_history": [
+        {
+          "issues": [
+            {
+              "claim_index": 3,
+              "issue_type": "ungrounded",
+              "explanation": "The claim asserts that the four architectural patterns are not mutually exclusive and can be combined (e.g., a hierarchical system using sequential pipelines internally). None of the three cited findings [0], [1], [2] make this assertion. Finding [0] describes a taxonomy of hierarchical systems; finding [1] describes sequential and concurrent patterns; finding [2] describes debate dynamics. None of them state or imply that these patterns can be combined or are composable with one another. This is an inferential leap not supported by the cited evidence."
+            },
+            {
+              "claim_index": 8,
+              "issue_type": "source_mismatch",
+              "explanation": "The claim states that each agent carries a 'distinct role, goal, and backstory,' but the cited finding [7] only mentions 'distinct roles and goals' \u2014 it does not mention 'backstory' as a component. The claim adds 'backstory' which is not present in the evidence quote."
+            },
+            {
+              "claim_index": 11,
+              "issue_type": "overstated",
+              "explanation": "The claim concludes that the different architectural assumptions among the four frameworks 'reflect the plurality of unresolved design philosophies in the field.' While the cited findings [6][7][8][9] do show different design approaches for each framework, none of them characterize these differences as representing 'unresolved design philosophies.' The interpretive conclusion about unresolved design philosophy is an editorial addition not supported by the evidence."
+            }
+          ],
+          "approved": false
+        }
+      ],
+      "verify_history": [
+        {
+          "results": []
+        }
+      ],
+      "metadata": {
+        "commit_hash": "2f6ab883c54607f36d522b553c98dfd10b64a6c9",
+        "branch": "main",
+        "models": {
+          "researcher": "claude-haiku-4-5",
+          "writer": "claude-sonnet-4-6",
+          "critic": "claude-sonnet-4-6",
+          "judge": "claude-opus-4-7",
+          "kae_judge": "claude-haiku-4-5"
+        },
+        "config_snapshot": {
+          "anthropic_api_key": "<set>",
+          "tavily_api_key": "<set>",
+          "researcher_model": "claude-haiku-4-5",
+          "writer_model": "claude-sonnet-4-6",
+          "critic_model": "claude-sonnet-4-6",
+          "judge_model": "claude-opus-4-7",
+          "kae_judge_model": "claude-haiku-4-5",
+          "min_subquestions": 3,
+          "max_subquestions": 7,
+          "decompose_max_retries": 2,
+          "researcher_max_tool_calls": 30,
+          "researcher_max_findings": 6,
+          "researcher_min_findings_to_stop": 3,
+          "researcher_min_unique_sources": 2,
+          "researcher_min_avg_confidence": 0.55,
+          "researcher_unproductive_call_limit": 10,
+          "search_results_per_query": 8,
+          "fetch_max_chars": 12000,
+          "scholar_max_retries": 3,
+          "scholar_backoff_seconds": 1.0,
+          "scholar_unavailable_window_seconds": 120,
+          "max_revisions": 0,
+          "verifier_enabled": false,
+          "parallel_researchers": 2
+        },
+        "captured_at": "2026-05-05T06:11:00.191027Z"
+      },
+      "metrics": {
+        "total_subquestions": 7,
+        "subquestions_with_findings": 3,
+        "total_findings": 10,
+        "unique_sources": 8,
+        "revision_rounds": 0,
+        "final_grounding_rate": 0.75,
+        "coverage_rate": 0.42857142857142855,
+        "elapsed_seconds": 162.30366206169128,
+        "per_stage": {
+          "classify_shape": {
+            "calls": 1,
+            "input_tokens": 989,
+            "output_tokens": 76,
+            "cost_usd": 0.004107,
+            "elapsed_seconds": 2.6888013328425586
+          },
+          "confidence": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cost_usd": 0.0,
+            "elapsed_seconds": 0.0001782500185072422
+          },
+          "critic": {
+            "calls": 1,
+            "input_tokens": 6435,
+            "output_tokens": 401,
+            "cost_usd": 0.02532,
+            "elapsed_seconds": 9.52692904183641
+          },
+          "decompose": {
+            "calls": 1,
+            "input_tokens": 1492,
+            "output_tokens": 987,
+            "cost_usd": 0.019281,
+            "elapsed_seconds": 17.5939623338636
+          },
+          "reconciler": {
+            "calls": 1,
+            "input_tokens": 3256,
+            "output_tokens": 18,
+            "cost_usd": 0.010038,
+            "elapsed_seconds": 1.2081917501054704
+          },
+          "researcher": {
+            "calls": 48,
+            "input_tokens": 362382,
+            "output_tokens": 8759,
+            "cost_usd": 0.4061770000000001,
+            "elapsed_seconds": 91.50291174999438
+          },
+          "writer": {
+            "calls": 1,
+            "input_tokens": 5386,
+            "output_tokens": 1987,
+            "cost_usd": 0.045963,
+            "elapsed_seconds": 39.735012540826574
+          }
+        },
+        "total_input_tokens": 379940,
+        "total_output_tokens": 12228,
+        "total_cost_usd": 0.5108860000000002,
+        "researcher_latency_max": 46.56748295901343,
+        "researcher_latency_avg": 25.38854636311797,
+        "tool_mix": {
+          "web_search": 21,
+          "search_papers": 18,
+          "fetch_url": 41,
+          "save_finding": 10,
+          "note_uncertainty": 0
+        },
+        "kae": null,
+        "ace": null,
+        "plan_judge": null
+      },
+      "taxonomy": null,
+      "started_at": "2026-05-05T06:13:42.447200Z"
+    }
+  ]
+}

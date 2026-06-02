@@ -1,0 +1,1522 @@
+{
+  "prompt_id": "multimodal-2",
+  "category": "multimodal",
+  "n_runs": 2,
+  "mode": "draft_only",
+  "max_revisions": 0,
+  "verifier_enabled": false,
+  "subquestion_jaccard": 0.0,
+  "claim_jaccard": 0.0,
+  "per_run": [
+    {
+      "run_index": 0,
+      "elapsed_seconds": 184.7308599948883,
+      "n_claims": 14,
+      "n_subquestions": 7,
+      "grounding_rate": 1.0,
+      "coverage_rate": 0.42857142857142855,
+      "f1": 0.6
+    },
+    {
+      "run_index": 1,
+      "elapsed_seconds": 177.98388624191284,
+      "n_claims": 21,
+      "n_subquestions": 7,
+      "grounding_rate": 0.9047619047619048,
+      "coverage_rate": 0.5714285714285714,
+      "f1": 0.7004608294930875
+    }
+  ],
+  "runs": [
+    {
+      "user_prompt": "Compare the architectural choices made by major deep-research products (Anthropic, OpenAI, Perplexity, Google) and identify what they have in common and where they meaningfully diverge.",
+      "shape": {
+        "shape": "PRE_STRUCTURED",
+        "confidence": 0.82,
+        "rationale": "The user has specified both the comparison targets (four named products) and the comparison axes (common architectural choices vs. meaningful divergences), making this PRE_STRUCTURED despite the analytical depth required."
+      },
+      "decomposition": {
+        "subquestions": [
+          {
+            "id": "sq1",
+            "question": "What are the publicly documented architectural components of Anthropic's deep-research product (e.g., Claude's extended thinking, tool use, search integration, multi-step reasoning loops)?",
+            "rationale": "Establishes the baseline architecture for one of the four named systems so it can be compared against the others.",
+            "confidence": 0.85,
+            "depends_on": [],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq2",
+            "question": "What are the publicly documented architectural components of OpenAI's deep-research product (e.g., o-series reasoning models, browser/code tool orchestration, agentic loop design, context management)?",
+            "rationale": "Establishes the baseline architecture for OpenAI's system, a major point of comparison in the prompt.",
+            "confidence": 0.85,
+            "depends_on": [],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq3",
+            "question": "What are the publicly documented architectural components of Perplexity's deep-research product (e.g., query decomposition, iterative search-and-synthesis pipeline, citation grounding, model backbone choices)?",
+            "rationale": "Establishes the baseline architecture for Perplexity, whose search-first design likely diverges meaningfully from the model-lab competitors.",
+            "confidence": 0.85,
+            "depends_on": [],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq4",
+            "question": "What are the publicly documented architectural components of Google's deep-research product (e.g., Gemini Deep Research, NotebookLM, multi-agent orchestration, Grounding with Google Search, long-context handling)?",
+            "rationale": "Establishes the baseline architecture for Google, whose unique access to search infrastructure and long-context models may produce distinct design choices.",
+            "confidence": 0.85,
+            "depends_on": [],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq5",
+            "question": "Across all four systems, what architectural patterns are shared \u2014 such as agentic/multi-step loops, tool-augmented LLMs, iterative query refinement, or source citation mechanisms?",
+            "rationale": "Directly answers the 'what they have in common' axis of the prompt by synthesizing findings from sq1\u2013sq4.",
+            "confidence": 0.9,
+            "depends_on": [
+              "sq1",
+              "sq2",
+              "sq3",
+              "sq4"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq6",
+            "question": "Where do the four systems meaningfully diverge \u2014 e.g., in reasoning model choice, search index access, context window strategy, multi-agent vs. single-agent design, output format, or latency/cost tradeoffs?",
+            "rationale": "Directly answers the 'where they diverge' axis of the prompt, which is the most analytically valuable part of the comparison.",
+            "confidence": 0.9,
+            "depends_on": [
+              "sq1",
+              "sq2",
+              "sq3",
+              "sq4"
+            ],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq7",
+            "question": "What is the current state of independent benchmarks or third-party evaluations comparing the output quality, factual accuracy, and reasoning depth of these four deep-research products, and what methodological limitations affect those comparisons?",
+            "rationale": "Grounds the architectural comparison in empirical performance evidence and flags where claims are speculative or unverified, preventing the analysis from being purely spec-sheet-level.",
+            "confidence": 0.75,
+            "depends_on": [
+              "sq5",
+              "sq6"
+            ],
+            "preferred_search": "either"
+          }
+        ]
+      },
+      "findings": {
+        "findings": [
+          {
+            "subquestion_id": "sq2",
+            "claim": "OpenAI's deep-research product uses o3-deep-research and o4-mini-deep-research models optimized for browsing and data analysis, with integrated tools for web search, remote MCP servers, file search, and code interpreter.",
+            "evidence": "The o3-deep-research and o4-mini-deep-research models can find, analyze, and synthesize hundreds of sources to create a comprehensive report at the level of a research analyst. These models are optimized for browsing and data analysis, and can use web search, remote MCP servers, and file search over internal vector stores to generate detailed reports. You can also include the code interpreter tool to allow the model to perform complex analysis by writing code.",
+            "source_url": "https://developers.openai.com/api/docs/guides/deep-research",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-d7d61e",
+            "saved_at": "2026-05-05T06:14:37.604675Z",
+            "fetched_at": "2026-05-05T06:14:37.604569Z",
+            "content_hash": "96c3b41df3d848f7f75df031b4275731f632b45947bb4d476ee8cc303eee8776",
+            "domain": "developers.openai.com",
+            "source_quality": 0.7,
+            "agreement_score": 0.8,
+            "combined_confidence": 0.825,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "OpenAI's deep-research uses an agentic, multi-step research loop that conducts multiple tool calls and returns output items documenting web_search_call, code_interpreter_call, mcp_tool_call, and file_search_call actions.",
+            "evidence": "Deep research models are agentic and conduct multi-step research. The output from a deep research model may want to pay particular attention to the output array for the response. It will contain a listing of web search calls, code interpreter calls, and remote MCP calls made to get to the answer. Responses may include output items like: web_search_call, code_interpreter_call, mcp_tool_call, file_search_call.",
+            "source_url": "https://developers.openai.com/api/docs/guides/deep-research",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-d7d61e",
+            "saved_at": "2026-05-05T06:14:37.604740Z",
+            "fetched_at": "2026-05-05T06:14:37.604717Z",
+            "content_hash": "9ff599e7f5992d42ed50b1572aae53da860be7a53af4294d627e93bc5c26eb36",
+            "domain": "developers.openai.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "OpenAI's deep-research includes a clarification step where an intermediate model (like gpt-4.1) helps clarify user intent and gather context before research begins, followed by prompt rewriting and deep research execution.",
+            "evidence": "Deep Research in ChatGPT follows a three step process: Clarification: When you ask a question, an intermediate model (like gpt-4.1) helps clarify the user's intent and gather more context (such as preferences, goals, or constraints) before the research process begins. Prompt rewriting: An intermediate model (like gpt-4.1) takes the original user input and clarifications, and produces a more detailed prompt. Deep research: The detailed, expanded prompt is passed to the deep research model, which conducts research and returns it.",
+            "source_url": "https://developers.openai.com/api/docs/guides/deep-research",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-d7d61e",
+            "saved_at": "2026-05-05T06:14:37.604777Z",
+            "fetched_at": "2026-05-05T06:14:37.604757Z",
+            "content_hash": "16fc05123867813c108ea2a69e089e3e00ddf7d2be68a24a708bc0975dc09be2",
+            "domain": "developers.openai.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "OpenAI's reasoning models (gpt-5.5, gpt-5.4) use internal reasoning tokens to \"think\" before responding, with support for interleaved thinking that generates visible output tokens before and between thinking phases.",
+            "evidence": "Reasoning models like GPT-5.5 use internal reasoning tokens before producing a response. This helps the model plan, use tools effectively, inspect alternatives, recover from ambiguity, and solve harder multi-step tasks. The models use these reasoning tokens to \"think,\" breaking down the prompt and considering multiple approaches to generating a response. Our reasoning models like gpt-5.5 and gpt-5.4 support interleaved thinking, where the model is able to generate visible output tokens before and in between thinking, and is able to think in between tool calls.",
+            "source_url": "https://developers.openai.com/api/docs/guides/reasoning",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-d7d61e",
+            "saved_at": "2026-05-05T06:14:51.805361Z",
+            "fetched_at": "2026-05-05T06:14:51.805240Z",
+            "content_hash": "de82600b759e79b36ef4ebc336e474970b49e16d3d5f0b4316c62793e13baa9a",
+            "domain": "developers.openai.com",
+            "source_quality": 0.7,
+            "agreement_score": 0.8,
+            "combined_confidence": 0.825,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "OpenAI's reasoning models track reasoning tokens separately from input and output tokens via output_tokens_details in the usage object, with context window management critical for multi-step reasoning tasks.",
+            "evidence": "The exact number of reasoning tokens used is visible in the usage object of the response object, under output_tokens_details. Depending on the problem's complexity, the models may generate anywhere from a few hundred to tens of thousands of reasoning tokens. It's important to ensure there's enough space in the context window for reasoning tokens when creating responses.",
+            "source_url": "https://developers.openai.com/api/docs/guides/reasoning",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-d7d61e",
+            "saved_at": "2026-05-05T06:14:51.805455Z",
+            "fetched_at": "2026-05-05T06:14:51.805426Z",
+            "content_hash": "8836faa9f3ad2ad9a2c7ce02c8e4cf1d7f20c9ea5ddb347845abc7e8ad1eaeee",
+            "domain": "developers.openai.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "OpenAI's reasoning models require explicit context management where reasoning items from previous function calls must be passed back to maintain continuity in multi-turn agentic workflows.",
+            "evidence": "When doing function calling with a reasoning model in the Responses API, we highly recommend you pass back any reasoning items returned with the last function call (in addition to the output of your function). If the model calls multiple functions consecutively, you should pass back all reasoning items, function call items, and function call output items, since the last user message. This allows the model to continue its reasoning process to produce better results in the most token-efficient manner.",
+            "source_url": "https://developers.openai.com/api/docs/guides/reasoning",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-d7d61e",
+            "saved_at": "2026-05-05T06:14:51.805500Z",
+            "fetched_at": "2026-05-05T06:14:51.805477Z",
+            "content_hash": "0c810067257780d85cc645af9ccc6fa0b856d2b0ba547b5dc75529d6fe5e9a58",
+            "domain": "developers.openai.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Gemini Deep Research uses an orchestrator/lead agent that interprets user queries, creates multi-step research plans, and delegates tasks to multiple specialized sub-agents that run in parallel.",
+            "evidence": "The orchestrator receives the query, interprets what the user wants, and then creates a plan for how to answer the question. That plan is broken into smaller pieces and delegated to multiple sub-agents... The lead agent delegates each sub-task using a structured API call. Technically, this means the orchestrator calls another service (the sub-agent) with a payload that contains everything the sub-agent needs",
+            "source_url": "https://blog.bytebytego.com/p/how-openai-gemini-and-claude-use",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-3ca72d",
+            "saved_at": "2026-05-05T06:15:14.026496Z",
+            "fetched_at": "2026-05-05T06:15:14.026425Z",
+            "content_hash": "f2aa64afc386d50b6ec275384c94941537d149364e84825175369fe4aa44cb69",
+            "domain": "blog.bytebytego.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.855,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Gemini Deep Research has built-in support for Google Search, URL Context reading, and Code Execution as default tools, with optional MCP Server integration for external tool access and File Search for document corpora.",
+            "evidence": "By default (when no tools parameter is provided), the agent has access to Google Search, URL Context, and Code Execution. You can explicitly specify tools to restrict or extend the agent's capabilities... Tool | Type value | Description | Google Search | google_search | Search the public web. Enabled by default. | URL Context | url_context | Read and summarize web page content. Enabled by default. | Code Execution | code_execution | Execute code to perform calculations and data analysis. Enabled by default. | MCP Server | mcp_server | Connect to remote MCP servers for external tool access. | File Search | file_search | Search your uploaded document corpora.",
+            "source_url": "https://ai.google.dev/gemini-api/docs/deep-research",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-3ca72d",
+            "saved_at": "2026-05-05T06:15:14.026552Z",
+            "fetched_at": "2026-05-05T06:15:14.026532Z",
+            "content_hash": "d0baf30cd1af29b2f9a995667dcb68bef7288482c6fc945aad258c2ad1d55284",
+            "domain": "ai.google.dev",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Gemini Deep Research includes a synthesis stage with two agents: a synthesizer agent that converts collected content into a final report, and a citations agent that ensures statements are supported by correct sources and inserts citations.",
+            "evidence": "The synthesizer agent takes all the content returned by the web agents and converts it into the final research report. It organizes the information into sections, resolves overlaps, and builds a coherent narrative. The citations agent then reads through the synthesized report and makes sure that each statement is supported by the correct sources. It inserts citations in the right locations in the text, so that the final report is thoroughly backed by the underlying material.",
+            "source_url": "https://blog.bytebytego.com/p/how-openai-gemini-and-claude-use",
+            "source_title": "",
+            "confidence": 0.85,
+            "researcher_id": "r-3ca72d",
+            "saved_at": "2026-05-05T06:15:14.026582Z",
+            "fetched_at": "2026-05-05T06:15:14.026565Z",
+            "content_hash": "9418510412140540e579400239452ef97b9951dcf82069ce8d4a897fc2aa8b92",
+            "domain": "blog.bytebytego.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.835,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Gemini Deep Research supports collaborative planning, allowing users to review and modify proposed research plans before execution.",
+            "evidence": "Collaborative planning gives you control over the research direction before the agent starts its work. When enabled, the agent returns a proposed research plan instead of executing immediately. You can then review, modify, or approve the plan through multi-turn interactions... Other systems, such as Google's Gemini, take a different path... Rather than asking the user follow-up questions by default, Gemini can autonomously generate a comprehensive multi-step plan based on its interpretation of the initial query. This plan outlines the sub-tasks and research angles the system intends to explore. Gemini then presents this proposed plan to the user for review and approval.",
+            "source_url": "https://blog.bytebytego.com/p/how-openai-gemini-and-claude-use",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-3ca72d",
+            "saved_at": "2026-05-05T06:15:14.026608Z",
+            "fetched_at": "2026-05-05T06:15:14.026592Z",
+            "content_hash": "94e98825486ac35cb0299f37953a214af6603de25f6f93c22aaa81e04df1d40f",
+            "domain": "blog.bytebytego.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.855,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Deep Research Max uses \"extended test-time compute to iteratively reason, search and refine the final report\" for maximum comprehensiveness, and consults significantly more sources than the earlier Deep Research version.",
+            "evidence": "Deep Research Max: Designed for maximum comprehensiveness and highest-quality synthesis, Max leverages extended test-time compute to iteratively reason, search and refine the final report... Deep Research Max consults significantly more sources and identifies critical nuances the older release frequently overlooked.",
+            "source_url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/next-generation-gemini-deep-research/",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-3ca72d",
+            "saved_at": "2026-05-05T06:15:14.026638Z",
+            "fetched_at": "2026-05-05T06:15:14.026620Z",
+            "content_hash": "90f348d2eeea82dde9ebc9d3649228f295e85d9ce7348f5d0faca2fcdae50fe3",
+            "domain": "blog.google",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Reasoning LLMs (o1, Claude 3.7, DeepSeek R1) diverge from conventional models by generating thousands of internal reasoning tokens at inference time, trading latency and cost for improved accuracy on complex tasks.",
+            "evidence": "Models like OpenAI's o1, Claude 3.7 Sonnet, and DeepSeek R1 are no longer focused solely on fast, fluent answers. Instead, they spend significantly more compute at inference time, generating long internal traces\u2014sometimes thousands of tokens\u2014to model multi-step reasoning. Performance is up. Latency and cost are up, too.",
+            "source_url": "https://workos.com/blog/reasoning-llms",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-5e4bc7",
+            "saved_at": "2026-05-05T06:15:38.928023Z",
+            "fetched_at": "2026-05-05T06:15:38.927688Z",
+            "content_hash": "fc4f4e0b35c8fe74ca8458cf06357d6886c2d37848f51b9f160f829d7cfd5a14",
+            "domain": "workos.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Claude and ChatGPT diverge significantly on context window strategy: Claude offers 200K tokens consistently across all tiers with less than 5% accuracy degradation across its full range, while ChatGPT varies by tier (32K-128K standard, up to 1M via API) with multimodal capability tradeoffs.",
+            "evidence": "Claude 4 Sonnet maintains less than 5% accuracy degradation across its entire 200,000-token range, outperforming most competitors who experience sharp performance drops beyond 60-70% of their advertised capacity. ChatGPT's context window varies significantly based on subscription tier and model version: Plus (32K-128K tokens), Pro (128K-196K tokens), API (1M tokens).",
+            "source_url": "https://aionx.co/ai-comparisons/chatgpt-claude-context-window/",
+            "source_title": "",
+            "confidence": 0.92,
+            "researcher_id": "r-5e4bc7",
+            "saved_at": "2026-05-05T06:15:50.582302Z",
+            "fetched_at": "2026-05-05T06:15:50.582208Z",
+            "content_hash": "406b0625c2ecb64e6faaa674790df40c0ab425fed05b5ca82d0e9aeb6b0b6ac2",
+            "domain": "aionx.co",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.863,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Perplexity and Claude diverge fundamentally in architecture: Perplexity is a search-focused system optimized for real-time web access and source citations, while Claude is a large-context conversational model designed for executing tasks like reasoning, writing, and coding.",
+            "evidence": "Perplexity is a specialized, source-cited search engine for research and real-time information, while Claude is a highly capable, large-context conversational model designed for executing tasks like reasoning, writing, and coding. Perplexity is best for real-time web search with source citations, fast factual answers, and multi-step research across the internet, while Claude excels at coding assistance and analyzing long documents.",
+            "source_url": "https://learn.g2.com/perplexity-vs-claude",
+            "source_title": "",
+            "confidence": 0.94,
+            "researcher_id": "r-5e4bc7",
+            "saved_at": "2026-05-05T06:15:50.582421Z",
+            "fetched_at": "2026-05-05T06:15:50.582369Z",
+            "content_hash": "432a7d3fc74fd20d48b3064149654aa615ac0919472c6de5c0d59063dfda5bf4",
+            "domain": "learn.g2.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.871,
+            "axis_disagreement": false
+          }
+        ],
+        "uncertainty_notes": [
+          {
+            "subquestion_id": "sq1",
+            "topic": "What are the publicly documented architectural components of Anthropic's deep-research product (e.g., Claude's extended thinking, tool use, search integration, multi-step reasoning loops)?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-13319e"
+          },
+          {
+            "subquestion_id": "sq3",
+            "topic": "What are the publicly documented architectural components of Perplexity's deep-research product (e.g., query decomposition, iterative search-and-synthesis pipeline, citation grounding, model backbone choices)?",
+            "reason": "Made 11 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-db383c"
+          },
+          {
+            "subquestion_id": "sq5",
+            "topic": "Across all four systems, what architectural patterns are shared \u2014 such as agentic/multi-step loops, tool-augmented LLMs, iterative query refinement, or source citation mechanisms?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-9f9a7b"
+          },
+          {
+            "subquestion_id": "sq7",
+            "topic": "What is the current state of independent benchmarks or third-party evaluations comparing the output quality, factual accuracy, and reasoning depth of these four deep-research products, and what methodological limitations affect those comparisons?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-fab174"
+          }
+        ]
+      },
+      "report": {
+        "user_prompt": "Compare the architectural choices made by major deep-research products (Anthropic, OpenAI, Perplexity, Google) and identify what they have in common and where they meaningfully diverge.",
+        "summary": "This report compares the publicly documented architectures of OpenAI and Google's deep-research products, with limited coverage of Anthropic and Perplexity due to insufficient public documentation found during research. Both OpenAI and Google share an agentic, multi-step loop design with integrated tool access (web search, code execution, file search) and explicit citation mechanisms, but diverge on orchestration design (single agentic model vs. explicit multi-agent hierarchy), user interaction patterns, and context window strategy. Anthropic's and Perplexity's internal architectures could not be documented from available sources, representing a significant gap in the comparison.",
+        "claims": [
+          {
+            "claim": "OpenAI's deep-research product is built on specialized models (o3-deep-research and o4-mini-deep-research) that conduct agentic, multi-step research loops with integrated tools including web search, code interpreter, remote MCP servers, and file search.",
+            "confidence": 0.85,
+            "supporting_finding_indices": [
+              0,
+              1
+            ]
+          },
+          {
+            "claim": "OpenAI's deep-research pipeline involves three sequential stages: a clarification step (using an intermediate model like gpt-4.1 to gather user intent), a prompt-rewriting step, and then execution by the deep-research model.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              2
+            ]
+          },
+          {
+            "claim": "OpenAI's reasoning models use internal reasoning tokens that are tracked separately from output tokens, and multi-turn agentic workflows require explicit passing of prior reasoning items back into context to maintain continuity.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              4,
+              5
+            ]
+          },
+          {
+            "claim": "There is a factual inconsistency in OpenAI's public documentation: deep-research is described as using 'o3-deep-research' and 'o4-mini-deep-research' models, while separate reasoning documentation refers to 'gpt-5.5' and 'gpt-5.4' as the reasoning model family \u2014 the relationship between these model designations is unclear from available sources.",
+            "confidence": 0.65,
+            "supporting_finding_indices": [
+              0,
+              3
+            ]
+          },
+          {
+            "claim": "Google's Gemini Deep Research uses an explicit multi-agent architecture: an orchestrator/lead agent creates a multi-step research plan and delegates sub-tasks to specialized sub-agents that run in parallel.",
+            "confidence": 0.85,
+            "supporting_finding_indices": [
+              6
+            ]
+          },
+          {
+            "claim": "Gemini Deep Research includes a dedicated synthesis stage composed of two specialized agents: a synthesizer agent that assembles the final report and a citations agent that verifies and inserts source citations.",
+            "confidence": 0.83,
+            "supporting_finding_indices": [
+              8
+            ]
+          },
+          {
+            "claim": "Gemini Deep Research supports collaborative planning, allowing users to review and modify the research plan before execution rather than immediately beginning research \u2014 contrasting with OpenAI's default clarification-then-execute flow.",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              9
+            ]
+          },
+          {
+            "claim": "Gemini Deep Research has default access to Google Search, URL Context reading, and Code Execution tools, with optional extensions via MCP Server and File Search.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              7
+            ]
+          },
+          {
+            "claim": "Google's Deep Research Max variant uses extended test-time compute to iteratively reason, search, and refine reports, and consults significantly more sources than earlier versions.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              10
+            ]
+          },
+          {
+            "claim": "Both OpenAI and Google's deep-research systems share the following architectural patterns: agentic multi-step research loops, integrated web search tools, code execution capabilities, file/document search, MCP server integration, and explicit citation or source-tracking mechanisms.",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              0,
+              1,
+              7,
+              8
+            ]
+          },
+          {
+            "claim": "OpenAI and Google diverge on orchestration design: OpenAI uses a single agentic model that calls tools directly and tracks its own reasoning tokens, while Google employs an explicit multi-agent hierarchy with a lead orchestrator delegating to specialized sub-agents including a dedicated citations agent.",
+            "confidence": 0.83,
+            "supporting_finding_indices": [
+              1,
+              5,
+              6,
+              8
+            ]
+          },
+          {
+            "claim": "Reasoning-capable LLMs (including OpenAI's o-series and Claude 3.7) diverge from conventional models by generating large numbers of internal reasoning tokens at inference time, which increases latency and cost in exchange for improved accuracy on complex tasks.",
+            "confidence": 0.86,
+            "supporting_finding_indices": [
+              11
+            ]
+          },
+          {
+            "claim": "Claude and ChatGPT diverge in context window strategy: Claude offers a consistent 200K-token context with reportedly less than 5% accuracy degradation across its full range, while ChatGPT's context window varies by subscription tier (32K\u2013128K standard, up to 1M via API).",
+            "confidence": 0.72,
+            "supporting_finding_indices": [
+              12
+            ]
+          },
+          {
+            "claim": "Perplexity is architecturally distinct from Claude in its fundamental design: Perplexity is a search-focused system optimized for real-time web access and source citations, whereas Claude is a large-context conversational model designed for reasoning, writing, and coding tasks.",
+            "confidence": 0.75,
+            "supporting_finding_indices": [
+              13
+            ]
+          }
+        ],
+        "contradictions_surfaced": [
+          {
+            "description": "Findings 0 and 3 present inconsistent model designations within OpenAI's documentation. Finding 0 states the deep-research product uses 'o3-deep-research and o4-mini-deep-research models optimized for browsing and data analysis,' while Finding 3 states 'Reasoning models like GPT-5.5 use internal reasoning tokens' and that 'our reasoning models like gpt-5.5 and gpt-5.4 support interleaved thinking.' Both are attributed to developers.openai.com but describe different model families (o3/o4-mini vs. gpt-5.5/gpt-5.4), creating ambiguity about which model family underlies OpenAI's reasoning and deep-research capabilities.",
+            "finding_ids": [
+              0,
+              3
+            ],
+            "severity": "moderate",
+            "type": "factual"
+          },
+          {
+            "description": "Findings 2 and 9 present potentially conflicting characterizations of upfront user interaction. Finding 2 documents that OpenAI's ChatGPT deep-research begins with a 'Clarification' step where an intermediate model gathers user intent before research starts. Finding 9, citing a blog post, implies that 'other systems such as Google's Gemini take a different path' from asking follow-up questions by default, suggesting Gemini autonomously generates a plan instead. This framing implies OpenAI asks questions by default while Gemini does not \u2014 yet both systems appear to have some form of pre-research user interaction, differing in mechanism (question-and-answer vs. plan review) rather than presence vs. absence.",
+            "finding_ids": [
+              2,
+              9
+            ],
+            "severity": "minor",
+            "type": "framing"
+          }
+        ],
+        "caveats": [
+          "WARNING \u2014 bounded revision exhausted with critic issues still open. The report ships with 3 unresolved critic issue(s):\n  \u2022 Claim #3 (overstated): The claim frames the difference between 'o3-deep-research/o4-mini-deep-research' and 'gpt-5.5/gpt-5.4' as a 'factual inconsistency in OpenAI's public documentation.' The cited findings (0 and 3) simply describe two different product lines from different documentation pages \u2014 deep-research models and reasoning models. The claim infers an inconsistency or confusion about model designations, but the findings themselves don't support that framing. They document separate model families without contradiction. The characterization of this as an 'inconsistency' is not supported by the evidence; it's an interpretive leap by the writer.\n  \u2022 Claim #9 (overstated): The claim asserts that BOTH OpenAI and Google share 'explicit citation or source-tracking mechanisms' as a common architectural pattern. For OpenAI's deep-research, the cited findings (0, 1) document tool call tracking (web_search_call, etc.) but do not describe an explicit citation mechanism in the output report. The citation mechanism is only explicitly described for Gemini (finding 8). The findings do not establish that OpenAI has an equivalent explicit citations agent or citation-insertion mechanism comparable to Gemini's. Also, the claim asserts MCP server integration as a shared pattern \u2014 while both support MCP, for OpenAI it's a standard tool and for Gemini it's optional/extension. The 'explicit citation' commonality is not supported for OpenAI.\n  \u2022 Claim #12 (overstated): Finding [12] references 'Claude 4 Sonnet' specifically, but the claim generalizes this to 'Claude' broadly, implying this applies to all Claude models. Additionally, the source (aionx.co/ai-comparisons) is a comparison blog rather than an authoritative Anthropic or OpenAI source, and the specific accuracy degradation figures (<5%) are third-party claims. While the combined confidence is 0.86, the source_q is only 0.70, and the claim presents these figures with a confidence of 0.72 \u2014 the accuracy degradation statistic is presented as established fact when it comes from a single third-party comparison site. This is a mild overstatement given the source quality.",
+          "Anthropic's deep-research product architecture could not be documented: researchers made 10 tool calls without finding concrete, citable evidence about Claude's specific deep-research architectural components (extended thinking implementation, tool use specifics, search integration, or multi-step reasoning loop design). Claims about Anthropic are limited to general observations from third-party comparisons.",
+          "Perplexity's deep-research architecture could not be documented: researchers made 11 tool calls without extracting concrete evidence about query decomposition, iterative search-and-synthesis pipeline internals, citation grounding mechanisms, or model backbone choices. The only finding about Perplexity (Finding 13) is a high-level framing comparison from a third-party review site rather than primary technical documentation.",
+          "No independent benchmarks or third-party evaluations comparing output quality, factual accuracy, and reasoning depth across all four products were found: researchers made 10 tool calls without locating citable comparative evaluation results. The relative quality and accuracy of these systems cannot be assessed from available evidence.",
+          "Shared architectural patterns (cross-system commonalities) could not be directly confirmed from a single source: the claim about shared patterns synthesizes individual system findings but lacks a primary comparative study to validate it. Researchers made 10 tool calls attempting to find such evidence without success.",
+          "Finding 12 (context window comparison between Claude and ChatGPT) comes from a single third-party comparison site (aionx.co) without primary source attribution for the specific performance degradation figures. The claim that Claude maintains 'less than 5% accuracy degradation' across its 200K range should be treated with caution as it is unverified against Anthropic's own benchmarks.",
+          "Several findings rely on a single blog post (blog.bytebytego.com) for details about Google's multi-agent architecture internals. While this source provides architectural detail, it is not Google's primary technical documentation, and some implementation specifics may be illustrative rather than literal.",
+          "Model naming inconsistencies in OpenAI's documentation (o3/o4-mini vs. gpt-5.5/gpt-5.4) suggest that some findings may reflect documentation from different time periods or product lines, potentially mixing pre-release and post-release naming conventions."
+        ]
+      },
+      "critic_history": [
+        {
+          "issues": [
+            {
+              "claim_index": 3,
+              "issue_type": "overstated",
+              "explanation": "The claim frames the difference between 'o3-deep-research/o4-mini-deep-research' and 'gpt-5.5/gpt-5.4' as a 'factual inconsistency in OpenAI's public documentation.' The cited findings (0 and 3) simply describe two different product lines from different documentation pages \u2014 deep-research models and reasoning models. The claim infers an inconsistency or confusion about model designations, but the findings themselves don't support that framing. They document separate model families without contradiction. The characterization of this as an 'inconsistency' is not supported by the evidence; it's an interpretive leap by the writer."
+            },
+            {
+              "claim_index": 9,
+              "issue_type": "overstated",
+              "explanation": "The claim asserts that BOTH OpenAI and Google share 'explicit citation or source-tracking mechanisms' as a common architectural pattern. For OpenAI's deep-research, the cited findings (0, 1) document tool call tracking (web_search_call, etc.) but do not describe an explicit citation mechanism in the output report. The citation mechanism is only explicitly described for Gemini (finding 8). The findings do not establish that OpenAI has an equivalent explicit citations agent or citation-insertion mechanism comparable to Gemini's. Also, the claim asserts MCP server integration as a shared pattern \u2014 while both support MCP, for OpenAI it's a standard tool and for Gemini it's optional/extension. The 'explicit citation' commonality is not supported for OpenAI."
+            },
+            {
+              "claim_index": 12,
+              "issue_type": "overstated",
+              "explanation": "Finding [12] references 'Claude 4 Sonnet' specifically, but the claim generalizes this to 'Claude' broadly, implying this applies to all Claude models. Additionally, the source (aionx.co/ai-comparisons) is a comparison blog rather than an authoritative Anthropic or OpenAI source, and the specific accuracy degradation figures (<5%) are third-party claims. While the combined confidence is 0.86, the source_q is only 0.70, and the claim presents these figures with a confidence of 0.72 \u2014 the accuracy degradation statistic is presented as established fact when it comes from a single third-party comparison site. This is a mild overstatement given the source quality."
+            }
+          ],
+          "approved": false
+        }
+      ],
+      "verify_history": [
+        {
+          "results": []
+        }
+      ],
+      "metadata": {
+        "commit_hash": "473fa656a3af4e9ddadb854d38ac96de50beee78",
+        "branch": "main",
+        "models": {
+          "researcher": "claude-haiku-4-5",
+          "writer": "claude-sonnet-4-6",
+          "critic": "claude-sonnet-4-6",
+          "judge": "claude-opus-4-7",
+          "kae_judge": "claude-haiku-4-5"
+        },
+        "config_snapshot": {
+          "anthropic_api_key": "<set>",
+          "tavily_api_key": "<set>",
+          "researcher_model": "claude-haiku-4-5",
+          "writer_model": "claude-sonnet-4-6",
+          "critic_model": "claude-sonnet-4-6",
+          "judge_model": "claude-opus-4-7",
+          "kae_judge_model": "claude-haiku-4-5",
+          "min_subquestions": 3,
+          "max_subquestions": 7,
+          "decompose_max_retries": 2,
+          "researcher_max_tool_calls": 30,
+          "researcher_max_findings": 6,
+          "researcher_min_findings_to_stop": 3,
+          "researcher_min_unique_sources": 2,
+          "researcher_min_avg_confidence": 0.55,
+          "researcher_unproductive_call_limit": 10,
+          "search_results_per_query": 8,
+          "fetch_max_chars": 12000,
+          "scholar_max_retries": 3,
+          "scholar_backoff_seconds": 1.0,
+          "scholar_unavailable_window_seconds": 120,
+          "max_revisions": 0,
+          "verifier_enabled": false,
+          "parallel_researchers": 2
+        },
+        "captured_at": "2026-05-05T06:14:06.458043Z"
+      },
+      "metrics": {
+        "total_subquestions": 7,
+        "subquestions_with_findings": 3,
+        "total_findings": 14,
+        "unique_sources": 8,
+        "revision_rounds": 0,
+        "final_grounding_rate": 0.7857142857142857,
+        "coverage_rate": 0.42857142857142855,
+        "elapsed_seconds": 184.7236568927765,
+        "per_stage": {
+          "classify_shape": {
+            "calls": 1,
+            "input_tokens": 993,
+            "output_tokens": 62,
+            "cost_usd": 0.003909,
+            "elapsed_seconds": 2.21395408292301
+          },
+          "confidence": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cost_usd": 0.0,
+            "elapsed_seconds": 0.0003168338444083929
+          },
+          "critic": {
+            "calls": 1,
+            "input_tokens": 8429,
+            "output_tokens": 613,
+            "cost_usd": 0.034482,
+            "elapsed_seconds": 13.0343004160095
+          },
+          "decompose": {
+            "calls": 1,
+            "input_tokens": 1495,
+            "output_tokens": 954,
+            "cost_usd": 0.018795,
+            "elapsed_seconds": 14.11796099995263
+          },
+          "reconciler": {
+            "calls": 1,
+            "input_tokens": 4071,
+            "output_tokens": 583,
+            "cost_usd": 0.020958,
+            "elapsed_seconds": 10.086551249958575
+          },
+          "researcher": {
+            "calls": 39,
+            "input_tokens": 340878,
+            "output_tokens": 9156,
+            "cost_usd": 0.3866579999999999,
+            "elapsed_seconds": 109.13638266711496
+          },
+          "writer": {
+            "calls": 1,
+            "input_tokens": 6769,
+            "output_tokens": 2401,
+            "cost_usd": 0.056322,
+            "elapsed_seconds": 36.090273999841884
+          }
+        },
+        "total_input_tokens": 362635,
+        "total_output_tokens": 13769,
+        "total_cost_usd": 0.5211239999999999,
+        "researcher_latency_max": 44.657973875058815,
+        "researcher_latency_avg": 28.944476196409337,
+        "tool_mix": {
+          "web_search": 31,
+          "search_papers": 5,
+          "fetch_url": 36,
+          "save_finding": 14,
+          "note_uncertainty": 0
+        },
+        "kae": null,
+        "ace": null,
+        "plan_judge": null
+      },
+      "taxonomy": null,
+      "started_at": "2026-05-05T06:17:11.138086Z"
+    },
+    {
+      "user_prompt": "Compare the architectural choices made by major deep-research products (Anthropic, OpenAI, Perplexity, Google) and identify what they have in common and where they meaningfully diverge.",
+      "shape": {
+        "shape": "PRE_STRUCTURED",
+        "confidence": 0.82,
+        "rationale": "The user has explicitly specified the comparison targets (four named products) and the comparison axes (architectural choices, commonalities, divergences), making this a user-structured comparison task despite the substance being somewhat contested/emerging."
+      },
+      "decomposition": {
+        "subquestions": [
+          {
+            "id": "sq1",
+            "question": "What is the documented or inferred architecture of Anthropic's deep-research product (e.g., Claude's research/analysis mode), including its search strategy, reasoning pipeline, context handling, and output synthesis approach?",
+            "rationale": "Establishing Anthropic's architectural choices is a necessary baseline for any cross-product comparison.",
+            "confidence": 0.85,
+            "depends_on": [],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq2",
+            "question": "What is the documented or inferred architecture of OpenAI's deep-research product (e.g., ChatGPT Deep Research / o3-based research agent), including its agentic loop design, tool use, search orchestration, and synthesis methodology?",
+            "rationale": "OpenAI's approach represents one of the most publicly discussed deep-research implementations and is essential for the comparison.",
+            "confidence": 0.9,
+            "depends_on": [],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq3",
+            "question": "What is the documented or inferred architecture of Perplexity's deep-research product, including its retrieval pipeline, re-ranking strategies, multi-turn query decomposition, and citation/grounding mechanisms?",
+            "rationale": "Perplexity is primarily retrieval-focused and may represent a structurally distinct architecture compared to reasoning-first systems.",
+            "confidence": 0.85,
+            "depends_on": [],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq4",
+            "question": "What is the documented or inferred architecture of Google's deep-research product (e.g., Gemini Deep Research), including its planning phase, web browsing strategy, multi-step reasoning, and report generation pipeline?",
+            "rationale": "Google's integration of search infrastructure with LLM reasoning may yield architecturally unique choices worth isolating.",
+            "confidence": 0.85,
+            "depends_on": [],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq5",
+            "question": "Across all four products, what architectural patterns are shared \u2014 such as query decomposition, iterative retrieval loops, chain-of-thought reasoning, tool calling, or grounding/citation mechanisms?",
+            "rationale": "Identifying convergent patterns reveals what the field has collectively concluded works best for deep research tasks.",
+            "confidence": 0.9,
+            "depends_on": [
+              "sq1",
+              "sq2",
+              "sq3",
+              "sq4"
+            ],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq6",
+            "question": "Where do the four products meaningfully diverge architecturally \u2014 e.g., in agentic autonomy level, reasoning model integration, context window usage, search index access, human-in-the-loop design, or output format?",
+            "rationale": "Understanding divergences reveals genuine strategic and technical tradeoffs, which is the core analytical contribution of the comparison.",
+            "confidence": 0.95,
+            "depends_on": [
+              "sq1",
+              "sq2",
+              "sq3",
+              "sq4"
+            ],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq7",
+            "question": "What evidence is missing, proprietary, or disputed about the internal architectures of these products, and what methodological limitations affect published comparisons or benchmarks of deep-research systems?",
+            "rationale": "Most architectural details are not fully disclosed; identifying gaps prevents overconfident conclusions and signals where inference replaces evidence.",
+            "confidence": 0.75,
+            "depends_on": [
+              "sq5",
+              "sq6"
+            ],
+            "preferred_search": "either"
+          }
+        ]
+      },
+      "findings": {
+        "findings": [
+          {
+            "subquestion_id": "sq1",
+            "claim": "Anthropic's Research system uses a multi-agent architecture with an orchestrator-worker pattern, where a lead agent (Claude Opus 4) analyzes queries and spawns subagents (Claude Sonnet 4) to explore different aspects simultaneously in parallel.",
+            "evidence": "Our Research system uses a multi-agent architecture with an orchestrator-worker pattern, where a lead agent coordinates the process while delegating to specialized subagents that operate in parallel. When a user submits a query, the lead agent analyzes it, develops a strategy, and spawns subagents to explore different aspects simultaneously.",
+            "source_url": "https://www.anthropic.com/engineering/built-multi-agent-research-system",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-6c1d02",
+            "saved_at": "2026-05-05T06:18:21.753440Z",
+            "fetched_at": "2026-05-05T06:18:21.753333Z",
+            "content_hash": "2d00e5764781020f2624a47557e975d52338bfbcde83d7ae31b91ede1f829be3",
+            "domain": "www.anthropic.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Anthropic's research agents use a dynamic multi-step search strategy rather than static retrieval (RAG), iteratively finding relevant information, adapting to new findings, and analyzing results to formulate high-quality answers.",
+            "evidence": "Traditional approaches using Retrieval Augmented Generation (RAG) use static retrieval. That is, they fetch some set of chunks that are most similar to an input query and use these chunks to generate a response. In contrast, our architecture uses a multi-step search that dynamically finds relevant information, adapts to new findings, and analyzes results to formulate high-quality answers.",
+            "source_url": "https://www.anthropic.com/engineering/built-multi-agent-research-system",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-6c1d02",
+            "saved_at": "2026-05-05T06:18:21.753542Z",
+            "fetched_at": "2026-05-05T06:18:21.753504Z",
+            "content_hash": "8f4a603f1801b989b5db926bc20d4f0efe1d960710fe2bef8ffa67d867160846",
+            "domain": "www.anthropic.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Anthropic's Research system prompting strategy encodes research heuristics such as decomposing difficult questions into smaller tasks, evaluating source quality, adjusting search approaches based on new information, and recognizing when to focus on depth versus breadth exploration.",
+            "evidence": "Our prompting strategy focuses on instilling good heuristics rather than rigid rules. We studied how skilled humans approach research tasks and encoded these strategies in our prompts\u2014strategies like decomposing difficult questions into smaller tasks, carefully evaluating the quality of sources, adjusting search approaches based on new information, and recognizing when to focus on depth (investigating one topic in detail) vs. breadth (exploring many topics in parallel).",
+            "source_url": "https://www.anthropic.com/engineering/built-multi-agent-research-system",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-6c1d02",
+            "saved_at": "2026-05-05T06:18:21.753592Z",
+            "fetched_at": "2026-05-05T06:18:21.753567Z",
+            "content_hash": "79af34b1e0ad1354494a299df14ca535d7cd17765f07628c28a9f705f4a27a0d",
+            "domain": "www.anthropic.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Anthropic's Research system uses parallel subagents as intelligent filters that iteratively use search tools to gather information and compress insights from a vast corpus, with each subagent operating independently with its own context window to enable thorough parallel investigations.",
+            "evidence": "Subagents facilitate compression by operating in parallel with their own context windows, exploring different aspects of the question simultaneously before condensing the most important tokens for the lead research agent. Each subagent also provides separation of concerns\u2014distinct tools, prompts, and exploration trajectories\u2014which reduces path dependency and enables thorough, independent investigations.",
+            "source_url": "https://www.anthropic.com/engineering/built-multi-agent-research-system",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-6c1d02",
+            "saved_at": "2026-05-05T06:18:21.753637Z",
+            "fetched_at": "2026-05-05T06:18:21.753612Z",
+            "content_hash": "8f9c8179c359c15ab1c7fb364553234bee1d85800a069635e11079ca49a73c5f",
+            "domain": "www.anthropic.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Anthropic's research evaluation uses multiple methods: LLM-as-judge with rubrics covering factual accuracy, citation accuracy, completeness, source quality, and tool efficiency; supplemented by human evaluation to catch edge cases and subtle biases.",
+            "evidence": "We used an LLM judge that evaluated each output against criteria in a rubric: factual accuracy (do claims match sources?), citation accuracy (do the cited sources match the claims?), completeness (are all requested aspects covered?), source quality (did it use primary sources over lower-quality secondary sources?), and tool efficiency (did it use the right tools a reasonable number of times?). Human evaluation catches what automation misses.",
+            "source_url": "https://www.anthropic.com/engineering/built-multi-agent-research-system",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-6c1d02",
+            "saved_at": "2026-05-05T06:18:21.753686Z",
+            "fetched_at": "2026-05-05T06:18:21.753663Z",
+            "content_hash": "fb1579d6492a1f98881860600877d2b588a554f70e3ea12df7f0a31a02abb74f",
+            "domain": "www.anthropic.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Anthropic's research system includes a Citation Agent that validates every claim against sources and ensures proper citation attribution to prevent unsupported statements and source misattribution.",
+            "evidence": "Once enough information has been gathered, the results are passed to a Citation Agent. Its job is to check every claim against the sources, match citations correctly, and ensure the final output is traceable. This prevents errors such as making statements without evidence or attributing information to the wrong source.",
+            "source_url": "https://blog.bytebytego.com/p/how-anthropic-built-a-multi-agent",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-6c1d02",
+            "saved_at": "2026-05-05T06:18:29.389921Z",
+            "fetched_at": "2026-05-05T06:18:29.389822Z",
+            "content_hash": "be8dc49bb266deb4987419e7008808e0d4a96fea3d21712160ab6e7cb4856d7d",
+            "domain": "blog.bytebytego.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Anthropic uses extended thinking and interleaved thinking as controllable scratchpads in the research system, where the Lead Researcher plans reasoning before acting and subagents use interleaved thinking to evaluate tool outputs, spot gaps, and refine queries.",
+            "evidence": "Anthropic used extended thinking and interleaved thinking as controllable scratchpads. Extended thinking allows the Lead Researcher to write out their reasoning before acting, such as planning which tools to use or how many subagents to create. Subagents also plan their steps and then, after receiving tool outputs, use interleaved thinking to evaluate results, spot gaps, and refine their next queries.",
+            "source_url": "https://blog.bytebytego.com/p/how-anthropic-built-a-multi-agent",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-6c1d02",
+            "saved_at": "2026-05-05T06:18:29.389999Z",
+            "fetched_at": "2026-05-05T06:18:29.389979Z",
+            "content_hash": "8f55a7988a9b2361ac6a66fb9f1255e6dcce6ff8c8c629efd0bcbf5ac247b00e",
+            "domain": "blog.bytebytego.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Anthropic's research system uses scaling rules for effort allocation: simple fact checks require one agent with 3-10 tool calls, direct comparisons need 2-4 subagents with 10-15 calls each, and complex research requires 10+ subagents with clearly divided responsibilities.",
+            "evidence": "To prevent over-investment in simple problems, scaling rules were written into prompts. For instance: A simple fact check should involve only one agent making 3\u201310 tool calls. A direct comparison might need 2\u20134 subagents, each with 10\u201315 calls. A complex research problem could require 10 or more subagents, each with clearly divided responsibilities.",
+            "source_url": "https://blog.bytebytego.com/p/how-anthropic-built-a-multi-agent",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-6c1d02",
+            "saved_at": "2026-05-05T06:18:29.390054Z",
+            "fetched_at": "2026-05-05T06:18:29.390022Z",
+            "content_hash": "f03c9b16fd35adaac5bed4c79ef9ebf9b8cdc69a6fc985bd442df70fce1d179d",
+            "domain": "blog.bytebytego.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Anthropic's prompting strategy encourages agents to begin with broad search queries to survey the landscape and then narrow focus as they learn more, mirroring how expert human researchers work.",
+            "evidence": "Agents often defaulted to very specific search queries, which returned few or irrelevant results. To fix this, prompts encouraged them to begin with broad queries, survey the landscape, and then narrow their focus as they learned more. This mirrors how expert human researchers work.",
+            "source_url": "https://blog.bytebytego.com/p/how-anthropic-built-a-multi-agent",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-6c1d02",
+            "saved_at": "2026-05-05T06:18:29.390087Z",
+            "fetched_at": "2026-05-05T06:18:29.390068Z",
+            "content_hash": "246e71dd8d9125d2562e00732842d11a750714ac734e349655f1fb611ce440ef",
+            "domain": "blog.bytebytego.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "OpenAI's Deep Research follows a five-phase research process: clarifying the task through interactive questions, breaking down queries into sub-questions and planning, iterative web searching with progressive query refinement, reading and analyzing diverse content formats, and synthesizing findings into structured reports with inline citations.",
+            "evidence": "The Five-Phase Research Process: \"Phase 1: Clarifying the Task Through Interactive Questions. Before diving into research, Deep Research often begins with a clarification phase. The model may ask follow-up questions... Phase 2: Breaking Down Queries Into Sub-Questions and Planning Research Strategy... Phase 3: Iterative Web Searching With Progressive Query Refinement... Phase 4: Reading and Analyzing Diverse Content Formats... Phase 5: Synthesizing Findings Into Structured Reports With Inline Citations\"",
+            "source_url": "https://blog.promptlayer.com/how-deep-research-works/",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-439a7f",
+            "saved_at": "2026-05-05T06:18:18.816029Z",
+            "fetched_at": "2026-05-05T06:18:18.815930Z",
+            "content_hash": "500b9dc3816e50b5797f0ef7ebd7842d199614fdff0aba59305b355df58e269a",
+            "domain": "blog.promptlayer.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "OpenAI's Deep Research architecture uses a ReAct-style Plan-Act-Observe loop, powered by the o3 model trained with reinforcement learning on complex browsing and reasoning tasks.",
+            "evidence": "Deep Research follows the classic 'Plan-Act-Observe' loop from the ReAct paradigm. The model plans what it needs to do (often implicit in its chain-of-thought), acts by invoking a tool (like issuing a search query), observes the result (reading the returned webpage), then repeats this cycle until ready to produce the final answer... The system is powered by an early version of OpenAI's o3 model, successor to GPT-4, specialized for extended reasoning and web browsing tasks... During training, OpenAI used end-to-end reinforcement learning on complex browsing and reasoning tasks.",
+            "source_url": "https://blog.promptlayer.com/how-deep-research-works/",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-439a7f",
+            "saved_at": "2026-05-05T06:18:18.816079Z",
+            "fetched_at": "2026-05-05T06:18:18.816063Z",
+            "content_hash": "cf682cfe0bd5612233235a6b6138916c56e2a4c051c10ea62c93ae008a1b2347",
+            "domain": "blog.promptlayer.com",
+            "source_quality": 0.7,
+            "agreement_score": 0.8,
+            "combined_confidence": 0.825,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "OpenAI Deep Research uses interactive clarification approach where the agent asks follow-up questions to refine research scope before committing to the full research process, in contrast to other systems like Gemini that autonomously generate a comprehensive multi-step plan.",
+            "evidence": "Interactive Clarification (OpenAI): Some architectures, such as OpenAI's Deep Research, use an interactive clarification approach. Here, the agent does not immediately start a long research process. Instead, it may ask the user follow-up questions. These questions are designed to refine the research scope, clarify the objectives, and confirm exactly what information the user cares about... This conversational back-and-forth continues until the agent has a crisp understanding of the user's needs, at which point it commits to the full research process.",
+            "source_url": "https://blog.bytebytego.com/p/how-openai-gemini-and-claude-use",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-439a7f",
+            "saved_at": "2026-05-05T06:18:18.816126Z",
+            "fetched_at": "2026-05-05T06:18:18.816110Z",
+            "content_hash": "6e3352de0c54e2ef33f8fcefecc64f85e887c36de4fc7a6060283751e68902b2",
+            "domain": "blog.bytebytego.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Deep Research uses a multi-agent architecture with a lead orchestrator agent that creates a research plan, delegates sub-tasks to specialized web search agents, and a synthesis stage with synthesizer and citations agents to produce the final report.",
+            "evidence": "At a high level, the architecture begins with the user request. The user's query is sent into a multi-agent research system. Inside this system, there is usually an orchestrator or lead agent that takes responsibility for the overall research strategy. The orchestrator receives the query, interprets what the user wants, and then creates a plan for how to answer the question. That plan is broken into smaller pieces and delegated to multiple sub-agents... Once the web agents finish their work, they return two things: The content they have extracted... and Citations that record exactly where that content came from... The synthesizer agent takes all the content returned by the web agents and converts it into the final research report... The citations agent then reads through the synthesized report and makes sure that each statement is supported by the correct sources.",
+            "source_url": "https://blog.bytebytego.com/p/how-openai-gemini-and-claude-use",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-439a7f",
+            "saved_at": "2026-05-05T06:18:18.816150Z",
+            "fetched_at": "2026-05-05T06:18:18.816136Z",
+            "content_hash": "ab5f826274fc15fa9d1f27864c702ab1c3e450abd85c82d409bbad53f235b1b2",
+            "domain": "blog.bytebytego.com",
+            "source_quality": 0.7,
+            "agreement_score": 0.8,
+            "combined_confidence": 0.825,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "OpenAI's Deep Research has access to integrated tools including web search, web browser for fetching content, code interpreter for data analysis and visualization, and file parser for PDFs and images.",
+            "evidence": "Integrated Tools: Web Search, Browser, Code Interpreter, File Parser. The model has access to several critical tools: - Web search tool for real-time internet queries (mandatory for operation) - Web browser that can fetch page content, search within pages, and handle scrolling - Code interpreter for data analysis, calculations, and visualization - File parser for PDFs, images, and other non-HTML content",
+            "source_url": "https://blog.promptlayer.com/how-deep-research-works/",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-439a7f",
+            "saved_at": "2026-05-05T06:18:18.816173Z",
+            "fetched_at": "2026-05-05T06:18:18.816159Z",
+            "content_hash": "109b8f2f75fd268c522db6bef43bd8f9f10bec0c75e492e481c510ea9a153410",
+            "domain": "blog.promptlayer.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Deep Research has a two-tier stopping mechanism: coverage-based early stops (when sufficient sources are met per sub-question, novelty exhausted, or confidence thresholds reached) and budget-driven hard stops (typically 20-30 minute time limit, 30-60 web searches, 120-150 page fetches).",
+            "evidence": "Deep Research uses a sophisticated two-tier stopping mechanism that balances thoroughness with practical constraints: Coverage-Based Early Stops... Threshold of sources per sub-question met (typically 2+ independent sources, or 1 if authoritative)... Novelty exhausted\u2014recent searches aren't uncovering new information... Budget-Driven Hard Stops... Wall-clock time: typically 20-30 minutes maximum... Search call limits: often 30-60 web searches per task... Page fetch caps: usually 120-150 pages maximum",
+            "source_url": "https://blog.promptlayer.com/how-deep-research-works/",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-439a7f",
+            "saved_at": "2026-05-05T06:18:18.816198Z",
+            "fetched_at": "2026-05-05T06:18:18.816184Z",
+            "content_hash": "70e176b0ab222125b34cdb52acb490195f379ea3a80092a67f699c5781a9d6e6",
+            "domain": "blog.promptlayer.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Deep research products use iterative multi-step retrieval with tool calling, combining reasoning cycles and external data retrieval across multiple sources.",
+            "evidence": "Systems integrate \"dynamic reasoning, adaptive planning, multi-iteration external data retrieval and tool use, and comprehensive analytical report generation\" with agents completing \"the planning, execution, and reflection cycle\" and calling \"appropriate tools\" based on context.",
+            "source_url": "https://huggingface.co/blog/exploding-gradients/deepresearch-survey",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-aa07b5",
+            "saved_at": "2026-05-05T06:18:41.751100Z",
+            "fetched_at": "2026-05-05T06:18:41.750999Z",
+            "content_hash": "b1a12b68f60954232b7fec5475f44abb51cff660cca6d25bdd74253f66207a3f",
+            "domain": "huggingface.co",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Deep research products employ query decomposition as a core architectural pattern, with agents decomposing task requirements into sub-tasks.",
+            "evidence": "Multi-agent architectures involve \"a planner agent for task understanding, decomposition, and allocation, followed by multiple sub-task agents\" and systems rely on the model's capability to \"autonomously decide all steps of the task\" and adjust \"future task execution steps based on feedback.\"",
+            "source_url": "https://huggingface.co/blog/exploding-gradients/deepresearch-survey",
+            "source_title": "",
+            "confidence": 0.94,
+            "researcher_id": "r-aa07b5",
+            "saved_at": "2026-05-05T06:18:43.961021Z",
+            "fetched_at": "2026-05-05T06:18:43.961000Z",
+            "content_hash": "738895d691afdf20272196fb5c1bad64c827aec59b8ac169617fdea9dd5f4157",
+            "domain": "huggingface.co",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.871,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Deep research systems use reasoning-execution-reflection cycles similar to ReAct framework as a shared pattern across single-agent implementations.",
+            "evidence": "Systems like \"Agent-R1, ReSearch, and Search-R1 all execute tasks based on reasoning, execution, and reflection cycles similar to the ReAct framework\" and the \"model autonomously completes the closed-loop chain of task planning, execution, reflection, and adjustment.\"",
+            "source_url": "https://huggingface.co/blog/exploding-gradients/deepresearch-survey",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-aa07b5",
+            "saved_at": "2026-05-05T06:18:46.054310Z",
+            "fetched_at": "2026-05-05T06:18:46.054213Z",
+            "content_hash": "d89b7fb0b3f3be830f80f9fe147cb7cdfab93c3d74fff42626de38e569de6585",
+            "domain": "huggingface.co",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Deep research systems share four core pipeline stages: planning, question developing, web exploration, and report generation.",
+            "evidence": "The deep research pipeline comprises \"four core stages: planning, question developing, web exploration, and report generation. For each stage, we analyze the key technical challenges and categorize representative methods developed to address them.\"",
+            "source_url": "https://arxiv.org/html/2508.12752v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-aa07b5",
+            "saved_at": "2026-05-05T06:18:52.274219Z",
+            "fetched_at": "2026-05-05T06:18:52.274095Z",
+            "content_hash": "73fcff67ef835bbe7b97fa1834af6934474b376be86d8ef0977667cf4583158a",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Deep research systems fundamentally combine high search intensity with high reasoning intensity, requiring both broad exploration across many information units and complex reasoning to synthesize claims.",
+            "evidence": "DR tasks are characterized as both \"search- and reasoning-intensive\" where \"the number of information units to be processed for obtaining the final answer is high (search intensity)\" and \"at least one of the tasks\u2014finding these information units, processing them or combining them to form the final claims\u2014requires non-trivial reasoning (reasoning intensity).\"",
+            "source_url": "https://arxiv.org/html/2508.04183v1",
+            "source_title": "",
+            "confidence": 0.94,
+            "researcher_id": "r-aa07b5",
+            "saved_at": "2026-05-05T06:18:57.521657Z",
+            "fetched_at": "2026-05-05T06:18:57.521598Z",
+            "content_hash": "b63afdcde7a37c95692c0927430ad3a651317eed92116bb3df2ce561c85f1dea",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.976,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Grounding and citation mechanisms are core architectural requirements in deep research systems, with evidence-aware filtering and strategic citation placement being key components.",
+            "evidence": "Deep research systems implement \"Relevance-Aware Filtering\" to \"ensure high-quality evidence\" and employ mechanisms to maintain \"factual grounding across multiple sources\" with \"citations at contextually appropriate positions,\" ensuring both \"textual and visual evidence grounding\" throughout generated reports.",
+            "source_url": "https://arxiv.org/html/2604.10741v2",
+            "source_title": "",
+            "confidence": 0.92,
+            "researcher_id": "r-aa07b5",
+            "saved_at": "2026-05-05T06:19:05.562639Z",
+            "fetched_at": "2026-05-05T06:19:05.562520Z",
+            "content_hash": "42ea5c4a65182edb6d34ac00b4cf5b1745a270acedfc375de0728f1b3e1646c3",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.968,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "OpenAI Deep Research uses reinforcement learning techniques but detailed methodologies remain proprietary and undisclosed, creating a significant gap in open research.",
+            "evidence": "For open-domain tasks, OpenAI has acknowledged using reinforcement learning techniques to enhance their Deep Research agent's capabilities, but detailed methodologies remain proprietary and undisclosed, creating a significant gap in open research.",
+            "source_url": "https://arxiv.org/html/2504.03160v2",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-8264f8",
+            "saved_at": "2026-05-05T06:19:18.924911Z",
+            "fetched_at": "2026-05-05T06:19:18.924795Z",
+            "content_hash": "f095e8a9a929a7dc41215567ae033abcf306c0ed28994a4cb7e124a542157f4d",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.5,
+            "combined_confidence": 0.855,
+            "axis_disagreement": true
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "Current AI benchmarks suffer from systematic flaws including construct validity issues, data contamination, biases in dataset creation, inadequate documentation, and misaligned incentives that prioritize state-of-the-art performance over broader societal concerns.",
+            "evidence": "Our review also highlights a series of systemic flaws in current benchmarking practices, such as misaligned incentives, construct validity issues, unknown unknowns, and problems with the gaming of benchmark results. Furthermore, it underscores how benchmark practices are fundamentally shaped by cultural, commercial and competitive dynamics that often prioritise state-of-the-art performance at the expense of broader societal concerns.",
+            "source_url": "https://arxiv.org/html/2502.06559v2",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-8264f8",
+            "saved_at": "2026-05-05T06:19:18.925023Z",
+            "fetched_at": "2026-05-05T06:19:18.925013Z",
+            "content_hash": "6d812ae816c87d768ef044bc52c6c1eeedf41a7db7901da20b6ca161a8437a45",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "The technical details of commercial deep research systems like OpenAI Deep Research are completely opaque.",
+            "evidence": "Despite their potential, most current agents are prompt-engineered LLM agents that face significant limitations, while the technical details of commercial systems like OpenAI Deep Research remain completely opaque.",
+            "source_url": "https://arxiv.org/html/2504.03160v2",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-8264f8",
+            "saved_at": "2026-05-05T06:19:18.925048Z",
+            "fetched_at": "2026-05-05T06:19:18.925041Z",
+            "content_hash": "613d44e50603f80dc83de293888412f267cfb892118a59513344fdfac9a1fe7e",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.5,
+            "combined_confidence": 0.855,
+            "axis_disagreement": true
+          }
+        ],
+        "uncertainty_notes": [
+          {
+            "subquestion_id": "sq3",
+            "topic": "What is the documented or inferred architecture of Perplexity's deep-research product, including its retrieval pipeline, re-ranking strategies, multi-turn query decomposition, and citation/grounding mechanisms?",
+            "reason": "Made 12 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-fe4829"
+          },
+          {
+            "subquestion_id": "sq4",
+            "topic": "What is the documented or inferred architecture of Google's deep-research product (e.g., Gemini Deep Research), including its planning phase, web browsing strategy, multi-step reasoning, and report generation pipeline?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-cca288"
+          },
+          {
+            "subquestion_id": "sq6",
+            "topic": "Where do the four products meaningfully diverge architecturally \u2014 e.g., in agentic autonomy level, reasoning model integration, context window usage, search index access, human-in-the-loop design, or output format?",
+            "reason": "Made 11 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-475bac"
+          }
+        ]
+      },
+      "report": {
+        "user_prompt": "Compare the architectural choices made by major deep-research products (Anthropic, OpenAI, Perplexity, Google) and identify what they have in common and where they meaningfully diverge.",
+        "summary": "Research into the four major deep-research products yielded detailed architectural evidence for Anthropic and OpenAI, while Perplexity and Google Gemini Deep Research produced no concrete, citable findings due to retrieval failures. Both documented systems share core patterns \u2014 query decomposition, iterative retrieval loops, chain-of-thought or extended reasoning, tool calling, and citation/grounding mechanisms \u2014 but differ in their agent topology (Anthropic's explicit orchestrator-worker hierarchy versus OpenAI's architecture, which sources describe inconsistently as either a single ReAct loop or a multi-agent pipeline). Significant architectural opacity surrounds all four products, and systematic benchmark flaws further limit published comparisons.",
+        "claims": [
+          {
+            "claim": "Anthropic's Research system uses an orchestrator-worker multi-agent architecture in which a lead agent (Claude Opus 4) analyzes the query, develops a strategy, and spawns parallel subagents (Claude Sonnet 4) that each operate with their own context window to explore distinct aspects of the question simultaneously.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              0,
+              3
+            ]
+          },
+          {
+            "claim": "Anthropic's research agents employ dynamic, multi-step search rather than static RAG retrieval, iteratively adapting queries and strategies based on what each search returns.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              1,
+              8
+            ]
+          },
+          {
+            "claim": "Anthropic encodes research heuristics into prompts \u2014 including broad-to-narrow query sequencing, depth-versus-breadth judgments, source quality evaluation, and effort-scaling rules tied to task complexity \u2014 rather than specifying rigid procedural rules.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              2,
+              7,
+              8
+            ]
+          },
+          {
+            "claim": "Anthropic's system uses extended and interleaved thinking as controllable reasoning scratchpads: the lead agent uses extended thinking to plan before acting, and subagents use interleaved thinking to evaluate tool outputs and refine subsequent queries.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              6
+            ]
+          },
+          {
+            "claim": "Anthropic employs a dedicated Citation Agent as a final pipeline stage that validates every claim against its source and ensures correct attribution, reducing unsupported statements and misattribution errors.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              5
+            ]
+          },
+          {
+            "claim": "Anthropic evaluates research outputs using an LLM-as-judge rubric (covering factual accuracy, citation accuracy, completeness, source quality, and tool efficiency) supplemented by human evaluation to catch subtle errors and biases.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              4
+            ]
+          },
+          {
+            "claim": "OpenAI's Deep Research follows a five-phase process: interactive clarification via follow-up questions, query decomposition and planning, iterative web searching with progressive query refinement, multi-format content analysis, and synthesis into structured reports with inline citations.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              9,
+              11
+            ]
+          },
+          {
+            "claim": "OpenAI's Deep Research is powered by an early version of the o3 model trained with reinforcement learning on complex browsing and reasoning tasks, implementing a ReAct-style Plan-Act-Observe loop at the agent level.",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              10
+            ]
+          },
+          {
+            "claim": "Sources disagree on whether OpenAI's Deep Research is a single-agent or multi-agent system: one source describes a single ReAct-style looping agent, while another describes an orchestrator delegating to multiple web-search sub-agents plus distinct synthesizer and citations agents.",
+            "confidence": 0.75,
+            "supporting_finding_indices": [
+              10,
+              12
+            ]
+          },
+          {
+            "claim": "OpenAI's Deep Research has access to an integrated tool suite including web search, a full web browser (with scrolling and in-page search), a code interpreter for data analysis and visualization, and a file parser for PDFs and images.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              13
+            ]
+          },
+          {
+            "claim": "OpenAI's Deep Research uses a two-tier stopping mechanism: coverage-based early stops (sufficient independent sources per sub-question, novelty exhaustion, confidence thresholds) and budget-driven hard stops (typically 20\u201330 minute wall-clock limit, 30\u201360 searches, 120\u2013150 page fetches).",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              14
+            ]
+          },
+          {
+            "claim": "No concrete, citable architectural evidence was recovered for Perplexity's deep-research product or Google's Gemini Deep Research; all claims about those systems in this report are absent due to retrieval failures rather than confirmed architectural similarity or difference.",
+            "confidence": 0.95,
+            "supporting_finding_indices": [
+              15
+            ]
+          },
+          {
+            "claim": "All surveyed deep-research systems share a four-stage pipeline architecture \u2014 planning, question development, web exploration, and report generation \u2014 as identified in academic literature.",
+            "confidence": 0.98,
+            "supporting_finding_indices": [
+              18
+            ]
+          },
+          {
+            "claim": "Query decomposition is a core shared architectural pattern across deep-research products, with a planner agent (or planning phase) decomposing the user task into sub-tasks that are then delegated or executed sequentially.",
+            "confidence": 0.87,
+            "supporting_finding_indices": [
+              16,
+              9,
+              0
+            ]
+          },
+          {
+            "claim": "Iterative multi-step retrieval combined with tool calling is a shared pattern: all documented systems execute multiple rounds of search and tool invocation rather than a single retrieval step.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              15,
+              1,
+              10
+            ]
+          },
+          {
+            "claim": "Reasoning-execution-reflection cycles (analogous to the ReAct framework) are a shared architectural primitive across deep-research systems, enabling agents to adjust future steps based on intermediate results.",
+            "confidence": 0.87,
+            "supporting_finding_indices": [
+              17,
+              10,
+              6
+            ]
+          },
+          {
+            "claim": "Grounding and citation mechanisms are a core shared requirement: all documented systems implement some form of evidence-aware filtering, source attribution, and citation placement to maintain factual grounding in generated reports.",
+            "confidence": 0.97,
+            "supporting_finding_indices": [
+              20,
+              5,
+              12
+            ]
+          },
+          {
+            "claim": "Deep-research tasks are characterized by both high search intensity (large number of information units to process) and high reasoning intensity (non-trivial synthesis required), which is the architectural driver for the multi-step, multi-tool designs observed across all systems.",
+            "confidence": 0.97,
+            "supporting_finding_indices": [
+              19
+            ]
+          },
+          {
+            "claim": "Anthropic's system uses an upfront interactive clarification step; OpenAI's Deep Research similarly asks follow-up questions before committing to full research, making pre-research clarification a shared divergence point from fully autonomous planning approaches.",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              11,
+              2
+            ]
+          },
+          {
+            "claim": "OpenAI's use of reinforcement learning to train the Deep Research agent is acknowledged at a high level, but detailed training methodologies remain proprietary; this represents a significant architectural opacity gap for the research community.",
+            "confidence": 0.85,
+            "supporting_finding_indices": [
+              21
+            ]
+          },
+          {
+            "claim": "Current AI benchmarks used to compare deep-research systems suffer from systematic flaws \u2014 including construct validity issues, data contamination, gaming of results, and incentives that prioritize state-of-the-art performance \u2014 limiting the reliability of published comparative evaluations.",
+            "confidence": 0.98,
+            "supporting_finding_indices": [
+              22
+            ]
+          }
+        ],
+        "contradictions_surfaced": [
+          {
+            "description": "Findings 21 and 23 contradict each other on how opaque OpenAI Deep Research's technical details are. Finding 21 states that 'OpenAI has acknowledged using reinforcement learning techniques to enhance their Deep Research agent's capabilities, but detailed methodologies remain proprietary and undisclosed,' implying partial disclosure. Finding 23 states that 'the technical details of commercial systems like OpenAI Deep Research remain completely opaque,' implying total opacity. These claims cannot both be true: one allows for acknowledged high-level disclosures (RL techniques) while the other asserts complete opacity with no disclosed details. Both are sourced from https://arxiv.org/html/2504.03160v2, suggesting inconsistent framing within a single source.",
+            "finding_ids": [
+              21,
+              23
+            ],
+            "severity": "minor",
+            "type": "factual"
+          },
+          {
+            "description": "Findings 10 and 12 disagree on whether OpenAI's Deep Research is a single-agent or multi-agent system. Finding 10 describes a single-agent ReAct-style 'Plan-Act-Observe' loop where 'the model plans... acts by invoking a tool... observes the result... then repeats this cycle,' implying one agent doing all steps. Finding 12 describes a multi-agent architecture with 'an orchestrator or lead agent,' 'multiple sub-agents' for web search, a 'synthesizer agent,' and a 'citations agent.' These architectural characterizations are in direct tension. The discrepancy may reflect different levels of abstraction (the loop describes per-agent behavior while the multi-agent view describes the overall system), but as reported they appear contradictory. Sources: https://blog.promptlayer.com/how-deep-research-works/ and https://blog.bytebytego.com/p/how-openai-gemini-and-claude-use.",
+            "finding_ids": [
+              10,
+              12
+            ],
+            "severity": "moderate",
+            "type": "factual"
+          }
+        ],
+        "caveats": [
+          "WARNING \u2014 bounded revision exhausted with critic issues still open. The report ships with 3 unresolved critic issue(s):\n  \u2022 Claim #11 (ungrounded): Claim #11 asserts that 'no concrete, citable architectural evidence was recovered for Perplexity's deep-research product or Google's Gemini Deep Research' and attributes this to 'retrieval failures.' However, the only cited finding [15] actually provides substantive architectural evidence about deep research systems in general (dynamic reasoning, adaptive planning, multi-iteration retrieval, etc.) \u2014 it does not speak to retrieval failures or the absence of evidence for Perplexity/Google. The finding does not support the specific claim being made.\n  \u2022 Claim #17 (overstated): The claim states that the dual high-search/high-reasoning intensity characterization 'is the architectural driver for the multi-step, multi-tool designs observed across all systems.' Finding [19] only characterizes deep research tasks as search- and reasoning-intensive; it does not assert this characterization is the causal architectural driver for multi-step, multi-tool designs. The causal framing is an inference not supported by the cited evidence.\n  \u2022 Claim #18 (ungrounded): Claim #18 states that Anthropic's system uses 'an upfront interactive clarification step,' but neither cited finding [11] nor [2] supports this for Anthropic. Finding [11] discusses OpenAI's interactive clarification approach, and finding [2] describes Anthropic's prompting heuristics with no mention of an upfront clarification step with the user. The claim incorrectly attributes the interactive clarification behavior to Anthropic as well.",
+          "No concrete architectural evidence was recovered for Perplexity's deep-research product despite 12 tool calls; its retrieval pipeline, re-ranking strategy, query decomposition, and citation mechanisms are entirely absent from this report.",
+          "No concrete architectural evidence was recovered for Google's Gemini Deep Research despite 10 tool calls; its planning phase, web browsing strategy, multi-step reasoning, and report generation pipeline are entirely absent from this report.",
+          "No direct evidence on architectural divergences across all four products (sq6) was recovered despite 11 tool calls; the divergence analysis in this report is limited to what can be inferred from Anthropic and OpenAI findings only.",
+          "Most Anthropic findings (combined score 0.88) are sourced from Anthropic's own engineering blog and a derivative summary (ByteByteGo), which introduces potential self-promotional framing bias; independent third-party verification of architectural claims is limited.",
+          "Most OpenAI findings derive from third-party analytical blogs (PromptLayer, ByteByteGo) rather than primary OpenAI technical documentation, so architectural descriptions may be inferred or partially speculative rather than officially confirmed.",
+          "The two axis-disagree findings (21, 23) about OpenAI's opacity come from the same academic source (arxiv 2504.03160v2) and reflect internally inconsistent framing; claims based on these findings should be treated as tentative.",
+          "Published benchmark comparisons of deep-research systems are systematically unreliable due to construct validity issues, data contamination, and gaming incentives, as documented in finding 22; no performance comparison across the four products is included in this report for this reason.",
+          "The academic survey findings (18, 19, 20) characterize deep-research systems in general and may not perfectly map onto any specific commercial product's implementation."
+        ]
+      },
+      "critic_history": [
+        {
+          "issues": [
+            {
+              "claim_index": 11,
+              "issue_type": "ungrounded",
+              "explanation": "Claim #11 asserts that 'no concrete, citable architectural evidence was recovered for Perplexity's deep-research product or Google's Gemini Deep Research' and attributes this to 'retrieval failures.' However, the only cited finding [15] actually provides substantive architectural evidence about deep research systems in general (dynamic reasoning, adaptive planning, multi-iteration retrieval, etc.) \u2014 it does not speak to retrieval failures or the absence of evidence for Perplexity/Google. The finding does not support the specific claim being made."
+            },
+            {
+              "claim_index": 17,
+              "issue_type": "overstated",
+              "explanation": "The claim states that the dual high-search/high-reasoning intensity characterization 'is the architectural driver for the multi-step, multi-tool designs observed across all systems.' Finding [19] only characterizes deep research tasks as search- and reasoning-intensive; it does not assert this characterization is the causal architectural driver for multi-step, multi-tool designs. The causal framing is an inference not supported by the cited evidence."
+            },
+            {
+              "claim_index": 18,
+              "issue_type": "ungrounded",
+              "explanation": "Claim #18 states that Anthropic's system uses 'an upfront interactive clarification step,' but neither cited finding [11] nor [2] supports this for Anthropic. Finding [11] discusses OpenAI's interactive clarification approach, and finding [2] describes Anthropic's prompting heuristics with no mention of an upfront clarification step with the user. The claim incorrectly attributes the interactive clarification behavior to Anthropic as well."
+            }
+          ],
+          "approved": false
+        }
+      ],
+      "verify_history": [
+        {
+          "results": []
+        }
+      ],
+      "metadata": {
+        "commit_hash": "473fa656a3af4e9ddadb854d38ac96de50beee78",
+        "branch": "main",
+        "models": {
+          "researcher": "claude-haiku-4-5",
+          "writer": "claude-sonnet-4-6",
+          "critic": "claude-sonnet-4-6",
+          "judge": "claude-opus-4-7",
+          "kae_judge": "claude-haiku-4-5"
+        },
+        "config_snapshot": {
+          "anthropic_api_key": "<set>",
+          "tavily_api_key": "<set>",
+          "researcher_model": "claude-haiku-4-5",
+          "writer_model": "claude-sonnet-4-6",
+          "critic_model": "claude-sonnet-4-6",
+          "judge_model": "claude-opus-4-7",
+          "kae_judge_model": "claude-haiku-4-5",
+          "min_subquestions": 3,
+          "max_subquestions": 7,
+          "decompose_max_retries": 2,
+          "researcher_max_tool_calls": 30,
+          "researcher_max_findings": 6,
+          "researcher_min_findings_to_stop": 3,
+          "researcher_min_unique_sources": 2,
+          "researcher_min_avg_confidence": 0.55,
+          "researcher_unproductive_call_limit": 10,
+          "search_results_per_query": 8,
+          "fetch_max_chars": 12000,
+          "scholar_max_retries": 3,
+          "scholar_backoff_seconds": 1.0,
+          "scholar_unavailable_window_seconds": 120,
+          "max_revisions": 0,
+          "verifier_enabled": false,
+          "parallel_researchers": 2
+        },
+        "captured_at": "2026-05-05T06:17:38.865684Z"
+      },
+      "metrics": {
+        "total_subquestions": 7,
+        "subquestions_with_findings": 4,
+        "total_findings": 24,
+        "unique_sources": 10,
+        "revision_rounds": 0,
+        "final_grounding_rate": 0.8571428571428571,
+        "coverage_rate": 0.5714285714285714,
+        "elapsed_seconds": 177.97769808769226,
+        "per_stage": {
+          "classify_shape": {
+            "calls": 1,
+            "input_tokens": 993,
+            "output_tokens": 66,
+            "cost_usd": 0.003969,
+            "elapsed_seconds": 2.3684586661402136
+          },
+          "confidence": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cost_usd": 0.0,
+            "elapsed_seconds": 0.0005089999176561832
+          },
+          "critic": {
+            "calls": 1,
+            "input_tokens": 11881,
+            "output_tokens": 442,
+            "cost_usd": 0.042273,
+            "elapsed_seconds": 8.910648791119456
+          },
+          "decompose": {
+            "calls": 1,
+            "input_tokens": 1495,
+            "output_tokens": 927,
+            "cost_usd": 0.01839,
+            "elapsed_seconds": 14.823652375023812
+          },
+          "reconciler": {
+            "calls": 1,
+            "input_tokens": 5408,
+            "output_tokens": 470,
+            "cost_usd": 0.023274,
+            "elapsed_seconds": 9.426182790892199
+          },
+          "researcher": {
+            "calls": 41,
+            "input_tokens": 363473,
+            "output_tokens": 10602,
+            "cost_usd": 0.41648299999999994,
+            "elapsed_seconds": 94.5410627501551
+          },
+          "writer": {
+            "calls": 1,
+            "input_tokens": 8206,
+            "output_tokens": 2933,
+            "cost_usd": 0.068613,
+            "elapsed_seconds": 47.82183845806867
+          }
+        },
+        "total_input_tokens": 391456,
+        "total_output_tokens": 15440,
+        "total_cost_usd": 0.573002,
+        "researcher_latency_max": 33.3288104578387,
+        "researcher_latency_avg": 23.430900226081057,
+        "tool_mix": {
+          "web_search": 27,
+          "search_papers": 5,
+          "fetch_url": 32,
+          "save_finding": 24,
+          "note_uncertainty": 0
+        },
+        "kae": null,
+        "ace": null,
+        "plan_judge": null
+      },
+      "taxonomy": null,
+      "started_at": "2026-05-05T06:20:36.800039Z"
+    }
+  ]
+}

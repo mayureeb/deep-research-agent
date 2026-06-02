@@ -1,0 +1,1012 @@
+{
+  "prompt_id": "sparse-1",
+  "category": "sparse",
+  "n_runs": 2,
+  "mode": "draft_only",
+  "max_revisions": 0,
+  "verifier_enabled": false,
+  "subquestion_jaccard": 0.0,
+  "claim_jaccard": 0.0,
+  "per_run": [
+    {
+      "run_index": 0,
+      "elapsed_seconds": 155.29011178016663,
+      "n_claims": 9,
+      "n_subquestions": 7,
+      "grounding_rate": 1.0,
+      "coverage_rate": 0.42857142857142855,
+      "f1": 0.6
+    },
+    {
+      "run_index": 1,
+      "elapsed_seconds": 156.72622728347778,
+      "n_claims": 6,
+      "n_subquestions": 7,
+      "grounding_rate": 0.8333333333333334,
+      "coverage_rate": 0.2857142857142857,
+      "f1": 0.42553191489361697
+    }
+  ],
+  "runs": [
+    {
+      "user_prompt": "What is the current state of inference-time compute scaling for LLM reasoning? Separate what has been empirically validated from what is still speculative, and identify where the evidence is too thin to draw conclusions.",
+      "shape": {
+        "shape": "SPARSE_EMERGING",
+        "confidence": 0.72,
+        "rationale": "The topic is recent and rapidly evolving (inference-time scaling is a 2024\u20132025 frontier), and the prompt asks the researcher to map the empirical landscape before going deep\u2014distinguishing validated findings from speculation\u2014which is characteristic of SPARSE_EMERGING rather than DISCOVERY (the answer space is known) or CONTESTED (no single clear dispute axis)."
+      },
+      "decomposition": {
+        "subquestions": [
+          {
+            "id": "sq1",
+            "question": "What are the primary methods used for inference-time compute scaling in LLMs (e.g., chain-of-thought, best-of-N sampling, MCTS, process reward models, self-consistency, iterative refinement), and what distinguishes them mechanistically?",
+            "rationale": "Establishing a precise taxonomy of methods is prerequisite to evaluating the evidence for each; without it, empirical claims cannot be correctly attributed.",
+            "confidence": 0.85,
+            "depends_on": [],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq2",
+            "question": "What empirical results (benchmark scores, scaling curves, controlled ablations) have been published demonstrating that increasing inference-time compute improves LLM reasoning performance, and how robust are these findings across domains and model families?",
+            "rationale": "This is the core factual question \u2014 identifying which gains are replicable and generalizable versus cherry-picked or benchmark-specific is central to separating validated from speculative claims.",
+            "confidence": 0.95,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq3",
+            "question": "How does the compute-efficiency tradeoff between inference-time scaling and training-time scaling (i.e., larger models vs. more inference compute) compare empirically \u2014 under what conditions does one dominate the other?",
+            "rationale": "The practical relevance of inference-time scaling hinges on whether it can substitute for or complement training compute, and published Pareto analyses directly address this.",
+            "confidence": 0.88,
+            "depends_on": [
+              "sq2"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq4",
+            "question": "What specific techniques \u2014 such as process reward models (PRMs), verifier-guided search, and outcome reward models \u2014 have been empirically validated as effective signals for guiding inference-time search, and what are their known failure modes?",
+            "rationale": "The quality of the search signal (reward/verifier) is the main bottleneck for inference-time scaling, so understanding validated vs. broken reward mechanisms is essential.",
+            "confidence": 0.9,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq5",
+            "question": "What claims about inference-time compute scaling \u2014 such as indefinite log-linear scaling, generalization to open-ended tasks, or self-improvement without external verifiers \u2014 remain speculative or have been contradicted by empirical evidence?",
+            "rationale": "Explicitly mapping unvalidated or disputed claims prevents conflating hype with evidence and is required by the prompt's instruction to separate speculation from validation.",
+            "confidence": 0.9,
+            "depends_on": [
+              "sq2",
+              "sq4"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq6",
+            "question": "What are the practical limitations and costs of inference-time compute scaling at deployment scale \u2014 including latency, token budgets, hardware constraints, and diminishing returns \u2014 as reported in production or large-scale evaluation settings?",
+            "rationale": "Real-world deployment constraints determine whether theoretically valid scaling translates into practical utility, and these constraints are often underreported in academic literature.",
+            "confidence": 0.8,
+            "depends_on": [
+              "sq2"
+            ],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq7",
+            "question": "Where are the critical gaps in the current evidence base for inference-time compute scaling \u2014 e.g., lack of out-of-distribution generalization tests, absence of non-math/coding benchmarks, missing long-horizon task evaluations, or unreproducible results?",
+            "rationale": "Identifying thin or missing evidence directly fulfills the prompt's requirement to flag where conclusions cannot yet be drawn and guides future research priorities.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq2",
+              "sq5"
+            ],
+            "preferred_search": "search_papers"
+          }
+        ]
+      },
+      "findings": {
+        "findings": [
+          {
+            "subquestion_id": "sq3",
+            "claim": "Under fixed compute budgets, optimally-scaled test-time compute can outperform models 14x larger in FLOPs-matched evaluation, particularly when base models achieve non-trivial success rates on problems.",
+            "evidence": "in a FLOPs-matched evaluation, we find that on problems where a smaller base model attains somewhat non-trivial success rates, test-time compute can be used to outperform a 14x larger model.",
+            "source_url": "https://arxiv.org/abs/2408.03314",
+            "source_title": "",
+            "confidence": 0.85,
+            "researcher_id": "r-91eda9",
+            "saved_at": "2026-05-05T05:55:46.937578Z",
+            "fetched_at": "2026-05-05T05:55:46.937474Z",
+            "content_hash": "7dbffdfca1d1088b3176aea52a809fd68b4c749fcf7aca6bb74dbcdd67c79e46",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.94,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq3",
+            "claim": "The compute-efficiency tradeoff between parameter scaling and test-time scaling is strongly domain-dependent: on mathematical reasoning (GSM8K), internal and external reasoning are nearly perfectly substitutable, while on knowledge retrieval (PopQA), external CoT often reduces cost-efficiency.",
+            "evidence": "Results show strong domain dependence. On GSM8K, internal reasoning alone reaches 95.36\\% accuracy at $\\$3.8\\times10^{-5}$ per sample, while CoT compensates for disabled internal reasoning to 95.60\\% at $\\$9.4\\times10^{-4}$, indicating near-perfect substitutability between internal and external mechanisms. On PopQA, external CoT often reduces both accuracy and cost-efficiency, with optimal settings consistently favoring direct generation over extended reasoning chains.",
+            "source_url": "https://openreview.net/forum?id=wU35L1GZud",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-91eda9",
+            "saved_at": "2026-05-05T05:55:56.945738Z",
+            "fetched_at": "2026-05-05T05:55:56.945659Z",
+            "content_hash": "d583d527cf55f7a819f1919e664402f130a6da38b701723077bff8bfed67c0dd",
+            "domain": "openreview.net",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.96,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq3",
+            "claim": "Scaling inference compute with optimal inference strategies is more computationally efficient than scaling model parameters, with smaller models combined with advanced inference algorithms offering Pareto-optimal tradeoffs; Llemma-7B with tree search outperforms Llemma-34B across all inference strategies on the MATH benchmark.",
+            "evidence": "Our findings suggest that scaling inference compute with inference strategies can be more computationally efficient than scaling model parameters. Additionally, smaller models combined with advanced inference algorithms offer Pareto-optimal trade-offs in cost and performance. For example, the Llemma-7B model, when paired with our novel tree search algorithm, consistently outperforms the Llemma-34B model across all tested inference strategies on the MATH benchmark.",
+            "source_url": "https://arxiv.org/abs/2408.00724",
+            "source_title": "",
+            "confidence": 0.88,
+            "researcher_id": "r-91eda9",
+            "saved_at": "2026-05-05T05:56:00.040388Z",
+            "fetched_at": "2026-05-05T05:56:00.040299Z",
+            "content_hash": "11c884f20282d68f3c6adc9f8418d0733e9da978bac97bd71d69f85a5f3f4f4d",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.952,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Verifier-guided search (using both outcome-supervised value models and process-supervised reward models) suffers from scaling flaws: it outperforms repeated sampling at small sample sizes but underperforms repeated sampling at large sample sizes.",
+            "evidence": "However, we observe that verifier-guided search (e.g. OVM- and PRM-guided) might experience diminishing advantages and eventually underperforms repeated sampling as the sample size scales. Its performance improves more slowly than repeated sampling, ultimately making them less effective. We refer to this phenomenon as scaling flaws of verifier-guided search.",
+            "source_url": "https://arxiv.org/html/2502.00271v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-234a34",
+            "saved_at": "2026-05-05T05:55:53.749559Z",
+            "fetched_at": "2026-05-05T05:55:53.749502Z",
+            "content_hash": "58b4b2c3e1fbca8ea98d9f9df786b8a053982c372bc376d8168f67a338b032f2",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Verifier failures\u2014where imperfect verifiers misrank and incorrectly prune all valid reasoning paths\u2014is the primary failure mode of verifier-guided search, and this issue intensifies for challenging and out-of-distribution problems.",
+            "evidence": "we identify verifier selection failures as the main factor, where imperfect verifiers misrank and incorrectly prune all valid paths\u2014an issue we term \"verifier failures\". ... Our investigation shows that verifier failures and scaling flaws worsen in challenging and out-of-distribution problems. As problem difficulty and solution sparsity increase, scaling flaws intensify.",
+            "source_url": "https://arxiv.org/html/2502.00271v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-234a34",
+            "saved_at": "2026-05-05T05:55:53.749634Z",
+            "fetched_at": "2026-05-05T05:55:53.749623Z",
+            "content_hash": "87c7ffeb7d9537c35fa4f574274547602a732735dfa595ed8552fa1d9c30cff6",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Process reward models (PRMs) enable finer credit assignment, richer diagnostics, and improved robustness by assessing partial solutions and trajectories step-by-step, rather than relying on single coarse outcome supervision like outcome reward models (ORMs).",
+            "evidence": "Early pipelines predominantly relied on outcome reward models (ORMs) (Lightman et al., 2023) that judge only final answers, providing a single coarse signal for long chains of thought. As reasoning tasks grow longer and more complex, this static, outcome-centric view struggles to capture stepwise progress, diagnose intermediate errors, or allocate computation adaptively. ... PRMs explicitly assess and guide reasoning at the step or trajectory level. ... PRMs assess partial solutions and trajectories, leverage context for adaptive \"reason-then-rate\" verification, and integrate with inference-time controllers and reinforcement learning (RL) objectives.",
+            "source_url": "https://arxiv.org/html/2510.08049v3",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-234a34",
+            "saved_at": "2026-05-05T05:56:06.655683Z",
+            "fetched_at": "2026-05-05T05:56:06.655588Z",
+            "content_hash": "864bfbb32df1838a666040af6124230b024ef75b0b2bfeedf948109549424408",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.6666666666666666,
+            "combined_confidence": 0.8766666666666666,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Outcome-supervised value models (OVMs) scale better than process-supervised models by eliminating the need for labor-intensive per-step correctness annotations, instead using only outcome supervision to train a value model that prioritizes steps leading to correct answers.",
+            "evidence": "we propose Outcome-supervised Value Model (OVM) that employs outcome supervision for training a value model, which prioritizes steps that lead to accurate conclusions. Furthermore, the OVM eliminates the need for labor-intensive annotations of step-level correctness, thereby significantly enhancing its scalability.",
+            "source_url": "https://arxiv.org/abs/2311.09724",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-234a34",
+            "saved_at": "2026-05-05T05:56:06.655767Z",
+            "fetched_at": "2026-05-05T05:56:06.655756Z",
+            "content_hash": "32e5c3e13e2f21c54f907260aae512f3a323681806c790e293cb2ec4c26386f5",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.6666666666666666,
+            "combined_confidence": 0.8766666666666666,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "At deployment scale, the cost of LLM inference is multi-dimensional beyond $/token: hardware cost (indivisible GPU node purchases), idle capacity cost during low-traffic periods, engineering/staffing costs for optimization, and network/communication costs, with idle GPU capacity being the largest invisible drain on ROI without sophisticated orchestration.",
+            "evidence": "Every minute a GPU sits idle during low-traffic hours (like 3 a.m.) is money lost. Because dedicated hardware isn't easily shared across different models without performance hits, bursty traffic patterns can create a gap between \"paid-for\" capacity and \"used\" capacity... Without sophisticated orchestration or \"serverless-on-dedicated\" setups, the lack of multi-tenancy on dedicated nodes can make this the largest invisible drain on ROI. Engineering cost is consistently underestimated. The most expensive component isn't necessarily the silicon; it's the specialized labor required to tune it.",
+            "source_url": "https://www.digitalocean.com/blog/llm-inference-tradeoffs",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-ae4bd8",
+            "saved_at": "2026-05-05T05:56:20.217441Z",
+            "fetched_at": "2026-05-05T05:56:20.217254Z",
+            "content_hash": "4ba95fc610e9aab761184dc6a65f1da7c9ff47dc6589d3c1c24f5db19191e7b3",
+            "domain": "www.digitalocean.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "LLM inference exhibits a fundamental three-way tradeoff at scale: pushing throughput up increases latency, clamping latency down inflates GPU costs, and optimizing for cost requires uncomfortable compromises on throughput or latency because inference is stateful, memory-bandwidth-bottlenecked, and not horizontally scalable like traditional web services.",
+            "evidence": "Large Language Models break this playbook because LLM inference is fundamentally stateful, bottlenecked by memory bandwidth rather than raw compute, and bound to physical hardware interconnects. Scaling LLM inference isn't just a matter of adding more servers; it's a delicate, multi-dimensional optimization problem. Push throughput up, and latency creeps higher. Clamp latency down, and your GPU bill inflates. Try to optimize cost, and you're forced to make uncomfortable compromises on one of the other two dimensions.",
+            "source_url": "https://www.digitalocean.com/blog/llm-inference-tradeoffs",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-ae4bd8",
+            "saved_at": "2026-05-05T05:56:20.217519Z",
+            "fetched_at": "2026-05-05T05:56:20.217498Z",
+            "content_hash": "f6f9817f1a53a6eb742d8dfa5629047f0888626c7878d58500dd35b34cfe2687",
+            "domain": "www.digitalocean.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Test-time compute scaling shows diminishing returns per question, where most questions are either easy (solved quickly) or extremely hard (almost never solved), with only a small tail of hard questions requiring many attempts\u2014meaning extra sampling mainly helps that hard tail and does not give proportional gains on every request.",
+            "evidence": "For any single question, extra samples help very quickly at first. If the model has a reasonable chance of being right on one try, then a few independent tries are usually enough to get it right at least once. Per question, the value of sampling drops off fast. The power law shape only appears when you average over many questions. Most are either easy and get solved with one or two samples, or extremely hard and almost never get solved. A small tail of hard questions, which need many attempts before they succeed, is what bends the overall curve into a smooth trend.",
+            "source_url": "https://buildml.substack.com/p/test-time-compute-scaling-a-practical",
+            "source_title": "",
+            "confidence": 0.92,
+            "researcher_id": "r-ae4bd8",
+            "saved_at": "2026-05-05T05:56:30.528656Z",
+            "fetched_at": "2026-05-05T05:56:30.528571Z",
+            "content_hash": "9925de98d9d0dfb372ae2dc7d771b113806cbfbabbc7a790078192eee8f75749",
+            "domain": "buildml.substack.com",
+            "source_quality": 0.5,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.793,
+            "axis_disagreement": true
+          }
+        ],
+        "uncertainty_notes": [
+          {
+            "subquestion_id": "sq1",
+            "topic": "What are the primary methods used for inference-time compute scaling in LLMs (e.g., chain-of-thought, best-of-N sampling, MCTS, process reward models, self-consistency, iterative refinement), and what distinguishes them mechanistically?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-2bf34a"
+          },
+          {
+            "subquestion_id": "sq2",
+            "topic": "What empirical results (benchmark scores, scaling curves, controlled ablations) have been published demonstrating that increasing inference-time compute improves LLM reasoning performance, and how robust are these findings across domains and model families?",
+            "reason": "Made 12 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-241dfc"
+          },
+          {
+            "subquestion_id": "sq5",
+            "topic": "What claims about inference-time compute scaling \u2014 such as indefinite log-linear scaling, generalization to open-ended tasks, or self-improvement without external verifiers \u2014 remain speculative or have been contradicted by empirical evidence?",
+            "reason": "Made 11 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-ea9091"
+          },
+          {
+            "subquestion_id": "sq7",
+            "topic": "Where are the critical gaps in the current evidence base for inference-time compute scaling \u2014 e.g., lack of out-of-distribution generalization tests, absence of non-math/coding benchmarks, missing long-horizon task evaluations, or unreproducible results?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-a7c859"
+          }
+        ]
+      },
+      "report": {
+        "user_prompt": "What is the current state of inference-time compute scaling for LLM reasoning? Separate what has been empirically validated from what is still speculative, and identify where the evidence is too thin to draw conclusions.",
+        "summary": "The evidence base for inference-time compute scaling is notably thin: four of seven sub-questions returned no extractable findings, leaving large gaps around mechanistic methods, broad empirical robustness, speculative claims, and evidence gaps themselves. From the findings that were retrieved, there is reasonable empirical support for the idea that inference-time compute can substitute for parameter scaling in math-heavy domains under specific conditions, but this advantage is strongly domain-dependent, subject to verifier failure modes, and comes with substantial deployment costs. Key questions\u2014such as whether scaling generalizes beyond math/coding, whether log-linear scaling holds indefinitely, and how results reproduce across labs\u2014remain unanswered by the current evidence.",
+        "claims": [
+          {
+            "claim": "Under fixed compute budgets, optimally-scaled test-time compute can outperform models roughly 14\u00d7 larger in FLOPs-matched evaluation, but this advantage is conditional on the base model already achieving non-trivial success rates on the problems in question.",
+            "confidence": 0.94,
+            "supporting_finding_indices": [
+              0
+            ]
+          },
+          {
+            "claim": "The compute-efficiency tradeoff between inference-time scaling and parameter scaling is strongly domain-dependent: on mathematical reasoning (GSM8K), the two are nearly perfectly substitutable, whereas on knowledge-retrieval tasks (PopQA), extended chain-of-thought reasoning often reduces both accuracy and cost-efficiency relative to direct generation.",
+            "confidence": 0.95,
+            "supporting_finding_indices": [
+              1
+            ]
+          },
+          {
+            "claim": "In mathematical benchmarks, smaller models paired with advanced inference algorithms (e.g., tree search) can achieve Pareto-optimal cost-performance tradeoffs compared to larger models, with Llemma-7B plus tree search outperforming Llemma-34B across all tested inference strategies on MATH.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              2,
+              3
+            ]
+          },
+          {
+            "claim": "Verifier-guided search (using outcome-supervised value models or process reward models) outperforms repeated sampling at small sample sizes but underperforms repeated sampling at large sample sizes\u2014a phenomenon termed 'scaling flaws of verifier-guided search.'",
+            "confidence": 0.97,
+            "supporting_finding_indices": [
+              3
+            ]
+          },
+          {
+            "claim": "The primary failure mode of verifier-guided search is 'verifier failures'\u2014imperfect verifiers misranking and incorrectly pruning all valid reasoning paths\u2014and this problem intensifies for challenging and out-of-distribution problems.",
+            "confidence": 0.97,
+            "supporting_finding_indices": [
+              4
+            ]
+          },
+          {
+            "claim": "Sources disagree on the relative merits of process-supervised versus outcome-supervised reward models: one argues that process reward models (PRMs) offer finer credit assignment and improved robustness over outcome reward models, while another argues that outcome-supervised value models (OVMs) scale better by eliminating labor-intensive per-step annotation requirements.",
+            "confidence": 0.72,
+            "supporting_finding_indices": [
+              5,
+              6
+            ]
+          },
+          {
+            "claim": "At deployment scale, LLM inference involves a fundamental three-way tradeoff among throughput, latency, and cost, because inference is stateful, memory-bandwidth-bottlenecked, and not horizontally scalable like traditional web services.",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              8
+            ]
+          },
+          {
+            "claim": "Deployment-scale inference costs extend well beyond per-token pricing to include indivisible hardware purchases, idle GPU capacity during low-traffic periods, and specialized engineering labor\u2014with idle GPU capacity identified as a major hidden drain on ROI.",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              7
+            ]
+          },
+          {
+            "claim": "Per-question, test-time compute scaling exhibits rapidly diminishing returns: most questions are either easy (solved with few samples) or extremely hard (almost never solved), and the apparent smooth power-law scaling curve emerges only when averaging over large, heterogeneous question sets.",
+            "confidence": 0.65,
+            "supporting_finding_indices": [
+              9
+            ]
+          }
+        ],
+        "contradictions_surfaced": [
+          {
+            "description": "Findings 5 and 6 make competing claims about which reward model supervision paradigm is superior. Finding 5 argues that process reward models (PRMs) provide 'finer credit assignment, richer diagnostics, and improved robustness' and that outcome-centric supervision struggles 'to capture stepwise progress, diagnose intermediate errors, or allocate computation adaptively' (https://arxiv.org/html/2510.08049v3). Finding 6 counters that outcome-supervised value models (OVMs) 'scale better than process-supervised models by eliminating the need for labor-intensive per-step correctness annotations,' claiming OVMs 'significantly enhance scalability' (https://arxiv.org/abs/2311.09724). The two findings emphasize different evaluation axes\u2014diagnostic quality and robustness versus annotation scalability\u2014but together they do not resolve which paradigm is net-superior in practice.",
+            "finding_ids": [
+              5,
+              6
+            ],
+            "severity": "moderate",
+            "type": "factual"
+          },
+          {
+            "description": "Findings 2 and 3 present partially conflicting pictures of inference-time search reliability. Finding 2 reports that Llemma-7B with tree search 'consistently outperforms' Llemma-34B 'across all tested inference strategies on the MATH benchmark,' suggesting robust advantage for inference-time scaling over parameter scaling (https://arxiv.org/abs/2408.00724). Finding 3 qualifies this by noting that verifier-guided search 'outperforms repeated sampling at small sample sizes but underperforms repeated sampling at large sample sizes,' labeling this a 'scaling flaw' (https://arxiv.org/html/2502.00271v1). While the experiments may differ in scope and baseline, together they raise doubt about how universally reliable inference-time search advantages are.",
+            "finding_ids": [
+              2,
+              3
+            ],
+            "severity": "moderate",
+            "type": "factual"
+          }
+        ],
+        "caveats": [
+          "WARNING \u2014 bounded revision exhausted with critic issues still open. The report ships with 2 unresolved critic issue(s):\n  \u2022 Claim #2 (source_mismatch): Finding [3] is cited alongside finding [2] for claim #2, but finding [3] is about scaling flaws of verifier-guided search underperforming repeated sampling at large sample sizes. This is tangentially related at best and does not directly support the claim that smaller models with tree search achieve Pareto-optimal tradeoffs versus larger models on MATH. Finding [3] actually introduces a caveat about search-based methods that is not reflected in the claim's framing. The claim would be better supported by finding [2] alone, and citing [3] as corroborating support is a source mismatch.\n  \u2022 Claim #8 (overstated): The underlying finding (combined=0.79, [AXIS-DISAGREE]) comes from a blog post (buildml.substack.com) rather than a peer-reviewed or high-quality academic source (source_q=0.50). The claim presents these mechanistic details\u2014e.g., the specific characterization of a 'power-law shape' emerging only from averaging\u2014with a confidence level (0.65) that still may be too high given the low source quality and axis disagreement. The claim does not adequately hedge the speculative nature of the source, particularly the assertion about power-law shapes being an averaging artifact, which is a strong mechanistic claim from a non-peer-reviewed blog.",
+          "Four of the seven sub-questions (sq1, sq2, sq5, sq7) returned no extractable findings despite 10\u201312 tool calls each. As a result, this report contains no empirically grounded claims about: (1) the mechanistic distinctions among inference-time methods such as chain-of-thought, best-of-N sampling, MCTS, and self-consistency; (2) the breadth and robustness of empirical scaling results across domains and model families; (3) which specific claims about inference-time scaling (e.g., indefinite log-linear scaling, self-improvement without verifiers) are speculative or contradicted; and (4) critical gaps in the evidence base such as missing OOD generalization tests or non-math benchmarks.",
+          "Finding 9 (diminishing per-question returns) is flagged [AXIS-DISAGREE]: its self-reported confidence (0.92) conflicts with its low source quality score (0.50), resulting in a combined score of 0.79. The source is a practitioner blog post (Substack), not a peer-reviewed paper, so this claim should be treated as a plausible heuristic rather than a validated empirical result.",
+          "Findings 7 and 8 (deployment-scale cost structure) derive from a vendor blog post (DigitalOcean), which has a source quality score of 0.70. These claims reflect practitioner experience but lack the rigor of peer-reviewed benchmarking and may reflect the author's commercial context.",
+          "All math/coding benchmark results (Findings 0, 1, 2, 3, 4) are from specialized mathematical domains (GSM8K, MATH, PopQA). There is no evidence in this findings set about whether inference-time compute scaling generalizes to open-ended reasoning, long-horizon tasks, creative writing, or other non-math/coding domains.",
+          "The findings do not include reproducibility assessments or cross-lab replications of any reported results, so it is unknown whether the specific numbers (e.g., '14x larger model' advantage, Llemma-7B outperforming Llemma-34B) hold under independent evaluation.",
+          "The relative merits of PRMs versus ORMs/OVMs remain unresolved in this evidence set, with two findings (5 and 6) emphasizing different dimensions (diagnostic quality vs. annotation scalability) without a head-to-head empirical comparison on the same benchmark under controlled conditions."
+        ]
+      },
+      "critic_history": [
+        {
+          "issues": [
+            {
+              "claim_index": 2,
+              "issue_type": "source_mismatch",
+              "explanation": "Finding [3] is cited alongside finding [2] for claim #2, but finding [3] is about scaling flaws of verifier-guided search underperforming repeated sampling at large sample sizes. This is tangentially related at best and does not directly support the claim that smaller models with tree search achieve Pareto-optimal tradeoffs versus larger models on MATH. Finding [3] actually introduces a caveat about search-based methods that is not reflected in the claim's framing. The claim would be better supported by finding [2] alone, and citing [3] as corroborating support is a source mismatch."
+            },
+            {
+              "claim_index": 8,
+              "issue_type": "overstated",
+              "explanation": "The underlying finding (combined=0.79, [AXIS-DISAGREE]) comes from a blog post (buildml.substack.com) rather than a peer-reviewed or high-quality academic source (source_q=0.50). The claim presents these mechanistic details\u2014e.g., the specific characterization of a 'power-law shape' emerging only from averaging\u2014with a confidence level (0.65) that still may be too high given the low source quality and axis disagreement. The claim does not adequately hedge the speculative nature of the source, particularly the assertion about power-law shapes being an averaging artifact, which is a strong mechanistic claim from a non-peer-reviewed blog."
+            }
+          ],
+          "approved": false
+        }
+      ],
+      "verify_history": [
+        {
+          "results": []
+        }
+      ],
+      "metadata": {
+        "commit_hash": "2f6ab883c54607f36d522b553c98dfd10b64a6c9",
+        "branch": "main",
+        "models": {
+          "researcher": "claude-haiku-4-5",
+          "writer": "claude-sonnet-4-6",
+          "critic": "claude-sonnet-4-6",
+          "judge": "claude-opus-4-7",
+          "kae_judge": "claude-haiku-4-5"
+        },
+        "config_snapshot": {
+          "anthropic_api_key": "<set>",
+          "tavily_api_key": "<set>",
+          "researcher_model": "claude-haiku-4-5",
+          "writer_model": "claude-sonnet-4-6",
+          "critic_model": "claude-sonnet-4-6",
+          "judge_model": "claude-opus-4-7",
+          "kae_judge_model": "claude-haiku-4-5",
+          "min_subquestions": 3,
+          "max_subquestions": 7,
+          "decompose_max_retries": 2,
+          "researcher_max_tool_calls": 30,
+          "researcher_max_findings": 6,
+          "researcher_min_findings_to_stop": 3,
+          "researcher_min_unique_sources": 2,
+          "researcher_min_avg_confidence": 0.55,
+          "researcher_unproductive_call_limit": 10,
+          "search_results_per_query": 8,
+          "fetch_max_chars": 12000,
+          "scholar_max_retries": 3,
+          "scholar_backoff_seconds": 1.0,
+          "scholar_unavailable_window_seconds": 120,
+          "max_revisions": 0,
+          "verifier_enabled": false,
+          "parallel_researchers": 2
+        },
+        "captured_at": "2026-05-05T05:54:58.565959Z"
+      },
+      "metrics": {
+        "total_subquestions": 7,
+        "subquestions_with_findings": 3,
+        "total_findings": 10,
+        "unique_sources": 8,
+        "revision_rounds": 0,
+        "final_grounding_rate": 0.7777777777777778,
+        "coverage_rate": 0.42857142857142855,
+        "elapsed_seconds": 155.2829349040985,
+        "per_stage": {
+          "classify_shape": {
+            "calls": 1,
+            "input_tokens": 994,
+            "output_tokens": 99,
+            "cost_usd": 0.004467,
+            "elapsed_seconds": 2.709268542006612
+          },
+          "confidence": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cost_usd": 0.0,
+            "elapsed_seconds": 0.00027199997566640377
+          },
+          "critic": {
+            "calls": 1,
+            "input_tokens": 5694,
+            "output_tokens": 383,
+            "cost_usd": 0.022827,
+            "elapsed_seconds": 9.267457833047956
+          },
+          "decompose": {
+            "calls": 1,
+            "input_tokens": 1502,
+            "output_tokens": 1021,
+            "cost_usd": 0.019821,
+            "elapsed_seconds": 16.856739250011742
+          },
+          "reconciler": {
+            "calls": 1,
+            "input_tokens": 3415,
+            "output_tokens": 587,
+            "cost_usd": 0.01905,
+            "elapsed_seconds": 11.616443667095155
+          },
+          "researcher": {
+            "calls": 45,
+            "input_tokens": 321027,
+            "output_tokens": 8915,
+            "cost_usd": 0.36560200000000004,
+            "elapsed_seconds": 79.45734291593544
+          },
+          "writer": {
+            "calls": 1,
+            "input_tokens": 6096,
+            "output_tokens": 2132,
+            "cost_usd": 0.050268,
+            "elapsed_seconds": 35.32425004080869
+          }
+        },
+        "total_input_tokens": 338728,
+        "total_output_tokens": 13137,
+        "total_cost_usd": 0.482035,
+        "researcher_latency_max": 30.928278957959265,
+        "researcher_latency_avg": 21.659763273716504,
+        "tool_mix": {
+          "web_search": 28,
+          "search_papers": 16,
+          "fetch_url": 39,
+          "save_finding": 10,
+          "note_uncertainty": 0
+        },
+        "kae": null,
+        "ace": null,
+        "plan_judge": null
+      },
+      "taxonomy": null,
+      "started_at": "2026-05-05T05:57:33.797859Z"
+    },
+    {
+      "user_prompt": "What is the current state of inference-time compute scaling for LLM reasoning? Separate what has been empirically validated from what is still speculative, and identify where the evidence is too thin to draw conclusions.",
+      "shape": {
+        "shape": "SPARSE_EMERGING",
+        "confidence": 0.72,
+        "rationale": "The topic is recent and rapidly evolving (inference-time compute scaling is a 2024\u20132025 frontier area), and the user wants to map what is empirically validated vs. speculative vs. under-evidenced \u2014 which is exactly the kind of literature-scoping task SPARSE_EMERGING is designed for."
+      },
+      "decomposition": {
+        "subquestions": [
+          {
+            "id": "sq1",
+            "question": "What are the primary inference-time compute scaling methods for LLM reasoning (e.g., chain-of-thought, self-consistency, tree/graph search, process reward models, repeated sampling), and what are the theoretical mechanisms proposed to explain why more compute at inference time improves reasoning?",
+            "rationale": "Establishing a clear taxonomy of methods and their proposed mechanisms is prerequisite to evaluating what is empirically validated versus speculative.",
+            "confidence": 0.9,
+            "depends_on": [],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq2",
+            "question": "What empirical evidence exists for inference-time compute scaling laws \u2014 specifically, how does reasoning performance scale with inference compute budget (number of samples, search steps, token generation), and across what benchmarks and model families has this been demonstrated?",
+            "rationale": "Identifying the concrete empirical results \u2014 including which scaling relationships are reproducible and on what tasks \u2014 is central to separating validated findings from speculation.",
+            "confidence": 0.95,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq3",
+            "question": "How does inference-time compute scaling compare to training-time compute scaling in terms of efficiency (FLOPs per unit of performance gain), and under what conditions does one dominate the other?",
+            "rationale": "The practical and theoretical significance of inference-time scaling depends heavily on how it trades off against simply training larger models, which is a key contested claim in the field.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq2"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq4",
+            "question": "What is the empirical evidence for and against the effectiveness of specific verifier/reward model approaches (process reward models, outcome reward models, verifiers) used to guide inference-time search, and what failure modes have been documented (e.g., reward hacking, distribution shift)?",
+            "rationale": "Verifier quality is widely claimed to be the bottleneck for inference-time scaling, so understanding the evidence on their effectiveness and failure modes is critical for separating validated from speculative claims.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq5",
+            "question": "What has been demonstrated empirically about 'reasoning models' trained with reinforcement learning to use extended chain-of-thought at inference time (e.g., OpenAI o1/o3, DeepSeek-R1, Gemini Thinking), including their scaling behavior and the degree to which their gains are attributable to inference-time compute versus training differences?",
+            "rationale": "These high-profile models are central to current claims about inference-time scaling, but disentangling the contribution of inference compute from training methodology is a key empirical challenge.",
+            "confidence": 0.9,
+            "depends_on": [
+              "sq2"
+            ],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq6",
+            "question": "What are the documented limitations and boundary conditions of inference-time compute scaling \u2014 including task types where it fails to help, saturation effects, latency/cost constraints, and evidence of diminishing returns?",
+            "rationale": "Understanding where inference-time scaling breaks down is essential for distinguishing robust findings from overextended claims.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq2",
+              "sq4"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq7",
+            "question": "What key empirical questions about inference-time compute scaling remain unanswered or poorly evidenced \u2014 such as generalization beyond math/code benchmarks, optimal compute allocation strategies, or the long-term scaling trajectory \u2014 and what methodological gaps limit current conclusions?",
+            "rationale": "Explicitly mapping the thin or missing evidence is required by the prompt and prevents the report from overstating what is currently known.",
+            "confidence": 0.8,
+            "depends_on": [
+              "sq2",
+              "sq5",
+              "sq6"
+            ],
+            "preferred_search": "search_papers"
+          }
+        ]
+      },
+      "findings": {
+        "findings": [
+          {
+            "subquestion_id": "sq2",
+            "claim": "On MATH and GSM8K benchmarks, smaller models (e.g., Llemma-7B) with advanced inference algorithms can outperform larger models (Llemma-34B) under the same compute budget, with Llemma-7B with tree search consistently outperforming Llemma-34B with majority voting across all FLOPs budgets.",
+            "evidence": "For instance, the Llemma-7B model, equipped with our novel tree search algorithm, consistently outperforms Llemma-34B with standard majority voting on the MATH benchmark across all FLOPs budgets. We show that the Llemma-7B model can achieve competitive accuracy to a Llemma-34B model while using less FLOPs when evaluating on MATH500 (Fig. 4) or GSM8K (Fig. 5).",
+            "source_url": "https://arxiv.org/html/2408.00724v2",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-537b1c",
+            "saved_at": "2026-05-05T05:58:33.859465Z",
+            "fetched_at": "2026-05-05T05:58:33.859404Z",
+            "content_hash": "cfc1c02ac16c1949ead755950c43f058a2c64a0af22f9dde63dbc25a9e857c60",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Sampling and majority voting methods exhibit exponential convergence but saturate to a fixed accuracy limit determined by model output probabilities, demonstrating diminishing returns without oracle verifiers.",
+            "evidence": "We analyse the asymptotic behaviour of sampling and voting-based inference strategies, showing their convergence upper bound and rate of convergence. Given a dataset, the accuracy of the language model will ultimately saturate to a fixed limit which is determined by the output probabilities assigned by the model, exhibiting exponential convergence speed through sampling and voting. This implies that, without an oracle verifier, simple strategies like sampling cannot achieve perfect accuracy even with an infinite number of samples, leading to diminishing returns.",
+            "source_url": "https://arxiv.org/html/2408.00724v2",
+            "source_title": "",
+            "confidence": 0.93,
+            "researcher_id": "r-537b1c",
+            "saved_at": "2026-05-05T05:58:33.859545Z",
+            "fetched_at": "2026-05-05T05:58:33.859533Z",
+            "content_hash": "21657fb92fc5716713f3b56656296c4826059154a3163b4e7099d23ea2ba3ba2",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.972,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Empirical evaluation across Pythia and Mistral model families shows that performance scales with increased inference compute across various model sizes, with smaller models initially outperforming larger ones until saturation, after which larger models show advantages.",
+            "evidence": "Our results on Pythia (Fig. 1) illustrate how performance scales with increased inference compute across various model sizes. Typically, increasing the compute budget leads to higher accuracy until the accuracy reaches saturation. As the compute budget increases, smaller models initially perform better than larger ones, but once the accuracy of the smaller models saturates, the larger models have favorable performance.",
+            "source_url": "https://arxiv.org/html/2408.00724v2",
+            "source_title": "",
+            "confidence": 0.94,
+            "researcher_id": "r-537b1c",
+            "saved_at": "2026-05-05T05:58:33.859575Z",
+            "fetched_at": "2026-05-05T05:58:33.859566Z",
+            "content_hash": "dbbd6da080a035ed7dd5a05607e7a2a58e6a0eeb1bca680d7f8cfa25bda90026",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.976,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Excessive scaling of chain-of-thought (CoT) length can impair reasoning performance on mathematical tasks, with an optimal CoT length distribution that varies across domains and problem difficulty levels.",
+            "evidence": "Our explorations on mathematical reasoning tasks reveal an unexpected finding that scaling with longer CoTs can indeed impair the reasoning performance of LLMs in certain domains. Moreover, we discover that there exists an optimal scaled length distribution that differs across different domains. We find that training with longer reasoning paths leads to worse performance especially in easier tasks, and there exists an optimal reasoning effort that varies across tasks of different difficulty levels.",
+            "source_url": "https://arxiv.org/html/2502.18080v2",
+            "source_title": "",
+            "confidence": 0.94,
+            "researcher_id": "r-537b1c",
+            "saved_at": "2026-05-05T05:58:48.492098Z",
+            "fetched_at": "2026-05-05T05:58:48.491919Z",
+            "content_hash": "43e81cd93fa3d76ecd676e3eac4dda5f44801aa96954401202f7dabe7cb0b399",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.976,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Chain-of-thought reasoning exhibits an optimal length beyond which performance deteriorates due to error accumulation; longer reasoning paths do not consistently improve results.",
+            "evidence": "As the number of reasoning steps increases, performance initially improves but eventually decreases. We theoretically prove the existence of an optimal CoT length and derive a scaling law for this optimal length based on model capability and task difficulty. ... longer is not always better. Specifically, by controlling task difficulty, we observe that as the reasoning path lengthens, the model's performance initially improves but eventually deteriorates, indicating the existence of an optimal length. This phenomenon can be understood by modeling the CoT process as a task decomposition and subtask-solving structure. While early-stage decomposition helps break down the problem, excessively long reasoning paths lead to error accumulation\u2014where a single mistake can mislead the entire chain of thought.",
+            "source_url": "https://arxiv.org/html/2502.07266v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-375b19",
+            "saved_at": "2026-05-05T05:59:23.865713Z",
+            "fetched_at": "2026-05-05T05:59:23.865692Z",
+            "content_hash": "cae17fd0ffdf58f14268397d69e69bf03984c3d82736f36845016130e754f5b8",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "The optimal chain-of-thought length depends directly on both model capability and task complexity; more capable models need shorter reasoning chains and more difficult tasks require longer chains.",
+            "evidence": "Our experimental results also show that the optimal CoT length is directly influenced by both model capability and task complexity. Intuitively, for more challenging tasks, a deeper decomposition is required. Meanwhile, a more capable model can handle moderately complex subtasks in a single step, reducing the need for excessive reasoning steps. Furthermore, as task difficulty increases, the optimal length of each reasoning step tends to grow to prevent the total number of steps from becoming excessively long.",
+            "source_url": "https://arxiv.org/html/2502.07266v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-375b19",
+            "saved_at": "2026-05-05T05:59:23.865731Z",
+            "fetched_at": "2026-05-05T05:59:23.865727Z",
+            "content_hash": "5ba2ef71734aad0bd7d238900a94f43a506d59c01068afb305aa7344d5b31ead",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Test-time scaling fails on knowledge-intensive tasks; increasing inference-time computation does not consistently improve factual accuracy and often increases hallucinations.",
+            "evidence": "Test-time scaling increases inference-time computation by allowing models to generate long reasoning chains, and has shown strong performance across many domains. However, in this work, we show that this approach is not yet effective for knowledge-intensive tasks, where high factual accuracy and low hallucination rates are essential. ... increasing test-time computation does not consistently improve accuracy and, in many cases, it even leads to more hallucinations.",
+            "source_url": "https://openreview.net/forum?id=r5WpkObeYa",
+            "source_title": "",
+            "confidence": 0.93,
+            "researcher_id": "r-375b19",
+            "saved_at": "2026-05-05T05:59:31.391928Z",
+            "fetched_at": "2026-05-05T05:59:31.391815Z",
+            "content_hash": "cf2396a4a53a7b430b0c97a6a0ab08c744fc066fe1e42ed1323e4064da4c41cf",
+            "domain": "openreview.net",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.972,
+            "axis_disagreement": false
+          }
+        ],
+        "uncertainty_notes": [
+          {
+            "subquestion_id": "sq1",
+            "topic": "What are the primary inference-time compute scaling methods for LLM reasoning (e.g., chain-of-thought, self-consistency, tree/graph search, process reward models, repeated sampling), and what are the theoretical mechanisms proposed to explain why more compute at inference time improves reasoning?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-bc0932"
+          },
+          {
+            "subquestion_id": "sq3",
+            "topic": "How does inference-time compute scaling compare to training-time compute scaling in terms of efficiency (FLOPs per unit of performance gain), and under what conditions does one dominate the other?",
+            "reason": "Made 11 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-450d9b"
+          },
+          {
+            "subquestion_id": "sq4",
+            "topic": "What is the empirical evidence for and against the effectiveness of specific verifier/reward model approaches (process reward models, outcome reward models, verifiers) used to guide inference-time search, and what failure modes have been documented (e.g., reward hacking, distribution shift)?",
+            "reason": "Made 11 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-86a203"
+          },
+          {
+            "subquestion_id": "sq5",
+            "topic": "What has been demonstrated empirically about 'reasoning models' trained with reinforcement learning to use extended chain-of-thought at inference time (e.g., OpenAI o1/o3, DeepSeek-R1, Gemini Thinking), including their scaling behavior and the degree to which their gains are attributable to inference-time compute versus training differences?",
+            "reason": "Made 12 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-92d958"
+          },
+          {
+            "subquestion_id": "sq7",
+            "topic": "What key empirical questions about inference-time compute scaling remain unanswered or poorly evidenced \u2014 such as generalization beyond math/code benchmarks, optimal compute allocation strategies, or the long-term scaling trajectory \u2014 and what methodological gaps limit current conclusions?",
+            "reason": "Made 12 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-22e5e0"
+          }
+        ]
+      },
+      "report": {
+        "user_prompt": "What is the current state of inference-time compute scaling for LLM reasoning? Separate what has been empirically validated from what is still speculative, and identify where the evidence is too thin to draw conclusions.",
+        "summary": "The evidence base for inference-time compute scaling is notably thin: only seven concrete findings were extracted across seven sub-questions, and five of those sub-questions returned no usable evidence. What has been empirically validated is largely confined to mathematical reasoning benchmarks (MATH, GSM8K) using specific model families (Pythia, Mistral, Llemma), where performance scales with compute up to a saturation point, smaller models with better search algorithms can outperform larger models under equal compute budgets, and chain-of-thought length exhibits an optimal beyond which performance degrades. A critical boundary condition is also supported: inference-time scaling appears ineffective or harmful for knowledge-intensive, factual tasks. Large portions of the research landscape \u2014 including reward model approaches, RL-trained reasoning models (o1, DeepSeek-R1), comparisons to training-time scaling, and generalization beyond math/code \u2014 could not be grounded in concrete findings and must be treated as insufficiently evidenced.",
+        "claims": [
+          {
+            "claim": "On mathematical benchmarks (MATH, GSM8K), a smaller model (Llemma-7B) equipped with tree search can consistently outperform a larger model (Llemma-34B) using majority voting across all FLOPs budgets, demonstrating that inference algorithm choice matters as much as model size under equal compute.",
+            "confidence": 0.95,
+            "supporting_finding_indices": [
+              0
+            ]
+          },
+          {
+            "claim": "Sampling and majority voting strategies exhibit exponential convergence in accuracy but saturate to a fixed ceiling determined by the model's own output probabilities; without an oracle verifier, infinite sampling cannot achieve perfect accuracy, producing clear diminishing returns.",
+            "confidence": 0.95,
+            "supporting_finding_indices": [
+              1
+            ]
+          },
+          {
+            "claim": "Across Pythia and Mistral model families, increasing inference compute generally improves accuracy until saturation, after which larger models hold the advantage \u2014 but this pattern has been demonstrated primarily on mathematical reasoning tasks, not broadly.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              2,
+              6
+            ]
+          },
+          {
+            "claim": "Chain-of-thought length exhibits a task- and model-dependent optimum: both excessively short and excessively long reasoning chains reduce performance, with error accumulation identified as one mechanism for degradation beyond the optimum.",
+            "confidence": 0.92,
+            "supporting_finding_indices": [
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "claim": "More capable models require shorter optimal reasoning chains for a given task, while more difficult tasks require longer chains; this relationship has been formally derived and empirically observed, though the evidence comes from a limited set of mathematical tasks.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              5
+            ]
+          },
+          {
+            "claim": "Inference-time compute scaling is not reliably beneficial outside mathematical reasoning: on knowledge-intensive tasks, increasing test-time computation does not consistently improve factual accuracy and in many cases increases hallucinations.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              6
+            ]
+          }
+        ],
+        "contradictions_surfaced": [
+          {
+            "description": "Findings 3 and 4 both address whether longer chain-of-thought reasoning impairs performance, but they offer subtly different mechanistic explanations. Finding 3 (https://arxiv.org/html/2502.18080v2) states that 'scaling with longer CoTs can indeed impair the reasoning performance of LLMs in certain domains' and specifically attributes worse performance to 'training with longer reasoning paths' particularly 'in easier tasks.' Finding 4 (https://arxiv.org/html/2502.07266v1) agrees that longer is not always better but attributes the deterioration specifically to 'error accumulation\u2014where a single mistake can mislead the entire chain of thought' as reasoning steps increase. While both agree on the existence of an optimal CoT length, Finding 3 ties impairment primarily to task difficulty (easier tasks suffer more) and to training-time scaling, whereas Finding 4 ties it to error accumulation in inference-time reasoning steps and derives a formal scaling law. These different mechanistic framings and differing contexts (training-time vs. inference-time) represent a framing tension that limits how confidently either mechanistic account can be asserted.",
+            "finding_ids": [
+              3,
+              4
+            ],
+            "severity": "minor",
+            "type": "framing"
+          },
+          {
+            "description": "Findings 2 and 6 disagree on whether increasing inference-time compute consistently improves model performance. Finding 2 (https://arxiv.org/html/2408.00724v2) states that 'increasing the compute budget leads to higher accuracy until the accuracy reaches saturation,' presenting compute scaling as reliably beneficial up to a saturation point across Pythia and Mistral model families on mathematical benchmarks. Finding 6 (https://openreview.net/forum?id=r5WpkObeYa) directly contradicts this for knowledge-intensive tasks, asserting that 'increasing test-time computation does not consistently improve accuracy and, in many cases, it even leads to more hallucinations.' The disagreement is primarily a domain boundary issue \u2014 math vs. knowledge-intensive tasks \u2014 but both findings use general language that could be misread as universal claims about inference compute scaling.",
+            "finding_ids": [
+              2,
+              6
+            ],
+            "severity": "moderate",
+            "type": "factual"
+          }
+        ],
+        "caveats": [
+          "WARNING \u2014 bounded revision exhausted with critic issues still open. The report ships with 3 unresolved critic issue(s):\n  \u2022 Claim #0 (overstated): The finding supports that Llemma-7B with tree search outperforms Llemma-34B with majority voting on MATH across all FLOPs budgets, and is competitive on GSM8K. However, the claim adds the interpretive conclusion that 'inference algorithm choice matters as much as model size under equal compute' \u2014 this causal/comparative framing is not stated in the cited evidence, which only reports the empirical result without that specific equivalence claim.\n  \u2022 Claim #2 (overstated): The finding from [2] only mentions Pythia (Fig. 1) explicitly; it does not mention Mistral. The claim states 'Across Pythia and Mistral model families' but the cited evidence only references Pythia. The Mistral reference is not supported by the quoted text from finding [2], making this a partial source mismatch/overstatement.\n  \u2022 Claim #4 (overstated): The claim states the relationship 'has been formally derived' (implying a theoretical proof), but finding [5] only reports experimental results. The theoretical derivation/proof is mentioned in finding [4], but finding [4] is not cited for claim #4. The sole cited finding [5] supports only the empirical observation, not the formal derivation aspect of the claim.",
+          "Five of seven sub-questions (sq1, sq3, sq4, sq5, sq7) returned no extractable concrete findings despite extensive search, meaning the following topics are entirely without grounded evidence in this report: (1) theoretical mechanisms explaining why inference-time compute improves reasoning; (2) direct FLOPs-efficiency comparisons between inference-time and training-time compute scaling; (3) empirical evidence for or against process reward models, outcome reward models, and verifier approaches, including documented failure modes such as reward hacking; (4) empirical characterization of RL-trained 'reasoning models' such as OpenAI o1/o3, DeepSeek-R1, and Gemini Thinking, including whether their gains are attributable to inference compute versus training; and (5) key open empirical questions and methodological gaps in the field.",
+          "All empirical findings on performance scaling (findings 0, 1, 2) are drawn from a single source (https://arxiv.org/html/2408.00724v2) and are confined to mathematical benchmarks (MATH, GSM8K) and specific model families (Pythia, Mistral, Llemma). Generalization to other task types, model families, or compute regimes is not supported by the evidence gathered.",
+          "The findings on optimal chain-of-thought length (findings 3, 4, 5) conflate training-time and inference-time phenomena in ways that are not fully disentangled. Finding 3 explicitly concerns training with longer reasoning paths, while Findings 4 and 5 concern inference-time reasoning steps; claims about optimal length at inference time should be read with this ambiguity in mind.",
+          "The finding on knowledge-intensive task failure (finding 6) is a single-source result from a workshop/review venue. While its direction aligns with the domain-specificity pattern, its generalizability across all knowledge-intensive tasks and model types is not confirmed by corroborating evidence.",
+          "No evidence was gathered on latency and cost constraints, optimal compute allocation strategies (e.g., how to split a fixed budget between model size and search steps), long-term scaling trajectories, or performance on non-math/code domains such as commonsense reasoning, planning, or open-ended generation. These remain entirely open questions based on the evidence available here."
+        ]
+      },
+      "critic_history": [
+        {
+          "issues": [
+            {
+              "claim_index": 0,
+              "issue_type": "overstated",
+              "explanation": "The finding supports that Llemma-7B with tree search outperforms Llemma-34B with majority voting on MATH across all FLOPs budgets, and is competitive on GSM8K. However, the claim adds the interpretive conclusion that 'inference algorithm choice matters as much as model size under equal compute' \u2014 this causal/comparative framing is not stated in the cited evidence, which only reports the empirical result without that specific equivalence claim."
+            },
+            {
+              "claim_index": 2,
+              "issue_type": "overstated",
+              "explanation": "The finding from [2] only mentions Pythia (Fig. 1) explicitly; it does not mention Mistral. The claim states 'Across Pythia and Mistral model families' but the cited evidence only references Pythia. The Mistral reference is not supported by the quoted text from finding [2], making this a partial source mismatch/overstatement."
+            },
+            {
+              "claim_index": 4,
+              "issue_type": "overstated",
+              "explanation": "The claim states the relationship 'has been formally derived' (implying a theoretical proof), but finding [5] only reports experimental results. The theoretical derivation/proof is mentioned in finding [4], but finding [4] is not cited for claim #4. The sole cited finding [5] supports only the empirical observation, not the formal derivation aspect of the claim."
+            }
+          ],
+          "approved": false
+        }
+      ],
+      "verify_history": [
+        {
+          "results": []
+        }
+      ],
+      "metadata": {
+        "commit_hash": "2f6ab883c54607f36d522b553c98dfd10b64a6c9",
+        "branch": "main",
+        "models": {
+          "researcher": "claude-haiku-4-5",
+          "writer": "claude-sonnet-4-6",
+          "critic": "claude-sonnet-4-6",
+          "judge": "claude-opus-4-7",
+          "kae_judge": "claude-haiku-4-5"
+        },
+        "config_snapshot": {
+          "anthropic_api_key": "<set>",
+          "tavily_api_key": "<set>",
+          "researcher_model": "claude-haiku-4-5",
+          "writer_model": "claude-sonnet-4-6",
+          "critic_model": "claude-sonnet-4-6",
+          "judge_model": "claude-opus-4-7",
+          "kae_judge_model": "claude-haiku-4-5",
+          "min_subquestions": 3,
+          "max_subquestions": 7,
+          "decompose_max_retries": 2,
+          "researcher_max_tool_calls": 30,
+          "researcher_max_findings": 6,
+          "researcher_min_findings_to_stop": 3,
+          "researcher_min_unique_sources": 2,
+          "researcher_min_avg_confidence": 0.55,
+          "researcher_unproductive_call_limit": 10,
+          "search_results_per_query": 8,
+          "fetch_max_chars": 12000,
+          "scholar_max_retries": 3,
+          "scholar_backoff_seconds": 1.0,
+          "scholar_unavailable_window_seconds": 120,
+          "max_revisions": 0,
+          "verifier_enabled": false,
+          "parallel_researchers": 2
+        },
+        "captured_at": "2026-05-05T05:57:50.375490Z"
+      },
+      "metrics": {
+        "total_subquestions": 7,
+        "subquestions_with_findings": 2,
+        "total_findings": 7,
+        "unique_sources": 4,
+        "revision_rounds": 0,
+        "final_grounding_rate": 0.5,
+        "coverage_rate": 0.2857142857142857,
+        "elapsed_seconds": 156.71874618530273,
+        "per_stage": {
+          "classify_shape": {
+            "calls": 1,
+            "input_tokens": 994,
+            "output_tokens": 90,
+            "cost_usd": 0.004332,
+            "elapsed_seconds": 2.380623625125736
+          },
+          "confidence": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cost_usd": 0.0,
+            "elapsed_seconds": 0.00024783285334706306
+          },
+          "critic": {
+            "calls": 1,
+            "input_tokens": 4445,
+            "output_tokens": 394,
+            "cost_usd": 0.019245,
+            "elapsed_seconds": 9.132498916937038
+          },
+          "decompose": {
+            "calls": 1,
+            "input_tokens": 1502,
+            "output_tokens": 1051,
+            "cost_usd": 0.020271,
+            "elapsed_seconds": 19.061867375159636
+          },
+          "reconciler": {
+            "calls": 1,
+            "input_tokens": 2749,
+            "output_tokens": 574,
+            "cost_usd": 0.016857,
+            "elapsed_seconds": 10.184031500015408
+          },
+          "researcher": {
+            "calls": 46,
+            "input_tokens": 354104,
+            "output_tokens": 7653,
+            "cost_usd": 0.39236899999999997,
+            "elapsed_seconds": 86.60286112502217
+          },
+          "writer": {
+            "calls": 1,
+            "input_tokens": 5508,
+            "output_tokens": 1906,
+            "cost_usd": 0.045114,
+            "elapsed_seconds": 29.309162000194192
+          }
+        },
+        "total_input_tokens": 369302,
+        "total_output_tokens": 11668,
+        "total_cost_usd": 0.49818799999999996,
+        "researcher_latency_max": 43.86450937506743,
+        "researcher_latency_avg": 22.79875404773546,
+        "tool_mix": {
+          "web_search": 28,
+          "search_papers": 14,
+          "fetch_url": 38,
+          "save_finding": 7,
+          "note_uncertainty": 0
+        },
+        "kae": null,
+        "ace": null,
+        "plan_judge": null
+      },
+      "taxonomy": null,
+      "started_at": "2026-05-05T06:00:27.047518Z"
+    }
+  ]
+}

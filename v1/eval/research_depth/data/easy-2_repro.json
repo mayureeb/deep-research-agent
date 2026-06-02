@@ -1,0 +1,1564 @@
+{
+  "prompt_id": "easy-2",
+  "category": "easy",
+  "n_runs": 2,
+  "mode": "draft_only",
+  "max_revisions": 0,
+  "verifier_enabled": false,
+  "subquestion_jaccard": 0.0,
+  "claim_jaccard": 0.0,
+  "per_run": [
+    {
+      "run_index": 0,
+      "elapsed_seconds": 185.00829195976257,
+      "n_claims": 18,
+      "n_subquestions": 7,
+      "grounding_rate": 1.0,
+      "coverage_rate": 0.7142857142857143,
+      "f1": 0.8333333333333333
+    },
+    {
+      "run_index": 1,
+      "elapsed_seconds": 162.31248307228088,
+      "n_claims": 19,
+      "n_subquestions": 6,
+      "grounding_rate": 0.9473684210526315,
+      "coverage_rate": 0.6666666666666666,
+      "f1": 0.782608695652174
+    }
+  ],
+  "runs": [
+    {
+      "user_prompt": "What are the main approaches to retrieval-augmented generation (RAG) for question answering, and how do they compare on accuracy and latency?",
+      "shape": {
+        "shape": "PRE_STRUCTURED",
+        "confidence": 0.72,
+        "rationale": "The user explicitly requests a comparison of approaches on specific axes (accuracy and latency), giving the response a pre-defined structure even though the underlying topic could also be treated as a survey/discovery."
+      },
+      "decomposition": {
+        "subquestions": [
+          {
+            "id": "sq1",
+            "question": "What are the primary architectural approaches to retrieval-augmented generation (RAG) for question answering (e.g., naive RAG, advanced RAG, modular RAG, iterative/multi-hop RAG), and what are the defining characteristics of each?",
+            "rationale": "Establishing a clear taxonomy of RAG architectures is the foundation for any meaningful comparison of accuracy and latency.",
+            "confidence": 0.9,
+            "depends_on": [],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq2",
+            "question": "What retrieval mechanisms are used in RAG systems for QA (e.g., sparse retrieval with BM25, dense retrieval with bi-encoders, hybrid retrieval, re-ranking), and how does the choice of retrieval method affect downstream answer quality?",
+            "rationale": "The retrieval component is the most variable part of RAG pipelines and directly drives both accuracy and latency trade-offs.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq3",
+            "question": "How do different RAG approaches compare on accuracy metrics (e.g., Exact Match, F1, RAGAS faithfulness/relevance scores) across standard QA benchmarks such as Natural Questions, TriviaQA, HotpotQA, and MMLU?",
+            "rationale": "Quantitative accuracy comparisons on established benchmarks provide the empirical basis for evaluating which approaches actually work best.",
+            "confidence": 0.9,
+            "depends_on": [
+              "sq1",
+              "sq2"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq4",
+            "question": "How do different RAG approaches compare on latency and computational cost (e.g., end-to-end query latency, number of retrieval rounds, index size, inference overhead), and what are the main latency bottlenecks?",
+            "rationale": "Latency is a critical practical constraint for production QA systems, and understanding where bottlenecks arise is essential for comparing approaches fairly.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq1",
+              "sq2"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq5",
+            "question": "What accuracy\u2013latency trade-offs exist across RAG approaches \u2014 are there methods (e.g., speculative RAG, adaptive retrieval, caching) that improve one dimension without significantly harming the other?",
+            "rationale": "The core tension between accuracy and latency is the crux of the comparison and requires explicit analysis rather than treating them as independent dimensions.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq3",
+              "sq4"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq6",
+            "question": "What are the known limitations, failure modes, and contested claims in the RAG-for-QA literature \u2014 for example, disputes about whether retrieval always helps, hallucination under noisy retrieval, or gaps in multi-hop reasoning benchmarks?",
+            "rationale": "Probing disagreements and limitations prevents an overly optimistic synthesis and reveals where the evidence base is weak or conflicted.",
+            "confidence": 0.75,
+            "depends_on": [
+              "sq3",
+              "sq4"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq7",
+            "question": "What evaluation frameworks, toolkits, and datasets are currently used to benchmark RAG systems for QA (e.g., RAGAS, ARES, BEIR, RGB), and what methodological gaps remain in how these systems are assessed?",
+            "rationale": "Understanding how RAG is evaluated is necessary for judging the reliability of accuracy and latency comparisons reported in the literature.",
+            "confidence": 0.7,
+            "depends_on": [
+              "sq3"
+            ],
+            "preferred_search": "either"
+          }
+        ]
+      },
+      "findings": {
+        "findings": [
+          {
+            "subquestion_id": "sq2",
+            "claim": "Hybrid retrieval combining BM25 and dense bi-encoder embeddings addresses complementary weaknesses: BM25 is precise but brittle (requires exact keyword matches), while dense retrieval casts a wide net but can rank irrelevant documents high.",
+            "evidence": "BM25-only search finds exact matches but misses semantically similar documents without shared keywords. Dense retrieval (bi-encoder embeddings) finds all semantically similar documents but \"lacks precision. Everything vaguely similar gets retrieved.\" Hybrid search \"runs BM25 (sparse retrieval) and dense retrieval (bi-encoder embeddings) in parallel, then combines their ranked lists.\"",
+            "source_url": "https://ranjankumar.in/building-a-full-stack-hybrid-search-system-bm25-vectors-cross-encoders-with-docker",
+            "source_title": "",
+            "confidence": 0.92,
+            "researcher_id": "r-83c920",
+            "saved_at": "2026-05-05T05:41:35.980632Z",
+            "fetched_at": "2026-05-05T05:41:35.980591Z",
+            "content_hash": "52903e1519076ce9e325bf9722a1d3c236b237c7943b53388ce252f79b55cead",
+            "domain": "ranjankumar.in",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.863,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Cross-encoder reranking achieves 10-25% improvement in top-3 precision over hybrid search but at a computational cost of +60-100ms per query on CPU due to processing query-document pairs jointly.",
+            "evidence": "The article states \"10-25% improvement in top-3 precision (based on our manual evaluation) Cost: +60\" and explains that \"On CPU: ~60-100ms for 20 pairs.\" Cross-encoders process query-document pairs together, whereas bi-encoders encode query and document separately for speed.",
+            "source_url": "https://ranjankumar.in/building-a-full-stack-hybrid-search-system-bm25-vectors-cross-encoders-with-docker",
+            "source_title": "",
+            "confidence": 0.88,
+            "researcher_id": "r-83c920",
+            "saved_at": "2026-05-05T05:41:35.980664Z",
+            "fetched_at": "2026-05-05T05:41:35.980653Z",
+            "content_hash": "0083e2375c69e4256b916880e6506b4621b25789c6f79051b037454070fb5ef9",
+            "domain": "ranjankumar.in",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.847,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Rerankers significantly improve RAG answer quality compared to bi-encoders because they \"analyze the query and each retrieved document pair, assigning a relevance score based on the compatibility and context\" while bi-encoders \"prioritize speed by pre-computing vector representations\" at the cost of lost contextual detail.",
+            "evidence": "Rerankers, despite their slower processing time, shine in accuracy. They delve deeper into the context, considering the nuances of both the query and individual documents to produce highly relevant rankings. Bi-encoders, on the other hand, prioritize speed by pre-computing vector representations of documents. However, this approach often leads to a loss of contextual detail, putting rerankers ahead in the race for precision and effectiveness in complex retrieval tasks.",
+            "source_url": "https://algopoetica.ai/addressing-rags-retrieval-challenges-the-impact-of-re-ranking-on-ai-accuracy",
+            "source_title": "",
+            "confidence": 0.85,
+            "researcher_id": "r-83c920",
+            "saved_at": "2026-05-05T05:41:35.980680Z",
+            "fetched_at": "2026-05-05T05:41:35.980671Z",
+            "content_hash": "d613dc718bdfdc06abd1dd2dcbdee6f76b6cc5b6cf9fc781a669ad4cc985f432",
+            "domain": "algopoetica.ai",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.835,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq3",
+            "claim": "Comprehensive RAG method comparison on conversational QA datasets shows that robust yet straightforward methods like reranking, hybrid BM25, and HyDE consistently outperform vanilla RAG, while several advanced techniques can degrade performance below the No-RAG baseline.",
+            "evidence": "Our results show that robust yet straightforward methods, such as reranking, hybrid BM25, and HyDE, consistently outperform vanilla RAG. In contrast, several advanced techniques fail to yield gains and can even degrade performance below the No-RAG baseline.",
+            "source_url": "https://arxiv.org/html/2602.09552v1",
+            "source_title": "",
+            "confidence": 0.85,
+            "researcher_id": "r-e84c70",
+            "saved_at": "2026-05-05T05:41:41.856517Z",
+            "fetched_at": "2026-05-05T05:41:41.856490Z",
+            "content_hash": "fc99e17648ee2038f2e86122855d8dd51184d97bb950d0fbb468472cd1154d95",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.94,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq3",
+            "claim": "RAG evaluation uses multiple categories of metrics including Faithfulness (whether the generated response contains hallucinations to retrieved context) and Contextual Relevancy/Recall/Precision to measure both retriever and generator components separately.",
+            "evidence": "RAG metrics measures either the retriever and generator in isolation, focusing on relevancy, hallucination, and retrieval. Retriever metrics include: Contextual recall, precision, and relevancy. Generator metrics include: Faithfulness and answer relevancy. RAG evaluation involves 5 key industry-standard metrics: Answer Relevancy, Faithfulness, Contextual Relevancy, Contextual Recall, and Contextual Precision.",
+            "source_url": "https://www.confident-ai.com/blog/rag-evaluation-metrics-answer-relevancy-faithfulness-and-more",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-e84c70",
+            "saved_at": "2026-05-05T05:41:56.326721Z",
+            "fetched_at": "2026-05-05T05:41:56.326533Z",
+            "content_hash": "4f84deb1632b8869e34def057e14fbdbdbc01e835bca42503b27d5a547fdc078",
+            "domain": "www.confident-ai.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.855,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq3",
+            "claim": "Standard QA benchmarks (Natural Questions, TriviaQA, HotpotQA) primarily use Exact Match (EM) and token-level F1 as evaluation metrics, though EM and F1 have limitations in capturing semantic aspects of answer quality and do not assess misinformation or satisfaction of information needs.",
+            "evidence": "Most factoid question answering benchmarks, including Natural Questions (NQ), TriviaQA, HotpoQA, and PopQA, rely on Exact Match (EM) and token-level F1 as their primary evaluation metrics. EM is a binary, factoid-level accuracy measure that evaluates whether the reference answer exactly matches, or is fully contained, within the generated answer. F1 quantifies surface-level token overlap between the generated and reference answers. While these metrics are simple and widely adopted, they fail to capture important semantic aspects of answer quality.",
+            "source_url": "https://arxiv.org/html/2604.07985v1",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-e84c70",
+            "saved_at": "2026-05-05T05:42:04.880787Z",
+            "fetched_at": "2026-05-05T05:42:04.880732Z",
+            "content_hash": "11208d655e77ca6d25aeb3b012b819f62042bede60ecd43b8499da4ed2f98ff6",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.96,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "In RAG systems, retrieval accounts for 41% of end-to-end latencies and 45%-47% of TTFT latencies, representing a major bottleneck.",
+            "evidence": "We show RAG introduces significant latency overhead to both TTFT latency and end-to-end latency, with retrieval making up 41% of the end-to-end latencies and 45%-47% of the TTFT latencies in our setups.",
+            "source_url": "https://arxiv.org/html/2412.11854v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-798bc2",
+            "saved_at": "2026-05-05T05:41:55.653793Z",
+            "fetched_at": "2026-05-05T05:41:55.653725Z",
+            "content_hash": "3d79b9278668c7d8cbb0536c7cd6ed037333cb322d231969ea74b8a390157894",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.8,
+            "combined_confidence": 0.9299999999999999,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Naive multi-retrieval (retrieval stride) in RAG can increase end-to-end latency to nearly 30 seconds, making production deployment infeasible.",
+            "evidence": "While prior work highlights how frequent retrievals can optimize accuracy, we find that naively re-retrieving can increase the end-to-end latency to nearly 30 seconds, precluding production deployment.",
+            "source_url": "https://arxiv.org/html/2412.11854v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-798bc2",
+            "saved_at": "2026-05-05T05:41:55.653871Z",
+            "fetched_at": "2026-05-05T05:41:55.653860Z",
+            "content_hash": "49cc6c63c05bfd3ba1341f66da7a5ae1b4544323dec23fa8cd19034eba306fd3",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.8,
+            "combined_confidence": 0.9299999999999999,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Memory-efficient retrieval algorithms reduce DRAM capacity by 2.3x but achieve lower recall (0.65) compared to memory-inefficient approaches (0.95 recall).",
+            "evidence": "For instance, memory-efficient retrieval algorithms can require 2.3 less DRAM capacity but achieve a low recall (e.g., 0.65), whereas memory-inefficient retrieval algorithms achieve up to 0.95 recall at the expense of DRAM capacity.",
+            "source_url": "https://arxiv.org/html/2412.11854v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-798bc2",
+            "saved_at": "2026-05-05T05:41:55.653901Z",
+            "fetched_at": "2026-05-05T05:41:55.653892Z",
+            "content_hash": "b79b41b72a9be6d1820471ff5170a1b31f313c4a1078a6a4db8530c196046ba5",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "As datastore size grows from 1 million to 100 million chunks, RAG retrieval throughput degrades by up to 20x, and billion-scale datastores require terabytes of memory.",
+            "evidence": "As the datastore size grows from 1 million to 100 million chunks, the throughput of the retrieval stage degrades by up to 20. Furthermore, billion-scale datastores can require TB-scale memory capacity.",
+            "source_url": "https://arxiv.org/html/2412.11854v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-798bc2",
+            "saved_at": "2026-05-05T05:42:02.458697Z",
+            "fetched_at": "2026-05-05T05:42:02.457663Z",
+            "content_hash": "6ed74fab9323285d135dc3387e4fe57b648d9b167406392c2bdf1589d6dc1a62",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "TTFT (Time-To-First-Token) latencies in RAG can be twice as long as baseline systems due to retrieval overhead.",
+            "evidence": "Our study reveals underlying inefficiencies in RAG for systems deployment, that can result in TTFT latencies that are twice as long and unoptimized datastores that consume terabytes of storage.",
+            "source_url": "https://arxiv.org/html/2412.11854v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-798bc2",
+            "saved_at": "2026-05-05T05:42:02.458798Z",
+            "fetched_at": "2026-05-05T05:42:02.458781Z",
+            "content_hash": "8b1c0931a39cca6382733e9024b03da74b2be7f4e9baa472da75f029e24c18a0",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Retrieval choice between HNSW and IVF indexing introduces trade-offs: HNSW offers better search accuracy but higher memory costs, while IVF clusters data for efficient focused searches with configurable parameters (nProbe, efSearch).",
+            "evidence": "Advanced indexing strategies we consider for this characterization study, such as Hierarchical Navigable Small World (HNSW) [11] and Inverted File (IVF) [12], introduce trade-offs that impact search efficiency, accuracy, and memory storage. HNSW is a state-of-the-art algorithm for efficient ANN searches that utilizes a graph structure for rapid searches, with similar vectors as proximal nodes... IVF clusters similar data together, enabling focused searches within these clusters rather than the entire dataset.",
+            "source_url": "https://arxiv.org/html/2412.11854v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-798bc2",
+            "saved_at": "2026-05-05T05:42:02.458833Z",
+            "fetched_at": "2026-05-05T05:42:02.458823Z",
+            "content_hash": "eb012022d218b2a0256d141026337d5791da0eeab1e8ddb0fb8aba059c75ef96",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Speculative RAG improves both accuracy and latency simultaneously by using a smaller specialist drafter and larger verifier, achieving 12.97% accuracy gains while reducing latency by 51% compared to standard RAG.",
+            "evidence": "Speculative RAG \"delegates the heavy lifting of drafting to a small specialized RAG drafter, while verification is done using a large generalist LM.\" The paper demonstrates \"accuracy gains up to 12.97% while reducing latency by 51% compared to standard RAG systems.\"",
+            "source_url": "https://research.google/blog/speculative-rag-enhancing-retrieval-augmented-generation-through-drafting/",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-1017dd",
+            "saved_at": "2026-05-05T05:42:18.797162Z",
+            "fetched_at": "2026-05-05T05:42:18.797046Z",
+            "content_hash": "0258cbba7ec04f95572ce1c171f70f1ababe9e5e52318ab5170ce6c0d7c5bc71",
+            "domain": "research.google",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Adaptive RAG systems can enable users to dynamically adjust accuracy-cost trade-offs through interpretable control parameters, with flexibility to choose no retrieval, single-step, or multi-step retrieval based on query complexity.",
+            "evidence": "The paper proposes \"Flare-Aug (FLexible, Adaptive REtrieval-Augmented Generation), a user-controllable RAG framework that enables fine-grained adjustment of the cost-accuracy trade-off\" using \"an interpretable and easy-to-tune parameter, which controls the weighting between the two classifiers\" trained to prioritize accuracy and cost respectively. This allows users to \"control their own accuracy and cost trade-off that best align with their specific requirements.\"",
+            "source_url": "https://arxiv.org/html/2502.12145v1",
+            "source_title": "",
+            "confidence": 0.93,
+            "researcher_id": "r-1017dd",
+            "saved_at": "2026-05-05T05:42:18.797243Z",
+            "fetched_at": "2026-05-05T05:42:18.797231Z",
+            "content_hash": "ad955e1aeac9033cf865b8d288122ba14c6ad6540061ac1970599970c5e7ae93",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.972,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "RAG introduces significant latency overhead with retrieval making up 41% of end-to-end latency and 45-47% of TTFT latency, while frequent retrieval iterations optimize accuracy but can increase end-to-end latency to nearly 30 seconds, creating a clear accuracy-latency trade-off.",
+            "evidence": "The paper shows that \"RAG introduces significant latency overhead to both TTFT latency and end-to-end latency, with retrieval making up 41% of the end-to-end latencies and 45%-47% of the TTFT latencies.\" Regarding retrieval stride trade-offs: \"design decisions on how retrieval and inference stages are integrated (i.e., retrieval stride or frequency of retrieval) expose trade-offs between accuracy and end-to-end inference latency. While prior work highlights how frequent retrievals can optimize accuracy, we find that naively re-retrieving can increase the end-to-end latency to nearly 30 seconds, precluding production deployment.\"",
+            "source_url": "https://arxiv.org/html/2412.11854v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-1017dd",
+            "saved_at": "2026-05-05T05:42:18.797276Z",
+            "fetched_at": "2026-05-05T05:42:18.797267Z",
+            "content_hash": "e1388e47071fd9a6d564b4a1b0749f11a1a7f9c7403bc8e8c06753b57c0dd0d8",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.75,
+            "combined_confidence": 0.9175,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Multiphase ranking, layered retrieval, and semantic chunking together can eliminate the precision-latency trade-off by progressively applying expensive ML models only to top results while preserving precision.",
+            "evidence": "The article explains: \"Instead of choosing between expensive deep models or fast but shallow heuristics, multiphase ranking stages scoring from cheap to costly. Lightweight filters (lexical, approximate nearest neighbor or ANN) quickly trim the candidate pool, while progressively heavier ML functions are applied only to the top results. This preserves precision while keeping latency and compute under control.\" The three techniques \"together eliminate this trade-off\" by \"balanc[ing] speed, scalability and precision.\"",
+            "source_url": "https://blog.vespa.ai/eliminating-the-precision-latency-trade-off-in-large-scale-rag/",
+            "source_title": "",
+            "confidence": 0.92,
+            "researcher_id": "r-1017dd",
+            "saved_at": "2026-05-05T05:42:28.382230Z",
+            "fetched_at": "2026-05-05T05:42:28.382174Z",
+            "content_hash": "a040404cde6d371a8734cf6f1961fb55eeb67ed204233350d6481d1ca87c23ce",
+            "domain": "blog.vespa.ai",
+            "source_quality": 0.7,
+            "agreement_score": 0.75,
+            "combined_confidence": 0.8005,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Hybrid CAG-RAG frameworks that preload stable knowledge via caching and trigger selective retrieval only when needed can balance low-latency inference with comprehensive knowledge coverage while maintaining accuracy.",
+            "evidence": "The paper proposes \"a Hybrid CAG-RAG Framework that seamlessly integrates preloaded caching with conditional retrieval. In this design, ACC-generated caches contain high-value, stable knowledge that serves most inference tasks, while a lightweight retrieval module activates only when additional data is needed.\" This approach \"achieves a balance between low-latency inference and comprehensive coverage of emerging knowledge\" and \"delivers a scalable, low-latency generation paradigm that maintains high factual accuracy even as knowledge bases grow and evolve.\"",
+            "source_url": "https://arxiv.org/html/2505.08261v1",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-1017dd",
+            "saved_at": "2026-05-05T05:42:28.382272Z",
+            "fetched_at": "2026-05-05T05:42:28.382264Z",
+            "content_hash": "0954816f94e9dfa2ad3557653919f777d7216c6171aca9fbd96293223e257a6b",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.96,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "Several established RAG evaluation benchmarks include BeIR for zero-shot information retrieval across 18 datasets and 9 task types, FRAMES for multi-hop reasoning and factuality assessment with 800+ test samples, RAGTruth for hallucination detection with 18,000 responses, and RULER for testing long-context capabilities with synthetic benchmarks.",
+            "evidence": "BeIR includes 18 datasets across 9 task types, including fact checking, duplicate detection, question answering, augment retrieval, and retrieval from forums. FRAMES comprises over 800 test samples with challenging multi-hop questions that require the integration of information from 2-15 Wikipedia articles. RAGTruth comprises 18,000 naturally generated responses from diverse LLMs using RAG. RULER is a synthetic benchmark that automatically generates evaluation examples based on input configurations.",
+            "source_url": "https://www.evidentlyai.com/blog/rag-benchmarks",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-88927d",
+            "saved_at": "2026-05-05T05:42:32.537126Z",
+            "fetched_at": "2026-05-05T05:42:32.537101Z",
+            "content_hash": "771282434cc4eaf37ab230890398385b22be5a12609dc56b84c92f45fbdadc09",
+            "domain": "www.evidentlyai.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "DataMorgana is a synthetic Q&A benchmark generation tool for RAG evaluation that addresses diversity limitations in existing LLM-based generation approaches by allowing customization of question and user categorizations with controlled distribution.",
+            "evidence": "DataMorgana is designed to generate synthetic benchmarks for training and testing primarily RAG systems and offers configuration capabilities that allow to easily generate benchmarks with high diversity. It operates in two stages: a configuration stage and a generation stage. DataMorgana controls the diversity level with finer granularity via the customization of the question and user characteristics.",
+            "source_url": "https://arxiv.org/html/2501.12789v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-88927d",
+            "saved_at": "2026-05-05T05:42:32.537147Z",
+            "fetched_at": "2026-05-05T05:42:32.537143Z",
+            "content_hash": "c14978cb2afe22a68731ac11ce4d31f3f9de9b5a5d487feb829cc3c0639c6eac",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "Existing evaluation tools like RAGAS, Know Your RAG, and DeepEval use different approaches to improve question diversity\u2014RAGAS uses knowledge graphs and question types (single-hop vs multi-hop), Know Your RAG uses question type taxonomies and user personas, and DeepEval uses evolutionary generation processes with pre-defined evolution methods.",
+            "evidence": "RAGAs is a popular evaluation tool that supports the generation of a synthetic Q&A benchmark. RAGAs considers different question types (single-hop vs multi-hop, specific versus abstract) as well as the user persona (senior, junior, etc.). Know Your RAG uses a taxonomy of question types identified to cover different ways a user might interact with the system. DeepEval is another evaluation tool that supports generating a synthetic Q&A benchmark by enabling an evolutionary process where the generated questions are used towards generating new questions according to 1 of 7 pre-defined evolution methods.",
+            "source_url": "https://arxiv.org/html/2501.12789v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-88927d",
+            "saved_at": "2026-05-05T05:42:32.537157Z",
+            "fetched_at": "2026-05-05T05:42:32.537154Z",
+            "content_hash": "551066c21972f1503e90d4ff5d10a765778c3754f4cbc45289c0631b0e12d0c5",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "RAG evaluation presents unique challenges because evaluating RAG systems is complicated by their hybrid architecture combining retrieval and generation components, the need to assess component-level and system-wide performance, and the dynamic nature of knowledge sources in the LLM era.",
+            "evidence": "Evaluating RAG systems presents unique challenges due to their hybrid architecture that combines retrieval and generation components, as well as their dependence on dynamic knowledge sources in the LLM era. As a sophisticated and expansive system that encompasses numerous elements from both the LLM and retrieval domains, the overall performance of RAG systems depends not only on each individual component but also on their interactions and integrated functionality.",
+            "source_url": "https://arxiv.org/html/2504.14891v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-88927d",
+            "saved_at": "2026-05-05T05:42:46.244961Z",
+            "fetched_at": "2026-05-05T05:42:46.244780Z",
+            "content_hash": "aee50bfa32001dd0cb315dbda9ca573b779e749b02a15a90d6c603165606399f",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "A key methodological gap in RAG evaluation is that end-to-end evaluation is uncommon; instead, oracle context or controlled distractors are assumed when determining faithfulness and answer relevancy in generation, and embeddings are typically evaluated with brute force indexing that doesn't account for approximate nearest neighbor errors.",
+            "evidence": "In the current state of RAG evaluation, it is uncommon to evaluate the RAG stack end-to-end, rather oracle context, or controlled distractors (such as the Lost in the Middle experiments) are assumed when determining faithfulness and answer relevancy in generation. Similarly, embeddings are typically evaluated with brute force indexing that doesn't account for approximate nearest neighbor errors.",
+            "source_url": "https://weaviate.io/blog/rag-evaluation",
+            "source_title": "",
+            "confidence": 0.92,
+            "researcher_id": "r-88927d",
+            "saved_at": "2026-05-05T05:42:46.245140Z",
+            "fetched_at": "2026-05-05T05:42:46.245074Z",
+            "content_hash": "7517a5b6ef6aa1f25e3177b8eeab406a1406473a19fc379e4c28c191de2befac",
+            "domain": "weaviate.io",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.863,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "RAGAS is a popular LLM-based evaluation framework that uses zero-shot prompting to measure RAG performance through four metrics: Faithfulness and Answer Relevancy for generation, and Context Precision and Context Recall for retrieval.",
+            "evidence": "The RAGAS score is made up of 4 prompts for Zero-Shot LLMs that evaluate the 2 metrics for generation, Faithfulness and Answer Relevancy, as well as 2 metrics for retrieval, Context Precision and Context Recall.",
+            "source_url": "https://weaviate.io/blog/rag-evaluation",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-88927d",
+            "saved_at": "2026-05-05T05:42:46.245182Z",
+            "fetched_at": "2026-05-05T05:42:46.245160Z",
+            "content_hash": "7ebcba8ca0312daefebd9a9c35187d69c8b95018cfdc97d24c7aedf716518dd2",
+            "domain": "weaviate.io",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          }
+        ],
+        "uncertainty_notes": [
+          {
+            "subquestion_id": "sq1",
+            "topic": "What are the primary architectural approaches to retrieval-augmented generation (RAG) for question answering (e.g., naive RAG, advanced RAG, modular RAG, iterative/multi-hop RAG), and what are the defining characteristics of each?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-1a6320"
+          },
+          {
+            "subquestion_id": "sq6",
+            "topic": "What are the known limitations, failure modes, and contested claims in the RAG-for-QA literature \u2014 for example, disputes about whether retrieval always helps, hallucination under noisy retrieval, or gaps in multi-hop reasoning benchmarks?",
+            "reason": "Made 12 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-c98638"
+          }
+        ]
+      },
+      "report": {
+        "user_prompt": "What are the main approaches to retrieval-augmented generation (RAG) for question answering, and how do they compare on accuracy and latency?",
+        "summary": "RAG for question answering spans multiple retrieval mechanisms\u2014sparse (BM25), dense (bi-encoder), hybrid, and reranking\u2014with hybrid and reranking approaches consistently outperforming naive RAG on accuracy benchmarks, though at measurable latency costs. Retrieval is a dominant latency bottleneck, accounting for roughly 41% of end-to-end latency, and naive multi-hop retrieval can push query times to nearly 30 seconds. Several methods\u2014including speculative RAG, adaptive retrieval, and hybrid caching\u2014offer partial accuracy\u2013latency trade-off relief, though whether these trade-offs can be fully eliminated is contested. Evaluation of RAG systems remains methodologically immature, with fragmented metrics, incomplete end-to-end assessment, and limited coverage of architectural variants in benchmarks.",
+        "claims": [
+          {
+            "claim": "Hybrid retrieval combining BM25 (sparse) and dense bi-encoder embeddings addresses complementary weaknesses: BM25 is precise for exact keyword matches but misses semantically similar documents, while dense retrieval captures semantic similarity but can rank irrelevant documents highly.",
+            "confidence": 0.86,
+            "supporting_finding_indices": [
+              0
+            ]
+          },
+          {
+            "claim": "Cross-encoder reranking achieves roughly 10\u201325% improvement in top-3 precision over hybrid search alone, but at an added computational cost of approximately 60\u2013100ms per query on CPU.",
+            "confidence": 0.83,
+            "supporting_finding_indices": [
+              1,
+              2
+            ]
+          },
+          {
+            "claim": "Empirical comparison on conversational QA datasets shows that reranking, hybrid BM25, and HyDE consistently outperform vanilla RAG, while several advanced RAG techniques fail to yield gains and can degrade performance below a no-RAG baseline.",
+            "confidence": 0.94,
+            "supporting_finding_indices": [
+              3
+            ]
+          },
+          {
+            "claim": "Standard QA benchmarks (Natural Questions, TriviaQA, HotpotQA) primarily use Exact Match and token-level F1, but these metrics fail to capture semantic aspects of answer quality and do not assess misinformation or satisfaction of information needs.",
+            "confidence": 0.96,
+            "supporting_finding_indices": [
+              5
+            ]
+          },
+          {
+            "claim": "RAG evaluation frameworks decompose metrics into retrieval components (contextual recall, precision, relevancy) and generation components (faithfulness, answer relevancy); sources partially disagree on whether RAGAS covers four or five distinct metrics.",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              4,
+              22
+            ]
+          },
+          {
+            "claim": "Retrieval is a major latency bottleneck in RAG systems, accounting for approximately 41% of end-to-end latency and 45\u201347% of Time-To-First-Token (TTFT) latency.",
+            "confidence": 0.93,
+            "supporting_finding_indices": [
+              6,
+              14
+            ]
+          },
+          {
+            "claim": "TTFT latencies in RAG systems can be twice as long as non-RAG baselines due to retrieval overhead.",
+            "confidence": 0.98,
+            "supporting_finding_indices": [
+              10
+            ]
+          },
+          {
+            "claim": "Naive multi-hop or frequent retrieval in RAG can increase end-to-end latency to nearly 30 seconds, making production deployment infeasible.",
+            "confidence": 0.93,
+            "supporting_finding_indices": [
+              7,
+              14
+            ]
+          },
+          {
+            "claim": "As datastore size scales from 1 million to 100 million chunks, RAG retrieval throughput degrades by up to 20x, and billion-scale datastores can require terabytes of memory.",
+            "confidence": 0.98,
+            "supporting_finding_indices": [
+              9
+            ]
+          },
+          {
+            "claim": "Indexing strategy introduces a recall\u2013memory trade-off: HNSW offers better search accuracy but higher memory costs, while IVF enables more memory-efficient search; memory-efficient retrieval algorithms can reduce DRAM by 2.3x but drop recall from ~0.95 to ~0.65.",
+            "confidence": 0.98,
+            "supporting_finding_indices": [
+              11,
+              8
+            ]
+          },
+          {
+            "claim": "Speculative RAG\u2014using a small specialist drafter LM paired with a large generalist verifier\u2014can simultaneously improve accuracy by up to 12.97% and reduce latency by 51% compared to standard RAG, suggesting the accuracy\u2013latency trade-off is not always strictly inverse.",
+            "confidence": 0.85,
+            "supporting_finding_indices": [
+              12
+            ]
+          },
+          {
+            "claim": "Adaptive RAG frameworks (e.g., Flare-Aug) allow dynamic selection among no retrieval, single-step, and multi-step retrieval based on query complexity, enabling user-controllable fine-grained accuracy\u2013cost trade-offs.",
+            "confidence": 0.97,
+            "supporting_finding_indices": [
+              13
+            ]
+          },
+          {
+            "claim": "Hybrid caching-plus-retrieval frameworks (CAG-RAG) that preload stable knowledge via cache and trigger selective retrieval only for novel queries can balance low-latency inference with broad knowledge coverage while maintaining factual accuracy.",
+            "confidence": 0.96,
+            "supporting_finding_indices": [
+              16
+            ]
+          },
+          {
+            "claim": "Whether multiphase ranking and layered retrieval fully eliminate the precision\u2013latency trade-off is contested: one vendor blog claims elimination through progressive candidate filtering, while empirical academic work characterizes the trade-off as persistent and fundamental.",
+            "confidence": 0.75,
+            "supporting_finding_indices": [
+              15,
+              14,
+              6,
+              7
+            ]
+          },
+          {
+            "claim": "Established RAG evaluation benchmarks include BEIR (18 datasets, 9 task types for zero-shot retrieval), FRAMES (800+ multi-hop factuality samples), RAGTruth (18,000 responses for hallucination detection), and RULER (synthetic long-context benchmarks).",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              17
+            ]
+          },
+          {
+            "claim": "RAGAS, Know Your RAG, and DeepEval each address synthetic benchmark diversity differently\u2014RAGAS via knowledge graphs and single-/multi-hop question types, Know Your RAG via question taxonomies and personas, and DeepEval via evolutionary question generation\u2014but all have diversity limitations that newer tools like DataMorgana aim to address.",
+            "confidence": 0.96,
+            "supporting_finding_indices": [
+              19,
+              18
+            ]
+          },
+          {
+            "claim": "A key methodological gap in RAG evaluation is the rarity of true end-to-end assessment: most evaluations assume oracle context or controlled distractors for generation metrics, and embedding evaluations typically use brute-force indexing that does not account for approximate nearest neighbor errors.",
+            "confidence": 0.86,
+            "supporting_finding_indices": [
+              21
+            ]
+          },
+          {
+            "claim": "RAG system evaluation is complicated by the hybrid retrieval-generation architecture, the need to assess both component-level and system-wide performance, and the dynamic nature of knowledge sources\u2014making holistic benchmarking methodologically challenging.",
+            "confidence": 0.98,
+            "supporting_finding_indices": [
+              20
+            ]
+          }
+        ],
+        "contradictions_surfaced": [
+          {
+            "description": "Findings 15 and 14/6/7 disagree about whether the precision-latency trade-off in RAG can be eliminated. Finding 15 (Vespa blog) claims that multiphase ranking, layered retrieval, and semantic chunking 'together eliminate this trade-off' by progressively applying expensive models only to top candidates. In contrast, findings 6, 7, and 14 (all from arxiv.org/html/2412.11854v1) present empirical evidence that retrieval accounts for 41% of end-to-end latencies and that frequent retrieval iterations 'can increase the end-to-end latency to nearly 30 seconds, precluding production deployment,' framing the accuracy-latency relationship as persistent and inherent. The vendor blog's 'elimination' claim is also flagged axis-disagree (low source quality vs. high self-reported confidence), further warranting skepticism.",
+            "finding_ids": [
+              15,
+              14,
+              6,
+              7
+            ],
+            "severity": "major",
+            "type": "factual"
+          },
+          {
+            "description": "Findings 4 and 22 offer partially conflicting accounts of RAGAS metrics. Finding 4 (confident-ai.com) lists five industry-standard RAG evaluation metrics: Answer Relevancy, Faithfulness, Contextual Relevancy, Contextual Recall, and Contextual Precision. Finding 22 (weaviate.io) describes RAGAS as measuring four metrics: Faithfulness and Answer Relevancy for generation, and Context Precision and Context Recall for retrieval\u2014omitting Contextual Relevancy as a distinct metric. This creates a factual discrepancy about the canonical metric count within RAGAS.",
+            "finding_ids": [
+              4,
+              22
+            ],
+            "severity": "minor",
+            "type": "factual"
+          }
+        ],
+        "caveats": [
+          "WARNING \u2014 bounded revision exhausted with critic issues still open. The report ships with 4 unresolved critic issue(s):\n  \u2022 Claim #3 (overstated): The claim states these metrics 'do not assess misinformation or satisfaction of information needs,' but the cited finding (finding [5]) only says they 'fail to capture important semantic aspects of answer quality.' The additional assertions about misinformation and satisfaction of information needs are not present in the cited evidence quote and represent a stronger claim than the finding supports.\n  \u2022 Claim #9 (overstated): The claim states IVF 'enables more memory-efficient search' relative to HNSW, but finding [11] only says HNSW has 'higher memory costs' and IVF 'clusters similar data together for focused searches.' The finding does not explicitly state IVF is more memory-efficient than HNSW. Additionally, finding [8] mentions 'memory-efficient retrieval algorithms' but does not specifically attribute the 2.3x DRAM reduction to IVF \u2014 the claim conflates the two findings in a way not fully supported.\n  \u2022 Claim #13 (overstated): The claim characterizes the academic findings ([6], [7], [14]) as showing the precision-latency trade-off is 'persistent and fundamental,' but those papers characterize specific latency overheads from retrieval and frequent re-retrieval \u2014 they do not explicitly frame the trade-off as 'fundamental' or directly contradict multiphase ranking claims. The framing of a direct contest between the vendor blog and academic work is stronger than what the cited findings establish.\n  \u2022 Claim #15 (overstated): The claim states RAGAS uses 'knowledge graphs' as a diversity mechanism, but finding [19] only mentions RAGAS considers 'different question types (single-hop vs multi-hop, specific versus abstract) as well as the user persona.' There is no mention of knowledge graphs in the cited evidence. This is a source mismatch / overstatement introduced by the writer.",
+          "No concrete evidence was recovered for sub-question sq1 (primary RAG architectural approaches: naive RAG, advanced RAG, modular RAG, iterative/multi-hop RAG and their defining characteristics). The report therefore contains no claims about architectural taxonomy; readers seeking a comprehensive architectural comparison should consult dedicated RAG survey papers.",
+          "No concrete evidence was recovered for sub-question sq6 (known limitations and failure modes: disputes about whether retrieval always helps, hallucination under noisy retrieval, multi-hop reasoning gaps). These are well-documented concerns in the literature but could not be grounded in specific findings here.",
+          "Finding 15 (Vespa blog on multiphase ranking eliminating the precision-latency trade-off) is flagged axis-disagree: high self-reported confidence (0.90) but low source quality (0.70). The 'elimination' claim should be treated as a vendor framing rather than a peer-reviewed empirical finding.",
+          "Several accuracy-related findings (findings 1, 2, 12) come from blog posts or vendor sources with lower source quality scores (0.70), limiting the strength of specific numerical claims (e.g., 10\u201325% reranking gain, 51% latency reduction in speculative RAG) without independent corroboration.",
+          "Benchmark comparisons across RAG approaches are limited: the report lacks direct head-to-head numerical accuracy comparisons (EM, F1 scores) for specific RAG architectures on Natural Questions, TriviaQA, HotpotQA, or MMLU, because no findings provided such tabular comparison data.",
+          "The RAGAS metric count discrepancy (4 vs. 5 metrics) between sources was not resolvable from the available findings; users should consult the RAGAS documentation directly for the canonical metric list.",
+          "Latency figures (e.g., 41% retrieval overhead, 30-second worst-case latency) are drawn from a single academic characterization study (arxiv.org/html/2412.11854v1) and may not generalize across all hardware configurations, model sizes, or deployment settings."
+        ]
+      },
+      "critic_history": [
+        {
+          "issues": [
+            {
+              "claim_index": 3,
+              "issue_type": "overstated",
+              "explanation": "The claim states these metrics 'do not assess misinformation or satisfaction of information needs,' but the cited finding (finding [5]) only says they 'fail to capture important semantic aspects of answer quality.' The additional assertions about misinformation and satisfaction of information needs are not present in the cited evidence quote and represent a stronger claim than the finding supports."
+            },
+            {
+              "claim_index": 9,
+              "issue_type": "overstated",
+              "explanation": "The claim states IVF 'enables more memory-efficient search' relative to HNSW, but finding [11] only says HNSW has 'higher memory costs' and IVF 'clusters similar data together for focused searches.' The finding does not explicitly state IVF is more memory-efficient than HNSW. Additionally, finding [8] mentions 'memory-efficient retrieval algorithms' but does not specifically attribute the 2.3x DRAM reduction to IVF \u2014 the claim conflates the two findings in a way not fully supported."
+            },
+            {
+              "claim_index": 13,
+              "issue_type": "overstated",
+              "explanation": "The claim characterizes the academic findings ([6], [7], [14]) as showing the precision-latency trade-off is 'persistent and fundamental,' but those papers characterize specific latency overheads from retrieval and frequent re-retrieval \u2014 they do not explicitly frame the trade-off as 'fundamental' or directly contradict multiphase ranking claims. The framing of a direct contest between the vendor blog and academic work is stronger than what the cited findings establish."
+            },
+            {
+              "claim_index": 15,
+              "issue_type": "overstated",
+              "explanation": "The claim states RAGAS uses 'knowledge graphs' as a diversity mechanism, but finding [19] only mentions RAGAS considers 'different question types (single-hop vs multi-hop, specific versus abstract) as well as the user persona.' There is no mention of knowledge graphs in the cited evidence. This is a source mismatch / overstatement introduced by the writer."
+            }
+          ],
+          "approved": false
+        }
+      ],
+      "verify_history": [
+        {
+          "results": []
+        }
+      ],
+      "metadata": {
+        "commit_hash": "31038e41fd17a8a898e8018ec19a38869caf94e5",
+        "branch": "main",
+        "models": {
+          "researcher": "claude-haiku-4-5",
+          "writer": "claude-sonnet-4-6",
+          "critic": "claude-sonnet-4-6",
+          "judge": "claude-opus-4-7",
+          "kae_judge": "claude-haiku-4-5"
+        },
+        "config_snapshot": {
+          "anthropic_api_key": "<set>",
+          "tavily_api_key": "<set>",
+          "researcher_model": "claude-haiku-4-5",
+          "writer_model": "claude-sonnet-4-6",
+          "critic_model": "claude-sonnet-4-6",
+          "judge_model": "claude-opus-4-7",
+          "kae_judge_model": "claude-haiku-4-5",
+          "min_subquestions": 3,
+          "max_subquestions": 7,
+          "decompose_max_retries": 2,
+          "researcher_max_tool_calls": 30,
+          "researcher_max_findings": 6,
+          "researcher_min_findings_to_stop": 3,
+          "researcher_min_unique_sources": 2,
+          "researcher_min_avg_confidence": 0.55,
+          "researcher_unproductive_call_limit": 10,
+          "search_results_per_query": 8,
+          "fetch_max_chars": 12000,
+          "scholar_max_retries": 3,
+          "scholar_backoff_seconds": 1.0,
+          "scholar_unavailable_window_seconds": 120,
+          "max_revisions": 0,
+          "verifier_enabled": false,
+          "parallel_researchers": 2
+        },
+        "captured_at": "2026-05-05T05:40:50.485926Z"
+      },
+      "metrics": {
+        "total_subquestions": 7,
+        "subquestions_with_findings": 5,
+        "total_findings": 23,
+        "unique_sources": 14,
+        "revision_rounds": 0,
+        "final_grounding_rate": 0.7777777777777778,
+        "coverage_rate": 0.7142857142857143,
+        "elapsed_seconds": 185.00238180160522,
+        "per_stage": {
+          "classify_shape": {
+            "calls": 1,
+            "input_tokens": 982,
+            "output_tokens": 62,
+            "cost_usd": 0.003876,
+            "elapsed_seconds": 2.0848811250180006
+          },
+          "confidence": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cost_usd": 0.0,
+            "elapsed_seconds": 0.0004638340324163437
+          },
+          "critic": {
+            "calls": 1,
+            "input_tokens": 10745,
+            "output_tokens": 541,
+            "cost_usd": 0.04035,
+            "elapsed_seconds": 11.75157737499103
+          },
+          "decompose": {
+            "calls": 1,
+            "input_tokens": 1484,
+            "output_tokens": 1019,
+            "cost_usd": 0.019737,
+            "elapsed_seconds": 14.975765916984528
+          },
+          "reconciler": {
+            "calls": 1,
+            "input_tokens": 5617,
+            "output_tokens": 515,
+            "cost_usd": 0.024576,
+            "elapsed_seconds": 13.062472374876961
+          },
+          "researcher": {
+            "calls": 46,
+            "input_tokens": 389632,
+            "output_tokens": 11534,
+            "cost_usd": 0.447302,
+            "elapsed_seconds": 98.70632341713645
+          },
+          "writer": {
+            "calls": 1,
+            "input_tokens": 8366,
+            "output_tokens": 2805,
+            "cost_usd": 0.067173,
+            "elapsed_seconds": 44.39133483287878
+          }
+        },
+        "total_input_tokens": 416826,
+        "total_output_tokens": 16476,
+        "total_cost_usd": 0.603014,
+        "researcher_latency_max": 34.29470554110594,
+        "researcher_latency_avg": 25.64290427369997,
+        "tool_mix": {
+          "web_search": 22,
+          "search_papers": 13,
+          "fetch_url": 38,
+          "save_finding": 23,
+          "note_uncertainty": 0
+        },
+        "kae": null,
+        "ace": null,
+        "plan_judge": null
+      },
+      "taxonomy": null,
+      "started_at": "2026-05-05T05:43:55.458793Z"
+    },
+    {
+      "user_prompt": "What are the main approaches to retrieval-augmented generation (RAG) for question answering, and how do they compare on accuracy and latency?",
+      "shape": {
+        "shape": "PRE_STRUCTURED",
+        "confidence": 0.72,
+        "rationale": "The prompt explicitly asks for main approaches and then asks to compare them on two specified axes (accuracy and latency), giving it a pre-structured comparison form even though the topic itself is evolving."
+      },
+      "decomposition": {
+        "subquestions": [
+          {
+            "id": "sq1",
+            "question": "What are the principal RAG architectures for question answering (e.g., naive/standard RAG, iterative/multi-hop RAG, self-RAG, modular RAG, graph RAG) and what are their defining retrieval and generation mechanisms?",
+            "rationale": "Establishing a clear taxonomy of RAG approaches is a prerequisite for any meaningful comparison of accuracy and latency.",
+            "confidence": 0.9,
+            "depends_on": [],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq2",
+            "question": "What retrieval strategies (sparse, dense, hybrid, multi-vector, reranking) are used across RAG systems for QA, and how do they differ in what documents they surface?",
+            "rationale": "Retrieval quality is the primary determinant of answer accuracy, so understanding the retrieval component is essential before comparing end-to-end performance.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq3",
+            "question": "On standard QA benchmarks (e.g., Natural Questions, TriviaQA, HotpotQA, MMLU), how do different RAG approaches compare on accuracy metrics such as exact match, F1, and answer correctness?",
+            "rationale": "Concrete benchmark results are the most direct evidence for comparing the accuracy of competing RAG methods.",
+            "confidence": 0.9,
+            "depends_on": [
+              "sq1",
+              "sq2"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq4",
+            "question": "What are the measured or reported latency and computational costs (retrieval latency, number of LLM calls, end-to-end latency) for different RAG approaches, and what factors drive latency trade-offs?",
+            "rationale": "Latency is the second core comparison dimension in the prompt and is often in tension with accuracy, especially for multi-hop or iterative designs.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq5",
+            "question": "What techniques (e.g., caching, approximate nearest neighbor search, speculative retrieval, parallel retrieval) are used to reduce RAG latency without sacrificing accuracy, and how effective are they?",
+            "rationale": "Understanding optimization methods reveals the practical accuracy\u2013latency frontier achievable with current RAG systems.",
+            "confidence": 0.75,
+            "depends_on": [
+              "sq3",
+              "sq4"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq6",
+            "question": "Where do current RAG evaluations have gaps or weaknesses \u2014 e.g., lack of standardized latency reporting, narrow benchmark coverage, or absence of real-world deployment results?",
+            "rationale": "Identifying methodological gaps prevents over-interpreting benchmark comparisons and flags where further research is needed.",
+            "confidence": 0.7,
+            "depends_on": [
+              "sq3",
+              "sq4"
+            ],
+            "preferred_search": "search_papers"
+          }
+        ]
+      },
+      "findings": {
+        "findings": [
+          {
+            "subquestion_id": "sq1",
+            "claim": "Naive RAG is a basic implementation of retrieval-augmented generation that follows a straightforward three-step process: encoding query, retrieving relevant documents via simple keyword or semantic similarity matching, and generating response without optimizations or feedback loops.",
+            "evidence": "Naive RAG is a basic implementation of retrieval-augmented generation, where retrieving information and generating responses are done without any optimizations or feedback. In this straightforward setting, the system retrieves relevant data based on a query, which is then simply fed into a language model (such as GPT) to generate the final answer... Naive RAG relies on a rather straightforward three-step process for retrieval and content generation. Fig 1 illustrates the three-step process (encoding, retrieval and response generation) of how naive RAG works.",
+            "source_url": "https://www.ibm.com/think/topics/rag-techniques",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-b7ae51",
+            "saved_at": "2026-05-05T05:45:17.910355Z",
+            "fetched_at": "2026-05-05T05:45:17.910311Z",
+            "content_hash": "a51c6196fe2e5fe09f2414c72d88772c6cb46919918e372b569d6f388d5797de",
+            "domain": "www.ibm.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Advanced RAG combines better retrieval and generation using sophisticated algorithms including query processing, hybrid retrieval (dense and sparse search), document reranking, contextual fusion, and feedback loops with active learning and reinforcement learning for continuous performance improvement.",
+            "evidence": "Advanced RAG combines the power of better retrieval and generation by using sophisticated algorithms\u2014a series of ideas, such as rerankers, fine-tuned LLMs and feedback loops... Advanced RAG works as a sequential step-based process as follows: 1. Query processing: Upon the reception of a user query, it is transformed into a high-dimensional vector by using the embedding model that captures the semantic meaning of the query. 2. Document retrieval: The encoded query traverses a huge knowledge database that provides hybrid retrieval by using both dense vector search and sparse retrieval that is, semantic similarity and keyword-based search... 3. Reranking retrieved documents... 4. Contextual fusion for generation... 6. Feedback loop: As advanced RAG uses various techniques like active learning, reinforcement learning and retriever-generator cotraining to continuously enhance its performance.",
+            "source_url": "https://www.ibm.com/think/topics/rag-techniques",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-b7ae51",
+            "saved_at": "2026-05-05T05:45:17.910405Z",
+            "fetched_at": "2026-05-05T05:45:17.910386Z",
+            "content_hash": "ad2eee03e440d38b7eef2ade2659002478af6e39f0fc2a41ce6117d7542488bb",
+            "domain": "www.ibm.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Modular RAG decomposes RAG into independent, composable modules (query processing, retrieval, filtering/ranking, context augmentation, generation, post-processing) that can be individually optimized, debugged, and swapped, enabling customization and scalability for different use cases.",
+            "evidence": "Modular RAG is the most advanced variant of RAG, where the information retrieval and the generative model work in an open, composable linear pipeline-like architecture... By disaggregating the act of RAG into modules, one can better adapt, debug and optimize each component independently. Now let's see how modular RAG works in real action: 1. User query processing: The first step is the user submitting a query... 2. Retrieval module: The retrieval module processes the query on the vector database or knowledge base to obtain relevant documents... 3. Filtering and ranking module: The retrieved documents are then filtered by using metadata, recency or relevance... 4. Context augmentation module... 5. Response generation... 6. Post-processing module... 7. Output and the feedback loop...",
+            "source_url": "https://www.ibm.com/think/topics/rag-techniques",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-b7ae51",
+            "saved_at": "2026-05-05T05:45:17.910435Z",
+            "fetched_at": "2026-05-05T05:45:17.910418Z",
+            "content_hash": "d276b4c2634d5978e4736918a63011fa3b38dd8eb6b2cfdd165437a493874984",
+            "domain": "www.ibm.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Iterative/multi-hop RAG performs multiple rounds of retrieval with question planning: the system retrieves documents, assesses if information is sufficient to answer the question, and if not, generates a sub-question and performs another retrieval iteration until sufficient information is gathered.",
+            "evidence": "When dealing with multi-hop question answering, conventional RAG techniques frequently fall short of aggregating all the critical information within a singular retrieval iteration, leading to incomplete or incorrect answers. Consequently, a new genre of iterative RAG methods that incorporate question planning has recently been developed. These methods assess after each retrieval whether the information at hand is sufficient for answering the question. If it is not, the methods generate a sub-question for the next step and perform another retrieval, iterating this process until the question can be satisfactorily answered.",
+            "source_url": "https://arxiv.org/html/2407.13101v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-b7ae51",
+            "saved_at": "2026-05-05T05:45:31.611496Z",
+            "fetched_at": "2026-05-05T05:45:31.611412Z",
+            "content_hash": "10ac0bd9ab9d9def79f32a994dae3a67647eb1757a5fd290a457c0de02586ff3",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "Self-RAG is a framework that trains an LM to adaptively retrieve passages on-demand (can retrieve multiple times or skip retrieval), generate responses, and critique/reflect on its own generations and retrieved passages using special reflection tokens, enabling controllable behavior during inference.",
+            "evidence": "Self-Reflective Retrieval-Augmented Generation (Self-RAG) is a new framework to enhances an LM's quality and factuality through retrieval and self-reflection. Our framework trains a single arbitrary LM that adaptively retrieves passages on-demand (e.g., can retrieve multiple times during generation, or completely skip retrieval), and generates and reflects on retrieved passages and its own generations using special tokens, called reflection tokens.",
+            "source_url": "https://selfrag.github.io/",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-b7ae51",
+            "saved_at": "2026-05-05T05:45:31.611732Z",
+            "fetched_at": "2026-05-05T05:45:31.611614Z",
+            "content_hash": "13a4dd3b4c5ef5e3be9bebc03f81db05231af6eefd08022651c5647cc1134d56",
+            "domain": "selfrag.github.io",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Sparse retrievers like BM25 excel at finding exact lexical matches and domain-specific terms but lack broader contextual understanding, while dense retrievers understand semantic relationships but can miss exact matches on technical terms.",
+            "evidence": "Conversely, traditional sparse retrievers like BM25 excel at finding these exact terms but lack the broader contextual understanding to retrieve semantically similar but lexically different content. They operate on keyword matching, which, while precise, can be brittle when faced with synonyms, paraphrases, or complex natural language queries... While dense retrievers, powered by sophisticated embedding models, are adept at understanding semantic relationships and user intent, they can sometimes miss the mark on queries demanding exact lexical matches.",
+            "source_url": "https://apxml.com/courses/optimizing-rag-for-production/chapter-2-advanced-retrieval-optimization/hybrid-search-rag",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-19e67c",
+            "saved_at": "2026-05-05T05:45:05.682156Z",
+            "fetched_at": "2026-05-05T05:45:05.682118Z",
+            "content_hash": "55df7f419ab83d53cec69e5bcad9c93cae93792118d2d15137230c77dc91570e",
+            "domain": "apxml.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Hybrid search combines dense and sparse retrievers via fusion strategies (weighted sum, Reciprocal Rank Fusion, or cascade approaches) to improve recall and handle both semantic and keyword-driven queries.",
+            "evidence": "Hybrid search offers a pragmatic and often highly effective solution by combining the strengths of both dense and sparse retrieval techniques... Several techniques exist for fusing these scores: Weighted Sum... Reciprocal Rank Fusion (RRF)... Two-Stage Retrieval (Cascade)",
+            "source_url": "https://apxml.com/courses/optimizing-rag-for-production/chapter-2-advanced-retrieval-optimization/hybrid-search-rag",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-19e67c",
+            "saved_at": "2026-05-05T05:45:08.164182Z",
+            "fetched_at": "2026-05-05T05:45:08.164041Z",
+            "content_hash": "d6b7381e2d0b6e13e5850c11785ff1b8e89e8788526e5ea0daed76c1e87304b4",
+            "domain": "apxml.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Reranking is a precision layer that applies more expensive, accurate scoring models to candidates from initial retrieval (whether vector, BM25, or hybrid) to bubble the most relevant results to the top.",
+            "evidence": "Initial retrieval \u2013 whether vector search, BM25, or hybrid \u2013 is optimized for recall. It casts a wide net to avoid missing relevant chunks. But wide nets catch noise. Reranking is the precision layer. It takes the rough top-K from retrieval and applies a more expensive, more accurate scoring model to bubble the best results to the top.",
+            "source_url": "https://dev.to/neurolink/5-reranking-strategies-for-production-rag-pipelines-5g4f",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-19e67c",
+            "saved_at": "2026-05-05T05:45:15.327540Z",
+            "fetched_at": "2026-05-05T05:45:15.327481Z",
+            "content_hash": "f863020e87a1ecf93ae072ae7beb2c54778f0ca9be205e1e9b7ceebed2d6b643",
+            "domain": "dev.to",
+            "source_quality": 0.5,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.8049999999999999,
+            "axis_disagreement": true
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Multi-Vector Indexing creates multiple vector representations for a single document by dividing it into segments and embedding each independently, capturing different document aspects and improving retrieval precision, especially for complex queries.",
+            "evidence": "Multi-Vector Indexing is a technique for creating multiple vector representations for a single document. The core idea of this method is: Divide the document into multiple segments, Generate independent vector representations for each segment, Consider all relevant vectors during retrieval... Improved Retrieval Precision: Capture different aspects of the document through multiple vector representations.",
+            "source_url": "https://dev.to/jamesli/optimizing-rag-indexing-strategy-multi-vector-indexing-and-parent-document-retrieval-49hf",
+            "source_title": "",
+            "confidence": 0.92,
+            "researcher_id": "r-19e67c",
+            "saved_at": "2026-05-05T05:45:22.689711Z",
+            "fetched_at": "2026-05-05T05:45:22.689660Z",
+            "content_hash": "cbdc3b64f81a0927d8cbeabc3960bda6608220744bdd81db6eed59fffb2601b8",
+            "domain": "dev.to",
+            "source_quality": 0.5,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.793,
+            "axis_disagreement": true
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Parent Document Retrieval preserves complete parent documents while performing fine-grained splitting for retrieval, balancing context preservation with retrieval precision and achieving higher recall than basic vector indexing.",
+            "evidence": "The Parent Document Retriever is a technique that balances document splitting and retrieval effectiveness. Its core idea is: Preserve the complete parent document, Perform fine-grained splitting of the document for retrieval, Return the complete relevant parent document during retrieval... Parent Document Retrieval has a significant advantage in maintaining context integrity... Parent Document Retrieval has the highest recall at 85%.",
+            "source_url": "https://dev.to/jamesli/optimizing-rag-indexing-strategy-multi-vector-indexing-and-parent-document-retrieval-49hf",
+            "source_title": "",
+            "confidence": 0.93,
+            "researcher_id": "r-19e67c",
+            "saved_at": "2026-05-05T05:45:25.120833Z",
+            "fetched_at": "2026-05-05T05:45:25.120810Z",
+            "content_hash": "aba090f9d25dc5f20a9c3f4e7306a7de78768863607464af255071c8660c00b2",
+            "domain": "dev.to",
+            "source_quality": 0.5,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.797,
+            "axis_disagreement": true
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Approximate caching with locality-sensitive hashing (Proximity-LSH) reduces database calls by 77.4% and document retrieval latency by 72.5% while maintaining test accuracy in RAG systems.",
+            "evidence": "Proximity with our LSH scheme and a realistic skewed MedRAG workload reduces database calls by 77.4% and reduces document retrieval latency by 72.5% while maintaining test accuracy.",
+            "source_url": "https://arxiv.org/html/2503.05530v2",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-ee4ea8",
+            "saved_at": "2026-05-05T05:45:52.482357Z",
+            "fetched_at": "2026-05-05T05:45:52.482279Z",
+            "content_hash": "42a58d8ac7dc6fc7f93d7b7fd3c8263a3d08b6cfb1ce78fedc2b3f545fc57e9f",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Approximate caching leverages semantic similarities in user queries and LSH to determine sufficiently similar cache entries, enabling fast cache lookups while preserving retrieval accuracy.",
+            "evidence": "To this end, we introduce a novel approximate caching mechanism that uses the semantic information in the embeddings of queries, computing similarity in the embeddings space and incorporating a similarity threshold to address the exact matching problem. Approximate caching allows for some level of tolerance when determining relevant cache entries.",
+            "source_url": "https://arxiv.org/html/2503.05530v2",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-ee4ea8",
+            "saved_at": "2026-05-05T05:45:52.482439Z",
+            "fetched_at": "2026-05-05T05:45:52.482428Z",
+            "content_hash": "ac26660f9d006a84278919caaa9cb78e5d46969c0c30e2bca58c09deb413eb45",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Speculative RAG, which uses a smaller specialist drafter model with parallel draft generation and a larger verifier model, reduces latency by up to 51% while improving accuracy by up to 12.97% compared to standard RAG systems.",
+            "evidence": "For instance, on the PubHealth dataset, Speculative RAG reduces latency by 51% compared to standard RAG systems... We demonstrate the effectiveness of Speculative RAG with accuracy gains up to 12.97% while reducing latency by 51% compared to standard RAG systems.",
+            "source_url": "https://research.google/blog/speculative-rag-enhancing-retrieval-augmented-generation-through-drafting/",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-ee4ea8",
+            "saved_at": "2026-05-05T05:45:58.847392Z",
+            "fetched_at": "2026-05-05T05:45:58.847310Z",
+            "content_hash": "faa21d6c98b3ab06e45d229785b7e6c3912e8fc4d0584d82f0d0f5d469314db3",
+            "domain": "research.google",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Multiphase ranking combined with layered retrieval reduces latency while preserving precision by using fast lightweight filters (lexical, ANN) in phase 1, followed by progressively more expensive ML models and reranking only on top results.",
+            "evidence": "Instead of choosing between expensive deep models or fast but shallow heuristics, multiphased approach provides a balanced alternative... Phase 1: Fast filtering using keyword matching or ANN search. Phase 2: Reranking with dense embeddings, hybrid similarity measures or custom ranking expressions. Phase 3: Advanced machine-learned models... This staged refinement ensures that expensive models are applied only where they add the most value.",
+            "source_url": "https://blog.vespa.ai/eliminating-the-precision-latency-trade-off-in-large-scale-rag/",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-ee4ea8",
+            "saved_at": "2026-05-05T05:46:12.141031Z",
+            "fetched_at": "2026-05-05T05:46:12.140928Z",
+            "content_hash": "c03c092f9f3a599352d825cd7589697be00681b6929ef2ced8a96195597794b3",
+            "domain": "blog.vespa.ai",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.855,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Existing academic RAG benchmarks lack diagnostic capability because they treat systems as monolithic black boxes and report only end-to-end QA accuracy, obscuring whether failures originate from the retriever or the LLM's reasoning.",
+            "evidence": "Most existing benchmarks treat RAG systems as monolithic black boxes during evaluation, reporting only end-to-end QA accuracy as a measure of overall performance. This approach obscures the ability to systematically diagnose errors, making it difficult to discern whether a failure originates from the retriever's inability to fetch relevant context, or from the LLM's reasoning failure in generating a correct answer.",
+            "source_url": "https://arxiv.org/html/2604.02640v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-1dadff",
+            "saved_at": "2026-05-05T05:46:01.459570Z",
+            "fetched_at": "2026-05-05T05:46:01.459499Z",
+            "content_hash": "f71122caa122894abd0e83bf0f56b1140d10a3c288b572ac40a1546121b7f131",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Existing RAG benchmarks lack evidence traceability, focusing only on final output correctness while overlooking critical business requirements for tracking the exact sources of supporting evidence.",
+            "evidence": "Most existing benchmarks focus solely on evaluating the correctness of the final output, overlooking critical business requirements for the traceability and reliability of supporting evidence. Specifically, they lack evaluation dimensions that track the sources from which a RAG system generates its output and assess how faithfully the answer is grounded in those evidences.",
+            "source_url": "https://arxiv.org/html/2604.02640v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-1dadff",
+            "saved_at": "2026-05-05T05:46:03.637740Z",
+            "fetched_at": "2026-05-05T05:46:03.637722Z",
+            "content_hash": "81ec9ab1a625df0f6710391879cc36a2973993314d4b9d1fbf0f827d2420d0e8",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "High scores on conventional RAG benchmarks can be misleading because models achieving high performance scores often fail to meet reliability expectations in practical enterprise deployment.",
+            "evidence": "While the rapid advancement in RAG research has led to the development of academic benchmarks, they fail to capture the practical and multifaceted requirements of enterprise environments. This creates a critical gap, leaving organizations unable to accurately predict a system's real-world performance within their specific context. Consequently, a high score on a conventional benchmark can be dangerously misleading.",
+            "source_url": "https://arxiv.org/html/2604.02640v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-1dadff",
+            "saved_at": "2026-05-05T05:46:06.191101Z",
+            "fetched_at": "2026-05-05T05:46:06.191058Z",
+            "content_hash": "f7de8e618d0e12c54b039d57d9279e6dd0413ec3294111127ae6cac75f2ec454",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "RAG evaluation lacks standardized metrics for assessing latency and practical considerations such as response time and complexity handling, which are critical for system usability and real-world deployment.",
+            "evidence": "Furthermore, practical considerations such as response latency and the ability to handle ambiguous or complex queries are also crucial for evaluating the system's overall effectiveness and usability.",
+            "source_url": "https://arxiv.org/html/2405.07437v2",
+            "source_title": "",
+            "confidence": 0.75,
+            "researcher_id": "r-1dadff",
+            "saved_at": "2026-05-05T05:46:17.628853Z",
+            "fetched_at": "2026-05-05T05:46:17.628799Z",
+            "content_hash": "0ec7bfbbbebd9d40cf6af52f7e2b91708d33b81372a6b3e6d6a9243df83b2112",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.9,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Most existing RAG benchmarks tackle only one or several aspects of evaluation but lack comprehensive, holistic analysis of the entire system's performance.",
+            "evidence": "Most prior benchmarks predominantly tackle one or several aspects of the RAG assessment but lack a comprehensive, holistic analysis.",
+            "source_url": "https://arxiv.org/html/2405.07437v2",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-1dadff",
+            "saved_at": "2026-05-05T05:46:19.100454Z",
+            "fetched_at": "2026-05-05T05:46:19.100403Z",
+            "content_hash": "927869127dda440c8fdc71d091b920feccfd1746c5a195452421e9f1a4a40c62",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.96,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Traditional retrieval evaluation metrics like Recall and Precision cannot fully capture the nuances of RAG retrieval systems, necessitating more nuanced and task-specific evaluation metrics.",
+            "evidence": "The traditional evaluation indicators for retrieval, such as Recall and Precision, cannot fully capture the nuances of RAG retrieval systems, necessitating the development of more nuanced and task-specific evaluation metrics.",
+            "source_url": "https://arxiv.org/html/2405.07437v2",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-1dadff",
+            "saved_at": "2026-05-05T05:46:20.971971Z",
+            "fetched_at": "2026-05-05T05:46:20.971907Z",
+            "content_hash": "3caf47dda5a3c0c9ba79bb449d4a5fcdaf05e59b9f9988e0f0f1728852d76d1a",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.96,
+            "axis_disagreement": false
+          }
+        ],
+        "uncertainty_notes": [
+          {
+            "subquestion_id": "sq3",
+            "topic": "On standard QA benchmarks (e.g., Natural Questions, TriviaQA, HotpotQA, MMLU), how do different RAG approaches compare on accuracy metrics such as exact match, F1, and answer correctness?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-91e79a"
+          },
+          {
+            "subquestion_id": "sq4",
+            "topic": "What are the measured or reported latency and computational costs (retrieval latency, number of LLM calls, end-to-end latency) for different RAG approaches, and what factors drive latency trade-offs?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-dfbaf3"
+          }
+        ]
+      },
+      "report": {
+        "user_prompt": "What are the main approaches to retrieval-augmented generation (RAG) for question answering, and how do they compare on accuracy and latency?",
+        "summary": "RAG systems for question answering span a spectrum from simple naive pipelines to sophisticated iterative, self-reflective, and modular architectures, each with distinct retrieval and generation mechanisms. Retrieval strategies range from sparse (BM25) and dense (vector) methods to hybrid and multi-vector approaches, with reranking as a common precision layer. Concrete benchmark comparisons of accuracy across RAG variants could not be established from available evidence, and systematic latency reporting is largely absent from the literature \u2014 a gap confirmed by multiple evaluation studies. Latency reduction techniques such as approximate caching and speculative RAG show measurable gains in specific settings, but broad head-to-head comparisons remain elusive.",
+        "claims": [
+          {
+            "claim": "Naive RAG follows a straightforward three-step pipeline \u2014 query encoding, document retrieval via keyword or semantic similarity, and response generation \u2014 without optimizations or feedback loops.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              0
+            ]
+          },
+          {
+            "claim": "Advanced RAG augments the naive pipeline with query processing, hybrid (dense + sparse) retrieval, document reranking, contextual fusion, and feedback loops using active learning or reinforcement learning.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              1
+            ]
+          },
+          {
+            "claim": "Modular RAG decomposes the RAG pipeline into independently optimizable, swappable components (query processing, retrieval, filtering/ranking, context augmentation, generation, post-processing), enabling per-module debugging and customization.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              2
+            ]
+          },
+          {
+            "claim": "Iterative/multi-hop RAG performs multiple retrieval rounds guided by question planning: after each retrieval it assesses whether gathered information suffices and, if not, generates a sub-question and retrieves again, making it better suited to multi-hop QA than single-pass approaches.",
+            "confidence": 0.98,
+            "supporting_finding_indices": [
+              3
+            ]
+          },
+          {
+            "claim": "Self-RAG trains a language model to adaptively decide when to retrieve (including skipping retrieval entirely), generate responses, and critique both retrieved passages and its own outputs via special reflection tokens, enabling controllable inference-time behavior.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              4
+            ]
+          },
+          {
+            "claim": "Sparse retrievers (e.g., BM25) excel at exact lexical and domain-specific term matching but lack semantic understanding, while dense retrievers capture semantic relationships but can miss exact-match queries on technical terms.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              5
+            ]
+          },
+          {
+            "claim": "Hybrid search combines dense and sparse retrievers through fusion strategies such as weighted sum, Reciprocal Rank Fusion, or two-stage cascade retrieval to improve recall across both semantic and keyword-driven queries.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              6
+            ]
+          },
+          {
+            "claim": "Reranking acts as a precision layer applied after initial retrieval, using more expensive scoring models to re-order a rough top-K candidate set and surface the most relevant results.",
+            "confidence": 0.72,
+            "supporting_finding_indices": [
+              7
+            ]
+          },
+          {
+            "claim": "Multi-vector indexing generates multiple independent embeddings per document by segmenting it, potentially capturing different document aspects and improving retrieval precision for complex queries; however, this claim comes from a lower-quality source and should be treated with caution.",
+            "confidence": 0.65,
+            "supporting_finding_indices": [
+              8
+            ]
+          },
+          {
+            "claim": "No concrete head-to-head accuracy comparisons (e.g., exact match or F1 on Natural Questions, TriviaQA, HotpotQA, or MMLU) across different RAG architectures could be established from the available evidence.",
+            "confidence": 0.95,
+            "supporting_finding_indices": [
+              14,
+              18
+            ]
+          },
+          {
+            "claim": "No systematic, directly comparable latency or computational cost figures (retrieval latency, LLM call counts, end-to-end latency) across RAG architectures were found in the available evidence; this gap is partly structural, as standardized latency reporting is absent from most RAG benchmarks.",
+            "confidence": 0.95,
+            "supporting_finding_indices": [
+              17,
+              18
+            ]
+          },
+          {
+            "claim": "Approximate caching using locality-sensitive hashing (Proximity-LSH) reduces database calls by 77.4% and document retrieval latency by 72.5% in a medical RAG workload while maintaining test accuracy.",
+            "confidence": 0.98,
+            "supporting_finding_indices": [
+              10,
+              11
+            ]
+          },
+          {
+            "claim": "Speculative RAG \u2014 which uses a smaller drafter model for parallel draft generation verified by a larger model \u2014 reduces end-to-end latency by up to 51% and improves accuracy by up to 12.97% compared to standard RAG on the PubHealth dataset.",
+            "confidence": 0.88,
+            "supporting_finding_indices": [
+              12
+            ]
+          },
+          {
+            "claim": "Multiphase ranking (fast lexical/ANN filtering in phase 1, dense reranking in phase 2, ML-based scoring in phase 3) reduces latency while preserving precision by reserving expensive models for only the top candidates.",
+            "confidence": 0.85,
+            "supporting_finding_indices": [
+              13
+            ]
+          },
+          {
+            "claim": "Existing RAG benchmarks evaluate systems as monolithic black boxes, reporting only end-to-end QA accuracy and making it impossible to attribute failures to the retriever versus the LLM's reasoning.",
+            "confidence": 0.98,
+            "supporting_finding_indices": [
+              14
+            ]
+          },
+          {
+            "claim": "Most RAG benchmarks focus solely on final output correctness and lack evidence traceability \u2014 they do not track which sources grounded the answer or assess faithfulness to those sources.",
+            "confidence": 0.98,
+            "supporting_finding_indices": [
+              15
+            ]
+          },
+          {
+            "claim": "High scores on conventional RAG benchmarks can be misleading because they do not capture enterprise requirements, meaning high-performing benchmark systems may still fail in real-world deployment.",
+            "confidence": 0.98,
+            "supporting_finding_indices": [
+              16
+            ]
+          },
+          {
+            "claim": "RAG evaluation currently lacks standardized metrics for latency and the ability to handle ambiguous or complex queries, both of which are critical for practical deployment.",
+            "confidence": 0.9,
+            "supporting_finding_indices": [
+              17
+            ]
+          },
+          {
+            "claim": "Traditional retrieval metrics like Recall and Precision are insufficient for evaluating RAG retrieval systems, and more nuanced, task-specific metrics are needed.",
+            "confidence": 0.96,
+            "supporting_finding_indices": [
+              19
+            ]
+          }
+        ],
+        "contradictions_surfaced": [],
+        "caveats": [
+          "WARNING \u2014 bounded revision exhausted with critic issues still open. The report ships with 1 unresolved critic issue(s):\n  \u2022 Claim #17 (overstated): The cited finding (17) states only that 'practical considerations such as response latency and the ability to handle ambiguous or complex queries are also crucial for evaluating the system's overall effectiveness and usability.' It identifies these as important factors but does not explicitly state that RAG evaluation 'lacks standardized metrics' for latency or complex query handling. The claim asserts an absence of standardized metrics, which is stronger than what the evidence supports.",
+          "No concrete benchmark accuracy comparisons (exact match, F1, answer correctness) across RAG architectures on standard datasets (Natural Questions, TriviaQA, HotpotQA, MMLU) were recoverable from the evidence gathered, despite 10 tool calls targeting this sub-question. Any accuracy comparison in this report is therefore absent.",
+          "No systematic latency or computational cost measurements (retrieval latency, LLM call counts, end-to-end latency) across different RAG architectures were found. Latency findings are limited to specific techniques (approximate caching, speculative RAG) in specific domains and cannot be generalized into a cross-architecture comparison.",
+          "Several findings (indices 7, 8, 9) carry an [AXIS-DISAGREE] flag, meaning the self-reported confidence diverges from source quality. These findings come from developer blogs or low-authority sources and have been assigned lower confidence; claims derived from them should be treated as indicative rather than definitive.",
+          "The speculative RAG latency and accuracy gains (finding 12) are reported on a single dataset (PubHealth) by the system's own developers (Google Research blog), introducing potential publication bias; generalizability to other domains or architectures is unknown.",
+          "The approximate caching results (findings 10, 11) are specific to a medical RAG (MedRAG) workload with a skewed query distribution; gains may not transfer to workloads with low query repetition or different domain characteristics.",
+          "The survey of RAG architectures (findings 0\u20134) draws heavily from a single IBM Think article, which may present a simplified or vendor-influenced framing of the landscape.",
+          "Parent Document Retrieval (finding 9) reports an 85% recall figure without specifying the dataset, baseline, or methodology, making this number unverifiable and potentially unreliable.",
+          "Graph RAG, mentioned in the decomposition, was not covered by any finding and is therefore absent from this report."
+        ]
+      },
+      "critic_history": [
+        {
+          "issues": [
+            {
+              "claim_index": 17,
+              "issue_type": "overstated",
+              "explanation": "The cited finding (17) states only that 'practical considerations such as response latency and the ability to handle ambiguous or complex queries are also crucial for evaluating the system's overall effectiveness and usability.' It identifies these as important factors but does not explicitly state that RAG evaluation 'lacks standardized metrics' for latency or complex query handling. The claim asserts an absence of standardized metrics, which is stronger than what the evidence supports."
+            }
+          ],
+          "approved": false
+        }
+      ],
+      "verify_history": [
+        {
+          "results": []
+        }
+      ],
+      "metadata": {
+        "commit_hash": "2f6ab883c54607f36d522b553c98dfd10b64a6c9",
+        "branch": "main",
+        "models": {
+          "researcher": "claude-haiku-4-5",
+          "writer": "claude-sonnet-4-6",
+          "critic": "claude-sonnet-4-6",
+          "judge": "claude-opus-4-7",
+          "kae_judge": "claude-haiku-4-5"
+        },
+        "config_snapshot": {
+          "anthropic_api_key": "<set>",
+          "tavily_api_key": "<set>",
+          "researcher_model": "claude-haiku-4-5",
+          "writer_model": "claude-sonnet-4-6",
+          "critic_model": "claude-sonnet-4-6",
+          "judge_model": "claude-opus-4-7",
+          "kae_judge_model": "claude-haiku-4-5",
+          "min_subquestions": 3,
+          "max_subquestions": 7,
+          "decompose_max_retries": 2,
+          "researcher_max_tool_calls": 30,
+          "researcher_max_findings": 6,
+          "researcher_min_findings_to_stop": 3,
+          "researcher_min_unique_sources": 2,
+          "researcher_min_avg_confidence": 0.55,
+          "researcher_unproductive_call_limit": 10,
+          "search_results_per_query": 8,
+          "fetch_max_chars": 12000,
+          "scholar_max_retries": 3,
+          "scholar_backoff_seconds": 1.0,
+          "scholar_unavailable_window_seconds": 120,
+          "max_revisions": 0,
+          "verifier_enabled": false,
+          "parallel_researchers": 2
+        },
+        "captured_at": "2026-05-05T05:44:31.547604Z"
+      },
+      "metrics": {
+        "total_subquestions": 6,
+        "subquestions_with_findings": 4,
+        "total_findings": 20,
+        "unique_sources": 11,
+        "revision_rounds": 0,
+        "final_grounding_rate": 0.9473684210526315,
+        "coverage_rate": 0.6666666666666666,
+        "elapsed_seconds": 162.30360388755798,
+        "per_stage": {
+          "classify_shape": {
+            "calls": 1,
+            "input_tokens": 982,
+            "output_tokens": 62,
+            "cost_usd": 0.003876,
+            "elapsed_seconds": 1.9014020829927176
+          },
+          "confidence": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cost_usd": 0.0,
+            "elapsed_seconds": 0.0005333330482244492
+          },
+          "critic": {
+            "calls": 2,
+            "input_tokens": 18932,
+            "output_tokens": 655,
+            "cost_usd": 0.066621,
+            "elapsed_seconds": 13.995411165989935
+          },
+          "decompose": {
+            "calls": 1,
+            "input_tokens": 1484,
+            "output_tokens": 820,
+            "cost_usd": 0.016752,
+            "elapsed_seconds": 12.799399875104427
+          },
+          "reconciler": {
+            "calls": 1,
+            "input_tokens": 4913,
+            "output_tokens": 9,
+            "cost_usd": 0.014874,
+            "elapsed_seconds": 1.220230125123635
+          },
+          "researcher": {
+            "calls": 67,
+            "input_tokens": 635678,
+            "output_tokens": 10453,
+            "cost_usd": 0.6879429999999997,
+            "elapsed_seconds": 94.72867708420381
+          },
+          "writer": {
+            "calls": 1,
+            "input_tokens": 7039,
+            "output_tokens": 2228,
+            "cost_usd": 0.054537,
+            "elapsed_seconds": 37.61545870802365
+          }
+        },
+        "total_input_tokens": 669028,
+        "total_output_tokens": 14227,
+        "total_cost_usd": 0.8446029999999998,
+        "researcher_latency_max": 45.35693670902401,
+        "researcher_latency_avg": 30.96984380572879,
+        "tool_mix": {
+          "web_search": 24,
+          "search_papers": 9,
+          "fetch_url": 29,
+          "save_finding": 20,
+          "note_uncertainty": 0
+        },
+        "kae": null,
+        "ace": null,
+        "plan_judge": null
+      },
+      "taxonomy": null,
+      "started_at": "2026-05-05T05:47:13.808866Z"
+    }
+  ]
+}

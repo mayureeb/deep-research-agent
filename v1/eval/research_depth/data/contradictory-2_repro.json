@@ -1,0 +1,1333 @@
+{
+  "prompt_id": "contradictory-2",
+  "category": "contradictory",
+  "n_runs": 2,
+  "mode": "draft_only",
+  "max_revisions": 0,
+  "verifier_enabled": false,
+  "subquestion_jaccard": 0.0,
+  "claim_jaccard": 0.0,
+  "per_run": [
+    {
+      "run_index": 0,
+      "elapsed_seconds": 194.053307056427,
+      "n_claims": 16,
+      "n_subquestions": 7,
+      "grounding_rate": 1.0,
+      "coverage_rate": 0.5714285714285714,
+      "f1": 0.7272727272727273
+    },
+    {
+      "run_index": 1,
+      "elapsed_seconds": 173.36035704612732,
+      "n_claims": 14,
+      "n_subquestions": 7,
+      "grounding_rate": 1.0,
+      "coverage_rate": 0.5714285714285714,
+      "f1": 0.7272727272727273
+    }
+  ],
+  "runs": [
+    {
+      "user_prompt": "Do larger LLMs reliably outperform smaller fine-tuned models on domain-specific tasks, or is the picture more mixed than scaling-laws advocates suggest?",
+      "shape": {
+        "shape": "CONTESTED",
+        "confidence": 0.87,
+        "rationale": "The prompt explicitly probes a known dispute between scaling-law proponents and practitioners who observe smaller fine-tuned models matching or beating larger general models on domain-specific benchmarks."
+      },
+      "decomposition": {
+        "subquestions": [
+          {
+            "id": "sq1",
+            "question": "What do empirical benchmarks show about the performance of large general-purpose LLMs (e.g., GPT-4, Claude, Gemini) vs. smaller fine-tuned models on domain-specific tasks (medicine, law, coding, finance, science)?",
+            "rationale": "Direct empirical comparisons are the primary evidence base for settling whether scale alone beats fine-tuning on specialized tasks.",
+            "confidence": 0.95,
+            "depends_on": [],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq2",
+            "question": "Under what conditions (dataset size, domain specificity, task type, evaluation metric) does fine-tuning a smaller model close the gap with or surpass a much larger model?",
+            "rationale": "Identifying the moderating conditions explains why the picture is mixed and prevents overgeneralizing in either direction.",
+            "confidence": 0.9,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq3",
+            "question": "What do scaling-law frameworks (Chinchilla, neural scaling laws) actually predict about domain-specific versus general task performance, and do their authors acknowledge limits to the scaling hypothesis?",
+            "rationale": "Understanding what scaling-law proponents actually claim \u2014 vs. the popular interpretation \u2014 is necessary to fairly characterize the 'scaling advocates' position.",
+            "confidence": 0.8,
+            "depends_on": [],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq4",
+            "question": "What methodological problems (benchmark contamination, prompt sensitivity, evaluation leakage, cherry-picked metrics) affect comparisons between large and small fine-tuned models, and how do they bias results in either direction?",
+            "rationale": "Many studies claiming large models dominate or that fine-tuning wins may be methodologically flawed; understanding these biases is essential to interpreting the evidence.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq5",
+            "question": "What evidence exists for parameter-efficient fine-tuning methods (LoRA, QLoRA, adapters) enabling small models to match larger ones, and what are the documented limits of these approaches?",
+            "rationale": "Parameter-efficient methods have lowered the cost of fine-tuning dramatically, making the trade-off between scale and specialization more practically relevant.",
+            "confidence": 0.8,
+            "depends_on": [
+              "sq2"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq6",
+            "question": "Where is the empirical evidence weakest or most contested \u2014 which domains, model size ranges, or task types lack rigorous head-to-head comparisons between large and small fine-tuned models?",
+            "rationale": "Identifying evidence gaps prevents the report from overstating conclusions and flags where future research is needed.",
+            "confidence": 0.75,
+            "depends_on": [
+              "sq1",
+              "sq4"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq7",
+            "question": "What do practitioners and recent industry reports say about actual deployment choices between large frontier models and smaller fine-tuned models, and what practical trade-offs (cost, latency, accuracy, data privacy) drive those decisions?",
+            "rationale": "Real-world deployment decisions reveal whether the empirical academic findings translate into practice and what factors dominate beyond raw benchmark accuracy.",
+            "confidence": 0.7,
+            "depends_on": [
+              "sq1",
+              "sq2"
+            ],
+            "preferred_search": "web_search"
+          }
+        ]
+      },
+      "findings": {
+        "findings": [
+          {
+            "subquestion_id": "sq1",
+            "claim": "Fine-tuning LLMs on domain-specific medical coding data dramatically improves performance, with exact code-matching rates increasing from <1% to 97%+ in base scenarios, and reaching 69.20% accuracy on real-world clinical notes.",
+            "evidence": "Fine-tuning dramatically improved performance, with the exact code-matching rate increasing from 3.35% to 97.48% for GPT-4o mini, and from 0.01\u20130.85% to 98.80\u201398.83% for Llama models in the base scenario... For the full real-world clinical notes, exact ICD code matching showed promising results: Top-1 accuracy reached 69.20% (95% CI: 67.42\u201371.09%)",
+            "source_url": "https://doi.org/10.1038/s44401-025-00018-3",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-e843c8",
+            "saved_at": "2026-05-05T05:48:34.914544Z",
+            "fetched_at": "2026-05-05T05:48:34.914461Z",
+            "content_hash": "89012a6b163c5dea6bed9b12b8a350f5ccc7f4add0ca6455b1f736f30dc09e39",
+            "domain": "doi.org",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "In medical coding tasks on radiology reports, a smaller fine-tuned model (4B parameters) outperformed larger proprietary LLMs (GPT-4.1, Gemini 2.5) on real-world samples, but GPT-5 achieved higher performance on cleaned samples.",
+            "evidence": "On a subset of 500 real-world samples, our models outperformed the best-performing LLM, Gemini 2.5 Flash, with an F1-score of 70.32% \u00b1 1.54% compared to 58.22% \u00b1 1.50% (p < 0.001). For the cleaned dataset of 350 samples, GPT-5 achieved the best F1-score of 89.51 \u00b1 1.52% and outperformed the fine-tuned models (p < 0.001).",
+            "source_url": "https://link.springer.com/article/10.1007/s00330-026-12445-3",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-e843c8",
+            "saved_at": "2026-05-05T05:48:50.587883Z",
+            "fetched_at": "2026-05-05T05:48:50.587812Z",
+            "content_hash": "93daa2ecfc7e7f595561921da8caefac49f89828b7e41a31ae313b1483e196da",
+            "domain": "link.springer.com",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.96,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq1",
+            "claim": "General-purpose LLMs (GPT-3.5, GPT-4) without domain-specific fine-tuning show mixed performance on medical NLP tasks, with GPT-4 performing similarly to specialized healthcare NLP tools on some tasks but worse on others like disease/symptom extraction.",
+            "evidence": "For MedDRA coding, GPT-4 had similar F1 score performance to healthcare NLP algorithms (GPT-4: 0.67 to 0.73; Microsoft Text Analytics for Health: 0.66, IQVIA API Marketplace: 0.72), while GPT-3.5-turbo had considerably lower performance (0.50 to 0.51)... GPT-3.5-turbo and GPT-4 generally had lower sensitivity than comparators... the absence of domain-specific fine tuning, GPT-4 performed similarly to healthcare-specific NLP tools on some tasks and less accurately on others.",
+            "source_url": "https://www.medrxiv.org/content/10.1101/2024.06.10.24308699v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-e843c8",
+            "saved_at": "2026-05-05T05:48:50.587948Z",
+            "fetched_at": "2026-05-05T05:48:50.587938Z",
+            "content_hash": "c8bfd79c1173d83a7770d2d09c8e02eec4f7c1c46f0eda1e033f2e0fcf5f80a5",
+            "domain": "www.medrxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Fine-tuned small models significantly outperform zero-shot large generative AI models across diverse text classification tasks when application-specific training data is available, and this advantage is especially pronounced for specialized, non-standard classification tasks.",
+            "evidence": "We show that smaller, fine-tuned LLMs (still) consistently and significantly outperform larger, zero-shot prompted models in text classification. ... fine-tuning with application-specific training data achieves superior performance in all cases. ... This tendency is especially pronounced for more specialized, non-standard classification tasks.",
+            "source_url": "https://arxiv.org/html/2406.08660v2",
+            "source_title": "",
+            "confidence": 0.92,
+            "researcher_id": "r-ccfff3",
+            "saved_at": "2026-05-05T05:48:37.491560Z",
+            "fetched_at": "2026-05-05T05:48:37.491536Z",
+            "content_hash": "6fcd7ef64cc257d30d29b0597ae83ff5c20b1ba4017b973556c5dff6f9895317",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.968,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Small pre-trained language models can match or exceed models 3\u00d7 larger in parameters through over-parameterization techniques applied during fine-tuning, without increasing inference latency.",
+            "evidence": "Extensive experiments have demonstrated that our approach can significantly boost the fine-tuning performance of small PLMs and even help small PLMs outperform 3\u00d7 parameterized larger ones.",
+            "source_url": "https://aclanthology.org/2023.acl-long.212/",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-ccfff3",
+            "saved_at": "2026-05-05T05:48:37.491611Z",
+            "fetched_at": "2026-05-05T05:48:37.491589Z",
+            "content_hash": "f9ca7c406a7122b8a9b146041dcb008d65b03dd10ef62a5eda4282fc8775a65a",
+            "domain": "aclanthology.org",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.855,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Small datasets (hundreds to thousands of examples) can achieve strong fine-tuning performance when datasets are well-curated, high-quality, and task-aligned, particularly with specialized domain tasks where larger pre-trained models are efficient.",
+            "evidence": "With the help of large-scale pre-training, small datasets can deliver impressive results, even with just hundreds or thousands of examples. This is especially true in specialized domains where collecting large amounts of data isn't feasible. Larger models, in particular, are more efficient with limited data, achieving strong performance with relatively few examples.",
+            "source_url": "https://latitude.so/blog/dataset-size-impacts-llm-fine-tuning",
+            "source_title": "",
+            "confidence": 0.88,
+            "researcher_id": "r-ccfff3",
+            "saved_at": "2026-05-05T05:48:37.491644Z",
+            "fetched_at": "2026-05-05T05:48:37.491626Z",
+            "content_hash": "43faa8059a1f49e0c1c9fd44fe51c52f677d99492376ef99adf1129e55805768",
+            "domain": "latitude.so",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.847,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Data quality, task alignment, and data cleanliness are more important than dataset size itself for fine-tuning success; a smaller, well-curated dataset consistently outperforms a larger, mediocre one.",
+            "evidence": "When it comes to fine-tuning, the quality of your dataset consistently outweighs its size. Research from Meta AI shows that a smaller, well-curated dataset can outperform a larger, mediocre one. ... a smaller amount of high-quality data is generally more effective than a larger amount of low-quality data.",
+            "source_url": "https://latitude.so/blog/dataset-size-impacts-llm-fine-tuning",
+            "source_title": "",
+            "confidence": 0.88,
+            "researcher_id": "r-ccfff3",
+            "saved_at": "2026-05-05T05:48:37.491671Z",
+            "fetched_at": "2026-05-05T05:48:37.491655Z",
+            "content_hash": "14887b7da0f19c621931d17cec99450da491ffc67e41639d44d2ac3b22428767",
+            "domain": "latitude.so",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.847,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "The optimal finetuning method across different model sizes is highly task- and data-dependent, making systematic comparison difficult.",
+            "evidence": "The study finds that \"the optimal finetuning method is highly task- and finetuning data-dependent\" and notes \"the selection of optimal finetuning method for a downstream task non-trivial.\" Their scaling experiments across machine translation and summarization tasks show that the relationship between model size and finetuning performance varies significantly by task type.",
+            "source_url": "https://arxiv.org/html/2402.17193v1",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-288fc4",
+            "saved_at": "2026-05-05T05:49:22.653411Z",
+            "fetched_at": "2026-05-05T05:49:22.653313Z",
+            "content_hash": "e0fb66038c127cec39d17f80001d389ccf0935813f8744a44cfde6c412ad4e85",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.96,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Requirements classification tasks show statistically insignificant performance differences between small language models (7-8B parameters) and large language models (1-2 trillion parameters), despite limited head-to-head comparisons in this domain.",
+            "evidence": "The requirements classification study found that \"although LLMs achieve an average F1 score of 2% higher than SLMs, this difference is not statistically significant\" and concluded \"dataset characteristics play a more significant role in performance than model size.\" The study notes \"the performance comparison between SLMs and LLMs in RE tasks remains unexplored\" until this work.",
+            "source_url": "https://arxiv.org/html/2510.21443v1",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-288fc4",
+            "saved_at": "2026-05-05T05:49:22.653513Z",
+            "fetched_at": "2026-05-05T05:49:22.653493Z",
+            "content_hash": "ddae5eda955321ecdd91248fb98485184be33309e9cc335712f5da01728bb3f9",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.96,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Small language models (\u22643B parameters) do not consistently benefit from long chain-of-thought reasoning or distillation from larger teacher models, exhibiting a \"Small Model Learnability Gap\" for fine-tuning.",
+            "evidence": "Research reveals that \"small student models (\u22643B parameters) do not consistently benefit from long CoT reasoning or distillation from large teacher models. Instead, they perform better when fine-tuned on shorter CoT reasoning or distilled from smaller teachers, which better aligns with their intrinsic learning capacity. We term this phenomenon as the Small Model Learnability Gap.\"",
+            "source_url": "https://small-model-gap.github.io/",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-288fc4",
+            "saved_at": "2026-05-05T05:49:36.353445Z",
+            "fetched_at": "2026-05-05T05:49:36.353350Z",
+            "content_hash": "2ce105a922061d3f390c3c59f7996b0b7dbe1a6a6ec450725b240e82ba7117fc",
+            "domain": "small-model-gap.github.io",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.855,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "Practitioners report a strategic hybrid approach: fine-tuned smaller models for domain-specific tasks requiring privacy, cost-effectiveness, and local deployment; frontier models for complex reasoning when data privacy can be managed through anonymization and cost is justified.",
+            "evidence": "We've adopted a strategic hybrid approach combining fine-tune LLMs with frontier models: Use Frontier Models when: Complex reasoning through large language models is crucial for workflows. Data privacy can be managed through anonymization. Premium insights justify API inference costs. Deploy Fine-Tuned LoRA Models when: Strict privacy, regulatory compliance (GDPR, HIPAA), or local deployment are essential. Cost-effective scalability using PEFT is critical. Task-specific requirements demand domain-specific understanding from a fine-tuned model.",
+            "source_url": "https://larridin.com/blog/fine-tuning-vs-frontier-models-making-the-right-ai-investment",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-e4b248",
+            "saved_at": "2026-05-05T05:49:44.443838Z",
+            "fetched_at": "2026-05-05T05:49:44.443712Z",
+            "content_hash": "9e1156ee5e9f2b785c72a7d2b76afa0da4494a32765227e6beccd623f33f7758",
+            "domain": "larridin.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.855,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "Enterprise inference teams face a fundamental Pareto frontier trade-off: accuracy, latency, and cost are interdependent. A larger model improves accuracy but increases latency and GPU costs; a smaller model reduces cost but risks quality degradation.",
+            "evidence": "One organizing principle ties all three parts together: inference systems live on a three-way tradeoff between accuracy, latency, and cost \u2014 the Pareto frontier of LLMs. Pick two; engineer around the third. Improving one dimension almost always requires tradeoffs in another. A larger model improves accuracy but increases latency and GPU costs. A smaller model reduces cost but risks quality degradation.",
+            "source_url": "https://techcommunity.microsoft.com/blog/appsonazureblog/inference-at-enterprise-scale-why-llm-inference-is-a-capital-allocation-problem/4498754",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-e4b248",
+            "saved_at": "2026-05-05T05:49:44.443955Z",
+            "fetched_at": "2026-05-05T05:49:44.443927Z",
+            "content_hash": "45ce2dfb623b2c2cf0bd575ae772714e3432272e7ba3cda3795117aaacd7f48f",
+            "domain": "techcommunity.microsoft.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "Small models (7-13B parameters) demonstrate significant practical advantages in latency, privacy, and cost: response times of 50-200ms versus 2-8 seconds for GPT-4; on-premises deployment enabling GDPR/HIPAA compliance; and direct API costs of $0.0001 per query versus $0.02-0.06 for GPT-4.",
+            "evidence": "Llama 2 7B typically generates responses in 50-200 milliseconds, while GPT-4 can take 2-8 seconds for similar queries. Models like Mistral 7B, Code Llama, and Phi-3 Mini can run entirely on-premises, eliminating the fundamental privacy risks of cloud-based APIs. Direct API costs often favor smaller models by orders of magnitude\u2014running Llama 2 7B locally might cost $0.0001 per query versus $0.02-0.06 for GPT-4 API calls.",
+            "source_url": "https://www.cloudgeometry.com/blog/right-sized-ai-when-small-language-models-beat-the-giants",
+            "source_title": "",
+            "confidence": 0.92,
+            "researcher_id": "r-e4b248",
+            "saved_at": "2026-05-05T05:49:44.444044Z",
+            "fetched_at": "2026-05-05T05:49:44.444015Z",
+            "content_hash": "a3f458a2436ec93ad84f7507520c61f1a18725ec91550e9cde00aee09bf4b862",
+            "domain": "www.cloudgeometry.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.863,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "Practitioners report a hybrid architecture strategy where small models handle 90% of routine tasks (classification, summarization, extraction) while frontier models address the hardest 10% requiring deep reasoning, driven by cost, latency, and data privacy constraints.",
+            "evidence": "Our architectural recommendation for 2025 is Hybrid AI: Use the Giant (GPT-4/Claude) only for the hardest 10% of problems requiring deep reasoning. Use the Specialist (SLMs) for the other 90% of routine tasks (summarization, formatting, data extraction). This approach creates a system that is smart, fast, cheap, and secure.",
+            "source_url": "https://www.solumize.com/blog/small-language-models-slm-enterprise-privacy",
+            "source_title": "",
+            "confidence": 0.88,
+            "researcher_id": "r-e4b248",
+            "saved_at": "2026-05-05T05:49:58.677951Z",
+            "fetched_at": "2026-05-05T05:49:58.677828Z",
+            "content_hash": "359c6e90c51255ea6a71efeeef5efcc62e56d8c3c679bce1086d8899aca17b96",
+            "domain": "www.solumize.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.847,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq7",
+            "claim": "For RAG and domain-specific applications, practitioners fine-tune small language models using PEFT techniques (LoRA, QLoRA) rather than using frontier models, achieving comparable performance to frontier LLMs while consuming significantly fewer resources and enabling private, on-premise deployment.",
+            "evidence": "Parameter-Efficient Fine-Tuning (PEFT) is a popular technique for adapting small pre-trained models to niche tasks. By adjusting only a small portion of the model's parameters, PEFT prevents overfitting, especially on smaller datasets, and greatly reduces computational and memory demands compared to full fine-tuning... to demonstrate the practical implications of using a small language model (SLM), we will build an agentic RAG application using MongoDB Atlas and illustrate how MongoDB can be used to power semantic search capabilities and also be leveraged as a semantic caching layer... to fine-tune an SLM that will satisfactorily perform a similar operation while consuming fewer resources.",
+            "source_url": "https://www.mongodb.com/company/blog/technical/you-dont-always-need-frontier-models-to-power-your-rag-architecture",
+            "source_title": "",
+            "confidence": 0.85,
+            "researcher_id": "r-e4b248",
+            "saved_at": "2026-05-05T05:49:58.678054Z",
+            "fetched_at": "2026-05-05T05:49:58.678026Z",
+            "content_hash": "9e7109f3e4a074435ea94f21f86e1a6f42fe0876d45564d783fc426fe2941152",
+            "domain": "www.mongodb.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.835,
+            "axis_disagreement": false
+          }
+        ],
+        "uncertainty_notes": [
+          {
+            "subquestion_id": "sq3",
+            "topic": "What do scaling-law frameworks (Chinchilla, neural scaling laws) actually predict about domain-specific versus general task performance, and do their authors acknowledge limits to the scaling hypothesis?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-44ffb4"
+          },
+          {
+            "subquestion_id": "sq4",
+            "topic": "What methodological problems (benchmark contamination, prompt sensitivity, evaluation leakage, cherry-picked metrics) affect comparisons between large and small fine-tuned models, and how do they bias results in either direction?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-c5abeb"
+          },
+          {
+            "subquestion_id": "sq5",
+            "topic": "What evidence exists for parameter-efficient fine-tuning methods (LoRA, QLoRA, adapters) enabling small models to match larger ones, and what are the documented limits of these approaches?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-31c3b7"
+          }
+        ]
+      },
+      "report": {
+        "user_prompt": "Do larger LLMs reliably outperform smaller fine-tuned models on domain-specific tasks, or is the picture more mixed than scaling-laws advocates suggest?",
+        "summary": "The evidence is genuinely contested: larger frontier models do not reliably outperform smaller fine-tuned models on domain-specific tasks, but the reverse is also not universally true. Performance depends heavily on task type, data quality, dataset cleanliness, and evaluation conditions, making simple scaling-law predictions unreliable for domain-specific settings. Practitioners have responded with hybrid architectures that deploy small fine-tuned models for routine and privacy-sensitive workloads while reserving frontier models for complex reasoning, driven by a three-way trade-off between accuracy, latency, and cost. Crucially, several methodological dimensions\u2014including scaling-law predictions for domain tasks, benchmark contamination, and the documented limits of parameter-efficient fine-tuning\u2014could not be assessed due to evidence gaps, which limits the firmness of any overall conclusion.",
+        "claims": [
+          {
+            "claim": "Fine-tuning dramatically improves smaller models on narrow domain-specific tasks: in medical coding, exact ICD code-matching rates rose from near-zero (0.01\u20130.85%) to over 97% for fine-tuned Llama models, demonstrating that task-specific training can transform otherwise unusable models.",
+            "confidence": 0.87,
+            "supporting_finding_indices": [
+              0
+            ]
+          },
+          {
+            "claim": "On real-world (noisy) medical coding samples from radiology reports, a fine-tuned 4B-parameter model outperformed both GPT-4.1 and Gemini 2.5 Flash (F1 70.32% vs. 58.22%); however, on a cleaned dataset GPT-5 reversed this result and outperformed the fine-tuned models (F1 89.51%), illustrating that data quality conditions determine which model class wins.",
+            "confidence": 0.95,
+            "supporting_finding_indices": [
+              1
+            ]
+          },
+          {
+            "claim": "General-purpose GPT-4, without fine-tuning, performs only comparably\u2014not superiorly\u2014to specialized healthcare NLP tools on some medical NLP tasks, and worse on others such as disease/symptom extraction, suggesting frontier model size alone does not guarantee domain dominance.",
+            "confidence": 0.92,
+            "supporting_finding_indices": [
+              2
+            ]
+          },
+          {
+            "claim": "Sources disagree on whether fine-tuned small models consistently outperform large zero-shot models on specialized classification tasks: one large study finds fine-tuned small models win 'in all cases' on specialized text classification, while a study of requirements classification finds only a statistically insignificant 2% F1 advantage for large models over small ones, and a medical coding study finds a frontier model (GPT-5) outperforms fine-tuned models on clean data.",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              1,
+              3,
+              8
+            ]
+          },
+          {
+            "claim": "When application-specific training data is available, smaller fine-tuned models consistently and significantly outperform larger zero-shot models on text classification, with the advantage most pronounced for specialized, non-standard classification tasks.",
+            "confidence": 0.78,
+            "supporting_finding_indices": [
+              3
+            ]
+          },
+          {
+            "claim": "For requirements classification\u2014a specialized domain task\u2014the performance difference between small language models (7\u20138B parameters) and large language models is not statistically significant, and dataset characteristics outweigh model size as a performance driver.",
+            "confidence": 0.9,
+            "supporting_finding_indices": [
+              8
+            ]
+          },
+          {
+            "claim": "The optimal fine-tuning method is highly task- and data-dependent, making any general claim about small-vs-large model performance across domains unreliable without task-specific empirical evaluation.",
+            "confidence": 0.94,
+            "supporting_finding_indices": [
+              7
+            ]
+          },
+          {
+            "claim": "Data quality and task alignment matter more than dataset size for fine-tuning success: a smaller, well-curated dataset consistently outperforms a larger, mediocre one.",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              6
+            ]
+          },
+          {
+            "claim": "Small datasets of hundreds to thousands of examples can yield strong fine-tuning results, particularly in specialized domains where data collection is constrained; larger pre-trained models appear more data-efficient with limited fine-tuning data.",
+            "confidence": 0.81,
+            "supporting_finding_indices": [
+              5
+            ]
+          },
+          {
+            "claim": "Models at or below 3B parameters exhibit a 'Small Model Learnability Gap': they do not consistently benefit from long chain-of-thought reasoning or distillation from large teacher models, and perform better with shorter reasoning chains or smaller teacher models\u2014limiting how effectively fine-tuning can close the gap with frontier models for this size range.",
+            "confidence": 0.8,
+            "supporting_finding_indices": [
+              9
+            ]
+          },
+          {
+            "claim": "Sources partially disagree on small-model fine-tuning efficacy: one source claims larger pre-trained models are more efficient with limited data (implying fine-tuning scales well across sizes), while evidence on the Small Model Learnability Gap suggests models \u22643B parameters have fundamental constraints that prevent them from leveraging fine-tuning data as effectively as larger models.",
+            "confidence": 0.72,
+            "supporting_finding_indices": [
+              5,
+              9
+            ]
+          },
+          {
+            "claim": "Enterprise practitioners have largely adopted hybrid architectures: small fine-tuned models handle the majority of routine tasks (classification, extraction, summarization) while frontier models are reserved for complex reasoning, driven by cost, latency, and data privacy constraints.",
+            "confidence": 0.84,
+            "supporting_finding_indices": [
+              10,
+              13
+            ]
+          },
+          {
+            "claim": "Small models (7\u201313B parameters) offer concrete practical advantages over frontier models: response latency of 50\u2013200ms versus 2\u20138 seconds for GPT-4, on-premises deployment enabling GDPR/HIPAA compliance, and API costs roughly 200\u2013600\u00d7 lower per query.",
+            "confidence": 0.82,
+            "supporting_finding_indices": [
+              12
+            ]
+          },
+          {
+            "claim": "Inference systems face a three-way Pareto trade-off among accuracy, latency, and cost: improving one dimension almost always requires conceding on another, meaning no single model size is optimal across all deployment scenarios.",
+            "confidence": 0.84,
+            "supporting_finding_indices": [
+              11
+            ]
+          },
+          {
+            "claim": "Parameter-efficient fine-tuning techniques (LoRA, QLoRA) are widely used by practitioners to adapt small models for domain-specific and RAG applications, achieving comparable performance to frontier models with significantly fewer resources and enabling private on-premises deployment.",
+            "confidence": 0.8,
+            "supporting_finding_indices": [
+              14,
+              10
+            ]
+          },
+          {
+            "claim": "Over-parameterization techniques applied during fine-tuning can allow a small pre-trained model to outperform models with 3\u00d7 more parameters without increasing inference latency, though this finding comes from a single study and broader replication is unclear.",
+            "confidence": 0.72,
+            "supporting_finding_indices": [
+              4
+            ]
+          }
+        ],
+        "contradictions_surfaced": [
+          {
+            "description": "Findings 1 and 3 present conflicting pictures about whether fine-tuned small models consistently outperform large frontier models. Finding 3 states that smaller fine-tuned LLMs 'consistently and significantly outperform larger, zero-shot prompted models in text classification' with 'fine-tuning with application-specific training data achieves superior performance in all cases.' However, Finding 1 directly contradicts this 'in all cases' claim by showing that on a cleaned dataset of 350 samples, 'GPT-5 achieved the best F1-score of 89.51 \u00b1 1.52% and outperformed the fine-tuned models (p < 0.001),' meaning a large frontier model without fine-tuning beat the fine-tuned 4B model under at least one condition. Sources: https://arxiv.org/html/2406.08660v2 and https://link.springer.com/article/10.1007/s00330-026-12445-3.",
+            "finding_ids": [
+              1,
+              3
+            ],
+            "severity": "major",
+            "type": "factual"
+          },
+          {
+            "description": "Findings 5 and 9 conflict on the effectiveness of fine-tuning small models with limited data. Finding 5 claims that 'larger models, in particular, are more efficient with limited data, achieving strong performance with relatively few examples,' implying fine-tuning generalizes well across model sizes. Finding 9, however, reveals a 'Small Model Learnability Gap' specifically for models \u22643B parameters, stating they 'do not consistently benefit from long CoT reasoning or distillation from large teacher models' and instead 'perform better when fine-tuned on shorter CoT reasoning or distilled from smaller teachers.' These findings disagree on whether small models can leverage fine-tuning data as effectively as larger models. Sources: https://latitude.so/blog/dataset-size-impacts-llm-fine-tuning and https://small-model-gap.github.io/.",
+            "finding_ids": [
+              5,
+              9
+            ],
+            "severity": "moderate",
+            "type": "factual"
+          },
+          {
+            "description": "Findings 3 and 8 contradict each other on whether fine-tuned small models consistently outperform larger models on specialized classification tasks. Finding 3 asserts that smaller fine-tuned LLMs 'consistently and significantly outperform larger, zero-shot prompted models in text classification,' especially for 'specialized, non-standard classification tasks.' Finding 8, however, reports that for requirements classification\u2014a specialized, non-standard task\u2014'although LLMs achieve an average F1 score of 2% higher than SLMs, this difference is not statistically significant,' and concludes that 'dataset characteristics play a more significant role in performance than model size.' This directly challenges the claim of consistent, significant fine-tuned-small-model superiority on specialized tasks. Sources: https://arxiv.org/html/2406.08660v2 and https://arxiv.org/html/2510.21443v1.",
+            "finding_ids": [
+              3,
+              8
+            ],
+            "severity": "major",
+            "type": "factual"
+          },
+          {
+            "description": "Findings 1 and 2 present different pictures of frontier model performance on medical tasks. Finding 2 characterizes GPT-4 as performing only 'similarly' to specialized healthcare NLP tools on some tasks and worse on others, suggesting frontier models are not dominant. Finding 1, however, shows GPT-5 (a newer frontier model) achieving the best F1 score on cleaned radiology coding data, outperforming fine-tuned models. This may reflect temporal differences (GPT-4 vs. GPT-5) rather than a true contradiction, but the juxtaposition matters for any generalized claim about frontier model capability on medical domain tasks.",
+            "finding_ids": [
+              1,
+              2
+            ],
+            "severity": "moderate",
+            "type": "temporal"
+          }
+        ],
+        "caveats": [
+          "WARNING \u2014 bounded revision exhausted with critic issues still open. The report ships with 2 unresolved critic issue(s):\n  \u2022 Claim #11 (overstated): The claim states that enterprise practitioners 'have largely adopted' hybrid architectures as an established fact, but the cited findings (10 and 13) are practitioner blog posts presenting recommendations/opinions, not empirical evidence of widespread adoption. Finding 10 says 'We've adopted' (a single practitioner's approach) and finding 13 says 'Our architectural recommendation for 2025 is Hybrid AI' (a recommendation, not a description of industry-wide practice). The claim overstates this as a broadly established enterprise trend.\n  \u2022 Claim #14 (overstated): The claim states PEFT/LoRA techniques achieve 'comparable performance to frontier models,' but finding 14 only says the fine-tuned SLM will 'satisfactorily perform a similar operation while consuming fewer resources' \u2014 not that it achieves comparable performance to frontier models. Finding 10 also does not make a direct performance comparison claim. The 'comparable performance' assertion is stronger than what the cited evidence supports.",
+          "Scaling-law frameworks (Chinchilla, neural scaling laws) and what they actually predict about domain-specific versus general task performance could not be assessed\u2014no concrete evidence was extractable despite extensive search. Claims about scaling laws and their acknowledged limits are therefore absent from this report.",
+          "Methodological problems affecting comparisons between large and small fine-tuned models\u2014including benchmark contamination, prompt sensitivity, evaluation leakage, and cherry-picked metrics\u2014could not be covered due to evidence gaps. This is a significant limitation: published benchmark comparisons may systematically favor one model class through these mechanisms, and the direction of bias is unknown.",
+          "Evidence on the specific capabilities and documented limits of parameter-efficient fine-tuning methods (LoRA, QLoRA, adapters) enabling small models to match larger ones could not be gathered. Practitioner reports mention these techniques, but rigorous head-to-head empirical comparisons were not captured.",
+          "Several practitioner-facing findings (indices 10\u201314) come from blog posts and vendor sources rather than peer-reviewed literature, which may introduce promotional framing. Confidence scores reflect this lower source quality.",
+          "The medical domain is substantially over-represented in the empirical findings (findings 0, 1, 2). Evidence from law, finance, coding, and science is absent from the findings list, limiting generalizability of domain-specific conclusions.",
+          "The 'Small Model Learnability Gap' finding (index 9) comes from a single source (a project website rather than a peer-reviewed venue), warranting caution in the strength of that claim.",
+          "Finding 4's claim about over-parameterization allowing a small model to outperform models 3\u00d7 its size comes from a single ACL paper with no corroborating findings in this dataset, and its generalizability is uncertain.",
+          "GPT-5 appears in finding 1 as a comparison point. If GPT-5 represents a qualitatively different capability tier from earlier frontier models, results comparing it to fine-tuned small models may not generalize to comparisons involving GPT-4-class models, introducing a temporal confound across findings."
+        ]
+      },
+      "critic_history": [
+        {
+          "issues": [
+            {
+              "claim_index": 11,
+              "issue_type": "overstated",
+              "explanation": "The claim states that enterprise practitioners 'have largely adopted' hybrid architectures as an established fact, but the cited findings (10 and 13) are practitioner blog posts presenting recommendations/opinions, not empirical evidence of widespread adoption. Finding 10 says 'We've adopted' (a single practitioner's approach) and finding 13 says 'Our architectural recommendation for 2025 is Hybrid AI' (a recommendation, not a description of industry-wide practice). The claim overstates this as a broadly established enterprise trend."
+            },
+            {
+              "claim_index": 14,
+              "issue_type": "overstated",
+              "explanation": "The claim states PEFT/LoRA techniques achieve 'comparable performance to frontier models,' but finding 14 only says the fine-tuned SLM will 'satisfactorily perform a similar operation while consuming fewer resources' \u2014 not that it achieves comparable performance to frontier models. Finding 10 also does not make a direct performance comparison claim. The 'comparable performance' assertion is stronger than what the cited evidence supports."
+            }
+          ],
+          "approved": false
+        }
+      ],
+      "verify_history": [
+        {
+          "results": []
+        }
+      ],
+      "metadata": {
+        "commit_hash": "2f6ab883c54607f36d522b553c98dfd10b64a6c9",
+        "branch": "main",
+        "models": {
+          "researcher": "claude-haiku-4-5",
+          "writer": "claude-sonnet-4-6",
+          "critic": "claude-sonnet-4-6",
+          "judge": "claude-opus-4-7",
+          "kae_judge": "claude-haiku-4-5"
+        },
+        "config_snapshot": {
+          "anthropic_api_key": "<set>",
+          "tavily_api_key": "<set>",
+          "researcher_model": "claude-haiku-4-5",
+          "writer_model": "claude-sonnet-4-6",
+          "critic_model": "claude-sonnet-4-6",
+          "judge_model": "claude-opus-4-7",
+          "kae_judge_model": "claude-haiku-4-5",
+          "min_subquestions": 3,
+          "max_subquestions": 7,
+          "decompose_max_retries": 2,
+          "researcher_max_tool_calls": 30,
+          "researcher_max_findings": 6,
+          "researcher_min_findings_to_stop": 3,
+          "researcher_min_unique_sources": 2,
+          "researcher_min_avg_confidence": 0.55,
+          "researcher_unproductive_call_limit": 10,
+          "search_results_per_query": 8,
+          "fetch_max_chars": 12000,
+          "scholar_max_retries": 3,
+          "scholar_backoff_seconds": 1.0,
+          "scholar_unavailable_window_seconds": 120,
+          "max_revisions": 0,
+          "verifier_enabled": false,
+          "parallel_researchers": 2
+        },
+        "captured_at": "2026-05-05T05:47:54.637290Z"
+      },
+      "metrics": {
+        "total_subquestions": 7,
+        "subquestions_with_findings": 4,
+        "total_findings": 15,
+        "unique_sources": 14,
+        "revision_rounds": 0,
+        "final_grounding_rate": 0.875,
+        "coverage_rate": 0.5714285714285714,
+        "elapsed_seconds": 194.04598808288574,
+        "per_stage": {
+          "classify_shape": {
+            "calls": 1,
+            "input_tokens": 985,
+            "output_tokens": 56,
+            "cost_usd": 0.003795,
+            "elapsed_seconds": 2.2826667078770697
+          },
+          "confidence": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cost_usd": 0.0,
+            "elapsed_seconds": 0.00042895879596471786
+          },
+          "critic": {
+            "calls": 1,
+            "input_tokens": 8715,
+            "output_tokens": 302,
+            "cost_usd": 0.030675,
+            "elapsed_seconds": 6.083739875117317
+          },
+          "decompose": {
+            "calls": 1,
+            "input_tokens": 1481,
+            "output_tokens": 945,
+            "cost_usd": 0.018618,
+            "elapsed_seconds": 16.784846584079787
+          },
+          "reconciler": {
+            "calls": 1,
+            "input_tokens": 4360,
+            "output_tokens": 793,
+            "cost_usd": 0.024975,
+            "elapsed_seconds": 16.436028834199533
+          },
+          "researcher": {
+            "calls": 43,
+            "input_tokens": 355890,
+            "output_tokens": 9794,
+            "cost_usd": 0.40486000000000005,
+            "elapsed_seconds": 104.97795512480661
+          },
+          "writer": {
+            "calls": 1,
+            "input_tokens": 7163,
+            "output_tokens": 3235,
+            "cost_usd": 0.070014,
+            "elapsed_seconds": 47.42161354213022
+          }
+        },
+        "total_input_tokens": 378594,
+        "total_output_tokens": 15125,
+        "total_cost_usd": 0.552937,
+        "researcher_latency_max": 39.7998489998281,
+        "researcher_latency_avg": 26.80007213673421,
+        "tool_mix": {
+          "web_search": 27,
+          "search_papers": 15,
+          "fetch_url": 36,
+          "save_finding": 15,
+          "note_uncertainty": 0
+        },
+        "kae": null,
+        "ace": null,
+        "plan_judge": null
+      },
+      "taxonomy": null,
+      "started_at": "2026-05-05T05:51:08.625213Z"
+    },
+    {
+      "user_prompt": "Do larger LLMs reliably outperform smaller fine-tuned models on domain-specific tasks, or is the picture more mixed than scaling-laws advocates suggest?",
+      "shape": {
+        "shape": "CONTESTED",
+        "confidence": 0.85,
+        "rationale": "The prompt explicitly probes a known dispute in the literature between scaling-law advocates and fine-tuning/efficiency researchers, asking whether the empirical picture is 'more mixed' than one side claims."
+      },
+      "decomposition": {
+        "subquestions": [
+          {
+            "id": "sq1",
+            "question": "What do empirical benchmarks show about the performance of large general-purpose LLMs (e.g., GPT-4, Claude, Llama-70B) versus smaller fine-tuned models (e.g., 7B\u201313B parameter models) on domain-specific tasks such as medicine, law, finance, and code?",
+            "rationale": "Establishing the concrete empirical record of head-to-head comparisons is the foundation for answering whether larger models reliably win.",
+            "confidence": 0.95,
+            "depends_on": [],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq2",
+            "question": "Under what conditions or task types do fine-tuned smaller models match or exceed larger general-purpose LLMs\u2014e.g., highly specialized corpora, low-resource settings, narrow classification tasks, or structured output requirements?",
+            "rationale": "Identifying the boundary conditions where smaller fine-tuned models succeed is essential to characterizing where the scaling-law advantage breaks down.",
+            "confidence": 0.9,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq3",
+            "question": "What do scaling-law frameworks (Chinchilla, Kaplan et al., and successors) actually predict about domain-specific performance, and do they explicitly account for fine-tuning or domain adaptation?",
+            "rationale": "Understanding what scaling laws actually claim\u2014versus what advocates assert\u2014is necessary to evaluate whether empirical results genuinely contradict them or address a different question.",
+            "confidence": 0.85,
+            "depends_on": [],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq4",
+            "question": "What methodological inconsistencies across studies\u2014such as differing evaluation protocols, prompt sensitivity, data contamination, and choice of metrics\u2014might explain contradictory findings about large vs. small fine-tuned models?",
+            "rationale": "Many conflicting results in this literature stem from methodological differences, so probing these is critical to assessing whether disagreements are substantive or artifactual.",
+            "confidence": 0.85,
+            "depends_on": [
+              "sq1"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq5",
+            "question": "How do practical factors\u2014inference cost, latency, data privacy, deployment constraints, and fine-tuning data availability\u2014affect real-world decisions to use large versus small fine-tuned models in domain-specific applications?",
+            "rationale": "Performance benchmarks alone do not determine deployment choices; practical trade-offs often favor smaller fine-tuned models even when larger models score marginally higher.",
+            "confidence": 0.75,
+            "depends_on": [
+              "sq1",
+              "sq2"
+            ],
+            "preferred_search": "either"
+          },
+          {
+            "id": "sq6",
+            "question": "What is the evidence for or against the claim that instruction-tuning and RLHF on large models (without domain fine-tuning) closes the gap with domain-specific fine-tuned smaller models?",
+            "rationale": "Recent large models use instruction-tuning and alignment techniques that may partly substitute for domain fine-tuning, directly testing whether scale plus general alignment beats targeted adaptation.",
+            "confidence": 0.8,
+            "depends_on": [
+              "sq3"
+            ],
+            "preferred_search": "search_papers"
+          },
+          {
+            "id": "sq7",
+            "question": "What gaps exist in the current literature\u2014e.g., underrepresented domains, lack of longitudinal studies, absence of standardized domain-specific benchmarks\u2014that prevent a definitive answer to the large-vs-fine-tuned debate?",
+            "rationale": "Identifying where evidence is weak or missing is necessary to honestly qualify any conclusion and point toward what future research would be most decisive.",
+            "confidence": 0.7,
+            "depends_on": [
+              "sq1",
+              "sq4"
+            ],
+            "preferred_search": "search_papers"
+          }
+        ]
+      },
+      "findings": {
+        "findings": [
+          {
+            "subquestion_id": "sq2",
+            "claim": "Fine-tuned smaller models significantly outperform larger zero-shot generative AI models in text classification tasks when application-specific training data is available.",
+            "evidence": "Smaller, fine-tuned LLMs consistently and significantly outperform larger, zero-shot prompted models in text classification. We compare three major generative AI models (ChatGPT with GPT-3.5/GPT-4 and Claude Opus) with several fine-tuned LLMs across a diverse set of classification tasks (sentiment, approval/disapproval, emotions, party positions) and text categories (news, tweets, speeches). We find that fine-tuning with application-specific training data achieves superior performance in all cases.",
+            "source_url": "https://arxiv.org/html/2406.08660v2",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-38e1db",
+            "saved_at": "2026-05-05T05:52:25.109128Z",
+            "fetched_at": "2026-05-05T05:52:25.109044Z",
+            "content_hash": "5fe4ee3cf22cacfae491a69c750ed6d1d1029ef8ad9be218a8abb9e2b279ed72",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Fine-tuned smaller models can outperform much larger models on specialized domain tasks when the output distribution is sufficiently constrained, such as in healthcare, legal, and scientific domains.",
+            "evidence": "When a 27B parameter model is fine-tuned for a specific task, it can dedicate its full representational capacity to a narrower probability space, effectively increasing its bits-per-parameter efficiency by 2-3 orders of magnitude compared to general inference. Medical, legal and scientific domain-specific fine-tuning consistently shows 40-100% improvements over base models. The fine-tuned Gemma 3 27B model outperformed Claude Sonnet 4 by 60% while requiring 10x-100x less compute per inference on a healthcare use case.",
+            "source_url": "https://www.together.ai/blog/fine-tune-small-open-source-llms-outperform-closed-models",
+            "source_title": "",
+            "confidence": 0.92,
+            "researcher_id": "r-38e1db",
+            "saved_at": "2026-05-05T05:52:25.109240Z",
+            "fetched_at": "2026-05-05T05:52:25.109181Z",
+            "content_hash": "fa6be8371209d882720d49e230141b85523bb6bdd102fd62b92042f3296993e1",
+            "domain": "www.together.ai",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.863,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq2",
+            "claim": "Across 31 diverse tasks, 6 of 10 fine-tuned small models (with <8B parameters) outperformed GPT-4 on average, with the advantage being largest for traditional NLP classification tasks and smaller for coding and math reasoning.",
+            "evidence": "The main finding from the study was that, for the tasks considered, 6 of the 10 small models outperformed GPT-4 on average after fine-tuning. And all 10 smaller models outperformed GPT-3.5-Turbo. The improvement in performance from fine-tuning and the gap between GPT-4 and the fine-tuned model was largest for tasks in the GLUE benchmark, which are primarily traditional NLP problems. The fine-tuned models didn't do as well when compared to GPT-4 on coding and math reasoning problems.",
+            "source_url": "https://oumi.ai/blog/small-fine-tuned-models-are-all-you",
+            "source_title": "",
+            "confidence": 0.93,
+            "researcher_id": "r-38e1db",
+            "saved_at": "2026-05-05T05:52:25.109284Z",
+            "fetched_at": "2026-05-05T05:52:25.109262Z",
+            "content_hash": "47917fe878269e2342928d5f6d2d92d1670bf18887914bdd3edb55e5acae623c",
+            "domain": "oumi.ai",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.867,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Different answer extraction methods for MCQA evaluation (Logprobs, RegEx, LLM-based) produce significantly different model performance scores, causing inconsistent and potentially misleading comparisons between models.",
+            "evidence": "Multiple factors can significantly impact the reported performance of LLMs, especially when the model generates free-form text before selecting one of the answer choices. ...measuring the probability of the first token generated by the model to be the label (\"A\" to \"D\") of the correct answer can yield different results compared to extracting the answer from the model's output text",
+            "source_url": "https://arxiv.org/html/2503.14996v1",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-51935f",
+            "saved_at": "2026-05-05T05:52:48.662122Z",
+            "fetched_at": "2026-05-05T05:52:48.661651Z",
+            "content_hash": "f5a0ae5ca298cf4657c2647cc631ee41ec5648467cb9b916af1c04567596e381",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.98,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Prompt format constraints significantly affect LLM performance evaluation: there is a fundamental trade-off between imposing format constraints to simplify answer extraction versus allowing free-form text generation that improves reasoning.",
+            "evidence": "Our findings call for standardized evaluation methodologies and highlight the need for more reliable and consistent MCQA evaluation practices...a fundamental trade-off between including format constraints in the prompt to simplify answer extraction and allowing models to generate free-form text to improve reasoning",
+            "source_url": "https://arxiv.org/html/2503.14996v1",
+            "source_title": "",
+            "confidence": 0.92,
+            "researcher_id": "r-51935f",
+            "saved_at": "2026-05-05T05:52:48.662211Z",
+            "fetched_at": "2026-05-05T05:52:48.662197Z",
+            "content_hash": "f075fba4b636de5b849c4bb5dcc6204a9373084739fb10e97a33e9b890eeea02",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.968,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "LLM-based answer extraction methods, while more flexible than RegEx, are prone to systematic errors and unreliability, contrary to expectations about their robustness.",
+            "evidence": "LLM-based answer extractors are prone to systematic errors. Moreover, we reveal a fundamental trade-off...we identify cases in which existing evaluation methods systematically fail, including those based on LLMs",
+            "source_url": "https://arxiv.org/html/2503.14996v1",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-51935f",
+            "saved_at": "2026-05-05T05:52:48.662242Z",
+            "fetched_at": "2026-05-05T05:52:48.662233Z",
+            "content_hash": "2782fb21ec686d77c5fc75b918ffe1c29798a618f55a8ba5a58adafec7258408",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.6666666666666666,
+            "combined_confidence": 0.8766666666666666,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq4",
+            "claim": "Much of the observed \"prompt sensitivity\" in LLMs may be an artifact of heuristic evaluation methods (log-likelihood scoring, rigid answer matching) rather than an inherent model flaw; when evaluated with LLM-as-Judge methods that handle semantic equivalence, prompt sensitivity largely disappears.",
+            "evidence": "heuristic evaluation methods often exaggerate the prompt sensitivity of LLMs...Heuristic evaluation methods often fail when model outputs deviate from expected formats...When we adopt LLM-as-a-Judge evaluations, we observe a substantial reduction in performance variance and a consistently higher correlation in model rankings across prompts...prompt sensitivity is largely an artifact of the evaluation method rather than an inherent flaw in LLMs",
+            "source_url": "https://arxiv.org/html/2509.01790v1",
+            "source_title": "",
+            "confidence": 0.93,
+            "researcher_id": "r-51935f",
+            "saved_at": "2026-05-05T05:52:58.694794Z",
+            "fetched_at": "2026-05-05T05:52:58.694734Z",
+            "content_hash": "92e825dcfd1807413916e1e33649ebf801d7698a19d974cc257c2faae45b7653",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.6666666666666666,
+            "combined_confidence": 0.8886666666666666,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Inference costs favor small fine-tuned models by orders of magnitude: a Mistral 7B model costs approximately $0.25 per million tokens versus $45 for GPT-4, resulting in 180x cost savings at production scale.",
+            "evidence": "SLMs reduce \"cost-per-million queries by over 100x\" and the comparison table shows: \"SLM (Mistral 7B): Cost / 1M tokens ($): 0.25\" versus \"GPT-4: Cost / 1M tokens ($): 45.00\". For enterprise scenarios: \"Large Enterprise (1M queries/month): Mistral 7B Monthly Cost: $250.0\" versus \"GPT-4 Monthly Cost: $45,000\", showing \"Savings Ratio: 180x\".",
+            "source_url": "https://labelyourdata.com/articles/llm-fine-tuning/slm-vs-llm",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-c74625",
+            "saved_at": "2026-05-05T05:52:59.403381Z",
+            "fetched_at": "2026-05-05T05:52:59.403298Z",
+            "content_hash": "5b333536208ae0a3ebfabb9ac1bd083fc6d127500cfa39994dc21b1d00ec0707",
+            "domain": "labelyourdata.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Latency is the decisive practical factor for real-time production workloads: small models deliver sub-second responses (50-100ms) while large cloud-hosted models incur hundreds of milliseconds to over a second, directly impacting user experience.",
+            "evidence": "\"Latency shapes user experience, with SLMs serving tokens in tens of milliseconds compared to hundreds of milliseconds or more for cloud-hosted LLMs.\" The latency comparison table shows: \"Real-time Chatbot: SLM Latency (ms): 50, LLM Latency (ms): 800\" and \"Code Completion: SLM Latency (ms): 80, LLM Latency (ms): 900\". The source states: \"For customer-facing systems like chatbots or search assistants, even a few hundred milliseconds of added latency can degrade user experience and increase drop-off rates.\"",
+            "source_url": "https://labelyourdata.com/articles/llm-fine-tuning/slm-vs-llm",
+            "source_title": "",
+            "confidence": 0.95,
+            "researcher_id": "r-c74625",
+            "saved_at": "2026-05-05T05:52:59.403476Z",
+            "fetched_at": "2026-05-05T05:52:59.403450Z",
+            "content_hash": "45e44f69813a438806af8700227be926b890f02b1cee70ccb5d9808352301994",
+            "domain": "labelyourdata.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.875,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Domain specialization through fine-tuning can narrow or eliminate accuracy gaps between small and large models on structured tasks: a 1.5B Qwen-2-math model achieves comparable accuracy to a 7B general-purpose model while using only 19.8% of the model space.",
+            "evidence": "\"A SLM pretrained on a specific domain may outperform a general purpose model when handling domain specific queries.\" Specifically: \"the Qwen-2-math:1.5B model, which shares the same architecture as Qwen-2.5 but is optimized for answering math questions...achieved accuracy comparable to that of 7B general-purpose variant while requiring just 19.8% of the model space.\"",
+            "source_url": "https://arxiv.org/html/2505.16508v2",
+            "source_title": "",
+            "confidence": 0.93,
+            "researcher_id": "r-c74625",
+            "saved_at": "2026-05-05T05:52:59.403529Z",
+            "fetched_at": "2026-05-05T05:52:59.403503Z",
+            "content_hash": "15beda6e83ce3719191052d382e427afd72dfa5a193df06810fbf3209d2a69f1",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.972,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Data privacy and on-device deployment become critical drivers of small model adoption: edge-based inference eliminates network round-trip times and avoids cloud logging/training reuse, addressing mission-critical applications where latency and data locality matter.",
+            "evidence": "\"Cloud-based LLMs come with significant drawbacks, including dependency on consistent network connectivity, latency issues, high operational costs, and privacy concerns...user prompts may be logged or used for model training, further amplifying privacy concerns.\" The paper notes: \"By reducing model size or precision, SLMs make on-device inference viable, addressing many of the challenges posed by centralized LLMs, particularly in terms of cost, latency, and data locality.\"",
+            "source_url": "https://arxiv.org/html/2505.16508v2",
+            "source_title": "",
+            "confidence": 0.93,
+            "researcher_id": "r-c74625",
+            "saved_at": "2026-05-05T05:52:59.403559Z",
+            "fetched_at": "2026-05-05T05:52:59.403550Z",
+            "content_hash": "652ed2e5cba4a58f998edfe21cfbac45d951f128d8546be3f84f930a971f52ec",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.972,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq5",
+            "claim": "Production deployments favor inference-efficient smaller models even when they require longer training: the optimal model for inference differs from the training-optimal model because inference compute can exceed training compute by 100\u00d7 over a model's lifetime.",
+            "evidence": "\"Production deployments face a fundamentally different optimization problem...When inference compute dwarfs training compute by orders of magnitude, optimizing for training efficiency can be precisely the wrong strategy.\" The source quantifies: \"For the most widely deployed models serving trillions of requests, inference can consume 100\u00d7 or more compute than training. This asymmetry fundamentally changes the optimization calculus.\"",
+            "source_url": "https://mbrenndoerfer.com/writing/inference-scaling-llm-deployment-optimization",
+            "source_title": "",
+            "confidence": 0.94,
+            "researcher_id": "r-c74625",
+            "saved_at": "2026-05-05T05:52:59.403600Z",
+            "fetched_at": "2026-05-05T05:52:59.403581Z",
+            "content_hash": "23d30321d46b084b7770be0dce3cee3cacb1545e42e67594cb6c83f476e7639f",
+            "domain": "mbrenndoerfer.com",
+            "source_quality": 0.7,
+            "agreement_score": 1.0,
+            "combined_confidence": 0.871,
+            "axis_disagreement": false
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "On domain-specific tasks (MedCalc clinical benchmark), base models outperform instruction-tuned variants, contradicting the claim that instruction-tuning closes the gap with domain-specific models.",
+            "evidence": "In zero-shot CoT, base models outperform instruction-tuned models across most categories and model sizes, with the largest gaps observed for smaller models (LLaMA3-3B, SmollM-3B). For example, SmollM-3B base model achieves 61.89% overall on MedCalc versus 39.26% for the instruction-tuned variant.",
+            "source_url": "https://arxiv.org/html/2601.13244v1",
+            "source_title": "",
+            "confidence": 0.92,
+            "researcher_id": "r-7978f5",
+            "saved_at": "2026-05-05T05:53:13.949876Z",
+            "fetched_at": "2026-05-05T05:53:13.949818Z",
+            "content_hash": "bf1730e9de59097ce15eb4b7700e5171f0248660c050ec2710c1d3136fcc07f8",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.0,
+            "combined_confidence": 0.718,
+            "axis_disagreement": true
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Instruction-tuning gains are brittle and do not generalize under distribution shift, suggesting limitations in scaling instruction-tuning as a substitute for domain adaptation.",
+            "evidence": "Performance gains from instruction tuning do not reliably transfer to the domain-specific MedCalc benchmark. Additionally, instruction-tuned models show sharp declines on perturbed datasets, indicating sensitivity to prompt structure over robust reasoning.",
+            "source_url": "https://arxiv.org/html/2601.13244v1",
+            "source_title": "",
+            "confidence": 0.9,
+            "researcher_id": "r-7978f5",
+            "saved_at": "2026-05-05T05:53:13.949956Z",
+            "fetched_at": "2026-05-05T05:53:13.949944Z",
+            "content_hash": "6d7964b4147106810ffbc49410b92b9d22a5a111bcfbcc62f0b772d749363d35",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.0,
+            "combined_confidence": 0.71,
+            "axis_disagreement": true
+          },
+          {
+            "subquestion_id": "sq6",
+            "claim": "Instruction-tuned smaller models (Mistral-7B, Llama3-8B, Phi-3) fine-tuned on domain tasks showed more robust zero-shot generalization than base models fine-tuned on the same tasks.",
+            "evidence": "Results show that fine-tuning both base and instruct models leads to substantial improvements, but base fine-tuned models exhibited greater performance degradation compared to instruct fine-tuned models on unseen tasks. This indicates that instruct fine-tuned models provide a more robust foundation for further fine-tuning on domain-specific tasks.",
+            "source_url": "https://arxiv.org/html/2411.02476v1",
+            "source_title": "",
+            "confidence": 0.88,
+            "researcher_id": "r-7978f5",
+            "saved_at": "2026-05-05T05:53:31.230378Z",
+            "fetched_at": "2026-05-05T05:53:31.230311Z",
+            "content_hash": "ff607167869194bd540bfae77edc97c527659bcbb3c889a3cbc4e2fe4a34a080",
+            "domain": "arxiv.org",
+            "source_quality": 1.0,
+            "agreement_score": 0.0,
+            "combined_confidence": 0.702,
+            "axis_disagreement": true
+          }
+        ],
+        "uncertainty_notes": [
+          {
+            "subquestion_id": "sq1",
+            "topic": "What do empirical benchmarks show about the performance of large general-purpose LLMs (e.g., GPT-4, Claude, Llama-70B) versus smaller fine-tuned models (e.g., 7B\u201313B parameter models) on domain-specific tasks such as medicine, law, finance, and code?",
+            "reason": "Made 10 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-17498b"
+          },
+          {
+            "subquestion_id": "sq3",
+            "topic": "What do scaling-law frameworks (Chinchilla, Kaplan et al., and successors) actually predict about domain-specific performance, and do they explicitly account for fine-tuning or domain adaptation?",
+            "reason": "Made 12 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-477f01"
+          },
+          {
+            "subquestion_id": "sq7",
+            "topic": "What gaps exist in the current literature\u2014e.g., underrepresented domains, lack of longitudinal studies, absence of standardized domain-specific benchmarks\u2014that prevent a definitive answer to the large-vs-fine-tuned debate?",
+            "reason": "Made 12 tool calls without extracting concrete evidence. Search results, fetched pages, or paper abstracts did not yield specific claims supportable as findings. Researcher exited early to free budget for other sub-questions.",
+            "researcher_id": "r-9a8459"
+          }
+        ]
+      },
+      "report": {
+        "user_prompt": "Do larger LLMs reliably outperform smaller fine-tuned models on domain-specific tasks, or is the picture more mixed than scaling-laws advocates suggest?",
+        "summary": "The evidence is decidedly mixed and largely cuts against the strong scaling-law position: across multiple domains and task types, smaller fine-tuned models frequently match or outperform larger general-purpose models, particularly on classification and structured output tasks. Fine-tuned models under 8B parameters outperformed GPT-4 on 6 of 10 comparisons across 31 tasks, and domain-specific fine-tuning routinely yields 40\u2013100% improvements over base models. However, the picture is complicated by substantial methodological inconsistencies\u2014prompt format, answer-extraction method, and evaluation protocol all materially affect reported scores\u2014and by a direct contradiction in the literature over whether instruction-tuning helps or hurts as a foundation for domain adaptation. Practical factors (cost, latency, privacy) independently favor smaller deployed models regardless of raw accuracy.",
+        "claims": [
+          {
+            "claim": "On text classification tasks with available domain-specific training data, fine-tuned smaller models consistently and significantly outperform larger zero-shot models including GPT-3.5, GPT-4, and Claude Opus across sentiment, party-position, emotion, and approval tasks.",
+            "confidence": 0.97,
+            "supporting_finding_indices": [
+              0
+            ]
+          },
+          {
+            "claim": "In a study spanning 31 diverse tasks, 6 of 10 fine-tuned models with fewer than 8B parameters outperformed GPT-4 on average after fine-tuning, and all 10 outperformed GPT-3.5-Turbo; however, the advantage was smallest on coding and math reasoning tasks.",
+            "confidence": 0.84,
+            "supporting_finding_indices": [
+              2
+            ]
+          },
+          {
+            "claim": "Domain-specific fine-tuning of smaller models produces large accuracy gains in constrained output settings: reported improvements of 40\u2013100% over base models are documented in medical, legal, and scientific domains, with one fine-tuned 27B model reportedly outperforming Claude Sonnet 4 by 60% on a healthcare task at 10\u2013100x lower inference compute.",
+            "confidence": 0.72,
+            "supporting_finding_indices": [
+              1
+            ]
+          },
+          {
+            "claim": "Domain specialization can compensate for massive parameter-count differences: a 1.5B Qwen-2-math model achieved accuracy comparable to a 7B general-purpose model on math tasks while using only 19.8% of the model space.",
+            "confidence": 0.95,
+            "supporting_finding_indices": [
+              9
+            ]
+          },
+          {
+            "claim": "The relative advantage of fine-tuned smaller models is task-type-dependent: gains are largest for traditional NLP classification tasks (e.g., GLUE-style) and smallest for open-ended coding and mathematical reasoning, suggesting larger models retain an edge on complex generative tasks.",
+            "confidence": 0.83,
+            "supporting_finding_indices": [
+              2
+            ]
+          },
+          {
+            "claim": "Evaluation methodology materially distorts comparisons between large and small models: different answer-extraction methods (logprobs, RegEx, LLM-based) produce significantly different performance scores for the same model on the same benchmark.",
+            "confidence": 0.97,
+            "supporting_finding_indices": [
+              3,
+              4
+            ]
+          },
+          {
+            "claim": "There is a fundamental tension in MCQA evaluation design between imposing format constraints (which simplify answer extraction but hurt reasoning) and allowing free-form generation (which improves reasoning but complicates extraction), meaning no current method is unambiguously correct.",
+            "confidence": 0.96,
+            "supporting_finding_indices": [
+              4,
+              5
+            ]
+          },
+          {
+            "claim": "Sources disagree on whether LLM-as-Judge evaluation reliably reduces measurement noise: one study finds it prone to systematic errors and identifies cases where it fails, while another finds it substantially reduces performance variance and prompt sensitivity compared to heuristic methods.",
+            "confidence": 0.75,
+            "supporting_finding_indices": [
+              5,
+              6
+            ]
+          },
+          {
+            "claim": "Sources directly contradict each other on whether instruction-tuning helps or hurts as a foundation for domain-specific adaptation: findings from the MedCalc benchmark show base models outperforming instruction-tuned variants (e.g., SmollM-3B base 61.89% vs. instruction-tuned 39.26%), while a separate study across Mistral-7B, Llama3-8B, and Phi-3 finds instruction-tuned models provide a more robust foundation and suffer less performance degradation on unseen tasks.",
+            "confidence": 0.65,
+            "supporting_finding_indices": [
+              12,
+              13,
+              14
+            ]
+          },
+          {
+            "claim": "Instruction-tuning gains appear brittle under distribution shift: on the MedCalc benchmark, instruction-tuned models show sharp performance declines on perturbed datasets, suggesting they learn prompt structure rather than robust domain reasoning.",
+            "confidence": 0.62,
+            "supporting_finding_indices": [
+              13
+            ]
+          },
+          {
+            "claim": "Inference cost strongly favors smaller fine-tuned models at production scale: a Mistral 7B model costs approximately $0.25 per million tokens versus $45 for GPT-4, a roughly 180x cost difference that dominates total-cost-of-ownership calculations for high-volume deployments.",
+            "confidence": 0.85,
+            "supporting_finding_indices": [
+              7
+            ]
+          },
+          {
+            "claim": "Latency requirements for real-time applications independently favor smaller models: small models deliver responses in 50\u2013100ms versus 800\u2013900ms for cloud-hosted large models, a gap large enough to materially affect user experience in customer-facing systems.",
+            "confidence": 0.83,
+            "supporting_finding_indices": [
+              8
+            ]
+          },
+          {
+            "claim": "Over a deployed model's lifetime, inference compute can exceed training compute by 100x or more, meaning the model that is optimal for training efficiency is frequently not optimal for production deployment\u2014shifting the calculus toward inference-efficient smaller models.",
+            "confidence": 0.83,
+            "supporting_finding_indices": [
+              11
+            ]
+          },
+          {
+            "claim": "Data privacy and on-device deployment requirements create an independent rationale for smaller models: cloud-based LLMs expose user prompts to potential logging and reuse, while edge-deployed small models can eliminate these risks alongside network latency.",
+            "confidence": 0.93,
+            "supporting_finding_indices": [
+              10
+            ]
+          }
+        ],
+        "contradictions_surfaced": [
+          {
+            "description": "Findings 12/13 and finding 14 directly contradict each other on whether instruction-tuned or base models provide a better foundation for domain-specific tasks. Finding 12 states that 'base models outperform instruction-tuned models across most categories and model sizes' on the MedCalc clinical benchmark (e.g., 'SmollM-3B base model achieves 61.89% overall on MedCalc versus 39.26% for the instruction-tuned variant'), and finding 13 adds that 'instruction-tuned models show sharp declines on perturbed datasets.' In direct contrast, finding 14 concludes that 'instruct fine-tuned models provide a more robust foundation for further fine-tuning on domain-specific tasks,' with base fine-tuned models exhibiting 'greater performance degradation compared to instruct fine-tuned models on unseen tasks.' The two sets of findings reach opposite conclusions about the robustness and utility of instruction-tuned models in domain-specific contexts. Sources: https://arxiv.org/html/2601.13244v1 vs. https://arxiv.org/html/2411.02476v1.",
+            "finding_ids": [
+              12,
+              13,
+              14
+            ],
+            "severity": "moderate",
+            "type": "factual"
+          },
+          {
+            "description": "Findings 5 and 6 contradict each other on the reliability of LLM-based answer extraction/evaluation methods. Finding 5 asserts that 'LLM-based answer extractors are prone to systematic errors' and explicitly includes 'those based on LLMs' among evaluation methods that 'systematically fail.' Finding 6, by contrast, argues that adopting 'LLM-as-a-Judge evaluations' leads to 'a substantial reduction in performance variance and a consistently higher correlation in model rankings across prompts,' concluding that LLM-as-Judge methods are more reliable and that prompt sensitivity 'largely disappears' under them. One finding treats LLM-based evaluation as unreliable and error-prone; the other treats it as the remedy to unreliable heuristic methods. Sources: https://arxiv.org/html/2503.14996v1 vs. https://arxiv.org/html/2509.01790v1.",
+            "finding_ids": [
+              5,
+              6
+            ],
+            "severity": "moderate",
+            "type": "methodological"
+          }
+        ],
+        "caveats": [
+          "WARNING \u2014 bounded revision exhausted with critic issues still open. The report ships with 1 unresolved critic issue(s):\n  \u2022 Claim #9 (overstated): The claim states instruction-tuning gains are brittle 'under distribution shift' as shown on the MedCalc benchmark. The cited finding [13] has a combined confidence of 0.71 and is flagged [AXIS-DISAGREE] (agreement=0.00), meaning no other source corroborates this finding. The claim presents this as a straightforward factual finding without acknowledging the conflicting evidence from finding [14], which shows the opposite pattern. The writer's stated confidence of 0.62 is reasonable given the uncertainty, but the claim text itself does not hedge\u2014it presents the brittleness finding as established fact without noting that finding [14] contradicts it. Given the AXIS-DISAGREE flag and zero cross-source agreement, the claim should be more explicitly hedged.",
+          "Sub-question sq1 (direct empirical benchmarks comparing large general-purpose LLMs vs. smaller fine-tuned models across medicine, law, finance, and code) could not be answered from the retrieved findings despite 10 search attempts. The report therefore lacks head-to-head benchmark numbers for the most-cited domain-specific evaluations (e.g., MedQA, LegalBench, FinanceBench), which limits the breadth of the domain coverage.",
+          "Sub-question sq3 (what scaling-law frameworks such as Chinchilla and Kaplan et al. actually predict about domain-specific performance, and whether they account for fine-tuning) produced no extractable findings after 12 search attempts. The report therefore cannot assess whether the scaling-law literature itself addresses the fine-tuning scenario, which is central to the user's prompt.",
+          "Sub-question sq7 (gaps in the literature preventing a definitive answer) also produced no findings after 12 attempts. The caveats about absent standardized benchmarks, underrepresented domains, and lack of longitudinal studies cannot be grounded in specific citations.",
+          "Several high-value findings (indices 1, 7, 8, 11) come from blog posts or commercial vendor sources (Together AI, LabelYourData, a personal writing site) with source-quality scores of 0.70. Quantitative figures from these sources (e.g., the 180x cost ratio, specific latency numbers, the 60% outperformance claim) should be treated as illustrative rather than peer-reviewed.",
+          "Findings 12, 13, and 14 are all flagged [AXIS-DISAGREE] (combined scores 0.70\u20130.72), meaning researcher confidence, source quality, and cross-source agreement diverge. Claims derived from these findings are hedged accordingly and should not be treated as settled.",
+          "The studies surveyed differ substantially in which models, benchmarks, prompting strategies, and fine-tuning data they use. Without a common evaluation framework, comparisons across findings are approximate and the apparent 'consensus' that small fine-tuned models often win may partially reflect selection of tasks favorable to fine-tuning.",
+          "None of the findings address very recent frontier models (e.g., GPT-4o, Gemini 1.5 Pro, Claude 3.5 Sonnet) versus current fine-tuned small models, so the conclusions may have a short shelf life as capabilities continue to evolve."
+        ]
+      },
+      "critic_history": [
+        {
+          "issues": [
+            {
+              "claim_index": 9,
+              "issue_type": "overstated",
+              "explanation": "The claim states instruction-tuning gains are brittle 'under distribution shift' as shown on the MedCalc benchmark. The cited finding [13] has a combined confidence of 0.71 and is flagged [AXIS-DISAGREE] (agreement=0.00), meaning no other source corroborates this finding. The claim presents this as a straightforward factual finding without acknowledging the conflicting evidence from finding [14], which shows the opposite pattern. The writer's stated confidence of 0.62 is reasonable given the uncertainty, but the claim text itself does not hedge\u2014it presents the brittleness finding as established fact without noting that finding [14] contradicts it. Given the AXIS-DISAGREE flag and zero cross-source agreement, the claim should be more explicitly hedged."
+            }
+          ],
+          "approved": false
+        }
+      ],
+      "verify_history": [
+        {
+          "results": []
+        }
+      ],
+      "metadata": {
+        "commit_hash": "2f6ab883c54607f36d522b553c98dfd10b64a6c9",
+        "branch": "main",
+        "models": {
+          "researcher": "claude-haiku-4-5",
+          "writer": "claude-sonnet-4-6",
+          "critic": "claude-sonnet-4-6",
+          "judge": "claude-opus-4-7",
+          "kae_judge": "claude-haiku-4-5"
+        },
+        "config_snapshot": {
+          "anthropic_api_key": "<set>",
+          "tavily_api_key": "<set>",
+          "researcher_model": "claude-haiku-4-5",
+          "writer_model": "claude-sonnet-4-6",
+          "critic_model": "claude-sonnet-4-6",
+          "judge_model": "claude-opus-4-7",
+          "kae_judge_model": "claude-haiku-4-5",
+          "min_subquestions": 3,
+          "max_subquestions": 7,
+          "decompose_max_retries": 2,
+          "researcher_max_tool_calls": 30,
+          "researcher_max_findings": 6,
+          "researcher_min_findings_to_stop": 3,
+          "researcher_min_unique_sources": 2,
+          "researcher_min_avg_confidence": 0.55,
+          "researcher_unproductive_call_limit": 10,
+          "search_results_per_query": 8,
+          "fetch_max_chars": 12000,
+          "scholar_max_retries": 3,
+          "scholar_backoff_seconds": 1.0,
+          "scholar_unavailable_window_seconds": 120,
+          "max_revisions": 0,
+          "verifier_enabled": false,
+          "parallel_researchers": 2
+        },
+        "captured_at": "2026-05-05T05:51:38.271693Z"
+      },
+      "metrics": {
+        "total_subquestions": 7,
+        "subquestions_with_findings": 4,
+        "total_findings": 15,
+        "unique_sources": 10,
+        "revision_rounds": 0,
+        "final_grounding_rate": 0.9285714285714286,
+        "coverage_rate": 0.5714285714285714,
+        "elapsed_seconds": 173.35271000862122,
+        "per_stage": {
+          "classify_shape": {
+            "calls": 1,
+            "input_tokens": 985,
+            "output_tokens": 61,
+            "cost_usd": 0.00387,
+            "elapsed_seconds": 2.3948124998714775
+          },
+          "confidence": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cost_usd": 0.0,
+            "elapsed_seconds": 0.00040208292193710804
+          },
+          "critic": {
+            "calls": 1,
+            "input_tokens": 7982,
+            "output_tokens": 234,
+            "cost_usd": 0.027456,
+            "elapsed_seconds": 5.10889120795764
+          },
+          "decompose": {
+            "calls": 1,
+            "input_tokens": 1481,
+            "output_tokens": 1013,
+            "cost_usd": 0.019638,
+            "elapsed_seconds": 18.433031874941662
+          },
+          "reconciler": {
+            "calls": 1,
+            "input_tokens": 4173,
+            "output_tokens": 593,
+            "cost_usd": 0.021414,
+            "elapsed_seconds": 10.575376875000075
+          },
+          "researcher": {
+            "calls": 41,
+            "input_tokens": 332536,
+            "output_tokens": 9653,
+            "cost_usd": 0.38080100000000006,
+            "elapsed_seconds": 92.13720112480223
+          },
+          "writer": {
+            "calls": 1,
+            "input_tokens": 6912,
+            "output_tokens": 2782,
+            "cost_usd": 0.062466,
+            "elapsed_seconds": 44.640823791967705
+          }
+        },
+        "total_input_tokens": 354069,
+        "total_output_tokens": 14336,
+        "total_cost_usd": 0.515645,
+        "researcher_latency_max": 33.233486166922376,
+        "researcher_latency_avg": 25.021285208707145,
+        "tool_mix": {
+          "web_search": 27,
+          "search_papers": 19,
+          "fetch_url": 35,
+          "save_finding": 15,
+          "note_uncertainty": 0
+        },
+        "kae": null,
+        "ace": null,
+        "plan_judge": null
+      },
+      "taxonomy": null,
+      "started_at": "2026-05-05T05:54:31.562751Z"
+    }
+  ]
+}
